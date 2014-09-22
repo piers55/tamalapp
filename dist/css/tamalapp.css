@@ -6280,15 +6280,12 @@ button.close {
 .header-inicio {
   margin: 70px 0;
   font-family: cabinItalic;
-  font-size: 50px;
+  font-size: 70px;
   color: white;
   text-align: center;
 }
-.sesion {
-  margin-bottom: 150px;
-}
 .sesion a {
-  margin-bottom: 40px;
+  margin-bottom: 90px;
   color: white;
 }
 .sesion .boton {
@@ -6304,6 +6301,20 @@ button.close {
 }
 .login-form.form-group {
   margin-bottom: 30px;
+}
+.login-form button {
+  font-size: 16px;
+}
+.password p {
+  margin-bottom: 50px;
+  font-size: 18px;
+  color: white;
+}
+.password .form-group {
+  margin-bottom: 50px;
+}
+.password .boton {
+  font-size: 16px;
 }
 .container-fluid {
   padding: 0;
@@ -6344,6 +6355,13 @@ button.close {
 }
 .menu-dropdown:hover {
   color: #720541 !important;
+}
+.boton-orden {
+  top: 480px;
+  z-index: 1000;
+}
+.boton-orden a {
+  color: #7aaf29;
 }
 .seleccionador {
   margin-bottom: 30px;
