@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta http-equiv="pragma" content="no-cache" />
+	    <title>Tamalapp</title>
+
+	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
+	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+
+	<body>
+	    <div class="container-fluid">
+		     <header class="clearfix">
+		        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				      	<span class="sr-only"></span>
+				        <i class="fa fa-bars"></i>
+				      </button>
+				      <a class="navbar-brand" href="">Tamalapp</a>
+				    </div>
+
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="hidden-sm hidden-md hidden-lg collapse navbar-collapse navbar-mobile" id="bs-example-navbar-collapse-1">
+				      <ul class="hidden-sm hidden-md hidden-lg nav navbar-nav">
+				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
+				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
+				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
+				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+				      </ul> 
+				    </div>  
+
+				      <div class="hidden-xs collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+				      <ul class=" nav navbar-nav">
+				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
+				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
+				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
+				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+				      </ul>  
+				    </div><!-- /.navbar-mobile -->
+				</nav>
+
+		    </header>
+
+	      
+	        <div class="content">
+		        <div class="col-xs-10 col-sm-8 col-md-6 center clearfix seleccionador">
+		        	<p class="instruccion">
+		        		<i class="fa fa-info-circle"></i>
+
+		        		Elige el sabor, la cantidad de tamales y envía una tamalerta. Te llegará una notificación avisando que tu pedido ha sido confirmado y va en camino.
+		        	</p>
+
+			        <form class="forma-pedido" action="">
+			        	<label for="sabor">Elige el sabor de tu tamal</label>
+			        	<select class="form-control" id="sabor">
+						  <option>Dulce</option>
+						  <option>Verde</option>
+						  <option>Mole</option>
+						  <option>Rajas</option>
+						  <option>Oaxaqueño</option>
+						</select>
+
+						<label for="cantidad">Elige la cantidad de tamales</label>
+			        	<select class="form-control" id="cantidad">
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+						</select>
+						<button type="button" class="btn btn-good btn-lg btn-block">Añadir al pedido</button>
+					</form>					
+				</div> 
+
+				<div class="orden col-xs-10 col-sm-8 col-md-6 center clearfix">
+					<table>
+					  <p>Mi pedido</p>
+					  <tr id="">
+					    <td class="sabor">Verde</td>
+					    <td class="cantidad">5</td>		
+					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
+					  </tr>
+					  <tr id="">
+					    <td class="sabor">Dulce</td>
+					    <td class="cantidad">1</td>		
+					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
+					  </tr>
+					  <tr id="">
+					    <td class="sabor">Mole</td>
+					    <td class="cantidad">2</td>		
+					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
+					  </tr>
+					</table>
+				</div><!--ORDEN-->
+
+				
+					<a class="tamalerta center block" href="#"><img class="center block" src="images/tamalerta-boton.png" alt=""></a>
+				
+
+				<h4>¡Activa la Tamalerta!</h4>
+
+				<div class="col-xs-10 col-centered">
+					
+				</div>
+				
+	        </div><!--CONTENT-->
+	    </div><!--CONTAINER-->
+  </body>
+
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/tamalapp.min.js"></script>
+</html>

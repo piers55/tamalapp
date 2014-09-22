@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta http-equiv="pragma" content="no-cache" />
+	    <title>Tamalapp</title>
+
+	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
+	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+
+	<body>
+	    <div class="container-fluid">
+		     <header class="clearfix">
+		        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				      	<span class="sr-only"></span>
+				        <i class="fa fa-bars"></i>
+				      </button>
+				      <a class="navbar-brand" href="">Tamalapp</a>
+				    </div>
+
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+				      <ul class="hidden-sm hidden-md hidden-lg nav navbar-nav navbar-mobile">
+				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
+				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
+				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
+				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+				      </ul> 
+
+				      <ul class="hidden-xs nav navbar-nav">
+				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
+				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
+				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
+				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+				      </ul>  
+				    </div><!-- /.navbar-mobile -->
+				</nav>
+
+		    </header>
+
+	      
+	        <div class="content">
+		        <div class="col-xs-11 col-sm-8 center perfil clearfix">
+		        	<p>
+		        		Nombre: <br> <em>Carlos López</em>
+		        	</p>
+
+		        	<p>
+		        		Usuario:<br> <em>Mister Tamalero</em>
+		        	</p>
+
+		        	<p>
+		        		E-mail:<br> <em>carlos.tamal@gmail.com</em>
+		        	</p>
+
+		        	<p>
+		        		Sabor preferido:<br> <em>Dulce</em>
+		        	</p>
+		        
+
+			        <form class="" action="">
+			        	<label for="radio">Radio de activación de tamalerta</label>
+			        	<select class="form-control col-xs-9 center" id="radio">
+						  <option>1000 mts</option>
+						  <option>1500 mts</option>
+						  <option>2000 mts</option>
+						  <option>2500 mts</option>
+						  <option>3000 mts</option>
+						</select>
+					</form>
+					
+						<h4>Total de tamales comprados</h4>
+						<h1 id="comprados">54</h1>
+
+						<h4>Total de tamalertas activadas</h4>
+						<h1 id="tamalerta-activada">22</h1>
+				</div><!--PERFIL-->
+	        </div><!--CONTENT-->
+	    </div><!--CONTAINER-->
+  </body>
+
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/tamalapp.min.js"></script>
+</html>
