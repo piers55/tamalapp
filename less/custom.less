@@ -3,6 +3,7 @@
 @font-face {
     font-family: dinAlternate !important;
     src: url(../fonts/DIN-Alternate-Bold.ttf);
+    letter-spacing: .08em;
 }
 
 @font-face {
@@ -15,6 +16,14 @@
     src: url(../fonts/Cabin-SemiBoldItalic.otf);
 }
 
+a{
+	cursor: pointer;
+}
+
+button{
+	cursor: pointer;
+}
+
 
 
 //CENTRAR COLUMNAS *************
@@ -23,7 +32,6 @@
 .center{ margin-left: auto !important; margin-right: auto !important; float: none !important; }
 
 //******************************
-
 
 
 
@@ -40,10 +48,10 @@
 }
 
 .header-inicio{ 
-	font-size: 70px;
+	font-size: 50px;
 	font-family: cabinItalic;
 	text-align: center;
-	margin: 70px 0;
+	margin: 40px 0 25px 0;
 	color: white;
 }
 
@@ -51,12 +59,32 @@
 
 	a{
 		color: white;
-		margin-bottom: 90px;
+		margin-bottom: 50px;
+		font-size: 18px;
+		text-align: center;
+		letter-spacing: .05em;
+		text-shadow: 1px 1px 2px @gray-darker;
+	}
+
+	h3{
+		color: #fff;
+		text-shadow: 1px 1px 1px @gray-darker;
 	}
 
 	.boton{
-		padding: 15px 0;
+		padding: 10px 0;
 		margin-bottom: 20px; 
+		font-size: 18px;
+		letter-spacing: .05em;
+	}
+
+	.registro{
+		border-left: solid 2px #fff;
+		border-right:solid 2px #fff;
+	}
+
+	.tamalero{
+		margin-bottom: 80px !important;
 	}
 
 }
@@ -65,15 +93,20 @@
 
 	label{
 		color: white;
+		font-size: 18px;
+		text-shadow: 1px 1px 2px @gray-darker;
+		letter-spacing: .05em;
 	}
 
 	input{ 
 		margin-bottom: 15px;
 		font-size: 16px;
+		color: @gray-darker;
+		background-color: rgba(255, 255, 255, 0.8);
 	}
 
 	&.form-group{
-		margin-bottom: 30px;
+		margin-bottom: 15px;
 	}
 
 	button{
@@ -89,12 +122,14 @@
 .password{
 	p{
 		color: white;
-		font-size: 18px;
+		font-size: 16px;
+		text-align: center;
 		margin-bottom: 50px;
+		text-shadow:1px 1px 1px @gray-darker; 
 	}
 
 	.form-group{
-		margin-bottom: 50px;
+		margin-bottom: 100px;
 
 		
 	}
@@ -116,7 +151,7 @@
 }
 
 .navbar-default{
-	background: @brand-primary;
+	background-image: url(images/nav-bg.png);
 	
 	a{
 		color: #fff;
@@ -128,10 +163,15 @@
 		width: 100%;
 		z-index: 9999;
 	}
+
+	.navbar-brand{
+		font-family: cabinItalic;
+	}
 }
 
 .navbar-header{
 	color: #fff;
+	
 }
 
 .navbar-toggle{
@@ -180,6 +220,7 @@
 	margin-bottom: 20px;
 	font-family: dinAlternate;
 	padding: 0 10px;
+	color: @brand-success;
 
 	i{ 
 
@@ -209,6 +250,14 @@ select{
 		margin: 0 auto;
 		color: @brand-danger;
 		font-size: 20px;
+
+		&.sumar{
+			color: @brand-good;
+		}
+
+		&.restar{
+			color: @brand-danger;
+		}
 	}
 
 	p{ 
@@ -297,6 +346,39 @@ h4{ text-align: center;}
 		border-bottom: solid 3px @brand-primary;
 		margin-bottom: 20px;
 	}
+
+
+}
+
+#nivel-tamalero{
+		background: @brand-good;
+
+		h3{
+			text-align: center;
+			color: #fff;
+			padding: 20px 0;
+		}
 }
 
 
+
+
+//TAMALERO-PEDIDO*****************
+
+.aviso-pedido{
+	background-color: rgba(91, 192, 222, 0.7);
+	padding: 10px 0;
+	position: absolute;
+	bottom: 0;
+	z-index: 9999;
+	width: 100%;
+
+	button{
+		margin: 10px 0;
+	}
+}
+
+
+
+
+//****************************
