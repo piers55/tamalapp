@@ -26,15 +26,16 @@
 				    </div>
 
 				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="collapse navbar-collapse navbar-mobile" id="bs-example-navbar-collapse-1">
+				    <div class="hidden-sm hidden-md hidden-lg collapse navbar-collapse navbar-mobile" id="bs-example-navbar-collapse-1">
 				      <ul class="hidden-sm hidden-md hidden-lg nav navbar-nav ">
 				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
 				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
 				      </ul> 
-
-				      <ul class="hidden-xs nav navbar-nav">
+					</div>
+					<div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
+				      <ul class=" nav navbar-nav">
 				        <li ><a class="menu-dropdown" href="index.html">Home</a></li>
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
@@ -47,13 +48,53 @@
 	      
 	        <div class="content">
 				
+				<!-- Button trigger modal -->
+					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					  Inventario de tamalero
+					</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				        <h4 class="modal-title primary" id="myModalLabel">Jesús Ramírez</h4>
+				        <h4 class="modal-title" id="distancia">Distancia aproximada: 4km</h4>
+				      </div>
+				      <div class="modal-body">
+				        <div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
+									<table>
+									  <p>Mi inventario</p>
+									  <tr id="">
+									    <td class="sabor">Verde</td>
+									    <td class="cantidad">5</td>		
+									  </tr>
+									  <tr id="">
+									    <td class="sabor">Dulce</td>
+									    <td class="cantidad">1</td>		
+									  </tr>
+									  <tr id="">
+									    <td class="sabor">Mole</td>
+									    <td class="cantidad">2</td>		
+									  </tr>
+									</table>
+								</div><!--INVENTARIO-->
+				      </div>
+				      
+				    </div>
+				  </div>
+				</div>		
 				
 				
-				
-	        </div><!--CONTENT--><span class="center block fa-stack fa-lg fa-4x boton-orden"><a href="orden.html" class=" col-center">
-				<i class="fa fa-circle fa-stack-2x"></i>
-				<i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
-				</a></span>
+	        </div><!--CONTENT-->
+
+	        <span class="center block fa-stack fa-lg fa-4x boton-orden">
+	        	<a href="orden.html" class=" col-center">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
+				</a>
+			</span>
 	    </div><!--CONTAINER-->
   </body>
 

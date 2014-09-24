@@ -2,7 +2,7 @@
   "name": "Tamalapp.",
   "version": "1.0",
   "description": "Tamales a domicilio",
-  "launch_path": "/tamalero-pedido.html",
+  "launch_path": "/index.html",
   "permissions": {
     "storage": {
       "description": "I need some storage"
