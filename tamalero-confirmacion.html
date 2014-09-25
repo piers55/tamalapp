@@ -7,6 +7,9 @@
 
 	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+
+	    <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -42,70 +45,21 @@
 				</nav>
 
 		    </header>
-
 	      
 	        <div class="content">
-		        <div class="col-xs-12 col-sm-8 col-md-6 center clearfix seleccionador">
-		        	<p class="instruccion">
-		        		<i class="fa fa-info-circle"></i>
-
-		        		Elige el sabor, la cantidad de tamales y envía una tamalerta. Te llegará una notificación avisando que tu pedido ha sido confirmado y va en camino.
-		        	</p>
-
-			        <form class="forma-pedido" action="">
-			        	<label for="sabor">Elige el sabor de tu tamal</label>
-			        	<select class="form-control" id="sabor">
-						  <option>Dulce</option>
-						  <option>Verde</option>
-						  <option>Mole</option>
-						  <option>Rajas</option>
-						  <option>Oaxaqueño</option>
-						</select>
-
-						<label for="cantidad">Elige la cantidad de tamales</label>
-			        	<select class="form-control" id="cantidad">
-						  <option>1</option>
-						  <option>2</option>
-						  <option>3</option>
-						  <option>4</option>
-						  <option>5</option>
-						</select>
-						<button type="button" class="btn btn-good btn-lg btn-block">Añadir al pedido</button>
-					</form>					
-				</div> 
-
-				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-					<table>
-					  <p>Mi pedido</p>
-					  <tr id="">
-					    <td class="sabor">Verde</td>
-					    <td class="cantidad">5</td>		
-					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Dulce</td>
-					    <td class="cantidad">1</td>		
-					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Mole</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="fa fa-times-circle"></i></button></td>
-					  </tr>
-					</table>
-				</div><!--ORDEN-->
-
 				
-					<a class="tamalerta center block" href="#"><img class="center block" src="images/tamalerta-boton.png" alt=""></a>
+				<!--AQUI EL MAPA-->
 				
-
-				<h4>¡Activa la Tamalerta!</h4>
-
-				<div class="col-xs-10 col-centered">
-					
+				<div class="aviso-pedido">
+					<a type="button" class="col-xs-8 center block btn btn-good btn-lg">Pedido entregado</a>
+					<a type="button" class="col-xs-8 center block btn btn-danger btn-lg">Cancelar entrega</a>
 				</div>
-				
+
+
+			
 	        </div><!--CONTENT-->
+
+
 	    </div><!--CONTAINER-->
   </body>
 

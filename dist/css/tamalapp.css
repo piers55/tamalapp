@@ -6262,11 +6262,24 @@ button.close {
 
   src: url(../fonts/Cabin-SemiBoldItalic.otf);
 }
+body {
+  min-height: 480px;
+}
 a {
   cursor: pointer;
 }
 button {
   cursor: pointer;
+}
+.translate {
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.center-bottom {
+  position: relative;
+  top: 220px;
 }
 .block {
   display: block !important;
@@ -6351,6 +6364,7 @@ button {
   padding: 0;
 }
 .container-fluid.login {
+  min-height: 480px;
   background-image: url(images/tamalapp-bg.jpg) !important;
   background-repeat: no-repeat;
   -webkit-background-size: 100% 100%;
@@ -6389,10 +6403,6 @@ button {
 }
 .menu-dropdown:hover {
   color: #720541 !important;
-}
-.boton-orden {
-  top: 480px;
-  z-index: 1000;
 }
 .boton-orden a {
   color: #7aaf29;
@@ -6524,6 +6534,7 @@ h4 {
 }
 #nivel-tamalero h3 {
   padding: 20px 0;
+  margin: 0;
   color: #fff;
   text-align: center;
 }

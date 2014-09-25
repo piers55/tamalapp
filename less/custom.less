@@ -16,6 +16,10 @@
     src: url(../fonts/Cabin-SemiBoldItalic.otf);
 }
 
+body{
+	min-height: 480px;
+}
+
 a{
 	cursor: pointer;
 }
@@ -24,6 +28,18 @@ button{
 	cursor: pointer;
 }
 
+
+.translate {
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+       -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.center-bottom {
+  position: relative;
+  top: 220px;
+}
 
 //CENTRAR COLUMNAS *************
 
@@ -146,6 +162,7 @@ button{
 		background-image: url(images/tamalapp-bg.jpg) !important;
 	background-repeat: no-repeat;
 	background-size: 100%;
+	min-height: 480px;
 	}
 }
 
@@ -193,8 +210,6 @@ button{
 
 
 .boton-orden{
-	z-index: 1000;
-	top: 480px;
 
 	a{
 		color: @brand-good;
@@ -360,6 +375,7 @@ h4{ text-align: center;}
 			text-align: center;
 			color: #fff;
 			padding: 20px 0;
+			margin: 0;
 		}
 }
 
