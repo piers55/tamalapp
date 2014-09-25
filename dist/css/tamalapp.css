@@ -4145,10 +4145,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   font-size: 25px;
   color: #fff;
   letter-spacing: 2px;
+  cursor: none;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: rgba(255, 255, 255, .5);
+  color: #fff;
   background-color: none;
 }
 .navbar-default .navbar-text {
@@ -6462,6 +6463,7 @@ select {
 }
 .orden table {
   width: 100%;
+  margin-bottom: 25px;
   font-size: 16px;
 }
 .orden table th {
@@ -6491,14 +6493,14 @@ button {
 }
 .tamalerta {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   cursor: pointer;
 }
 .tamalerta img {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   margin: 0 auto;
 }
 h4 {
