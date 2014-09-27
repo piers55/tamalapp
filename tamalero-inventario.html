@@ -7,9 +7,10 @@
 
 	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	    <script src="js/pedido.js"></script>
 	</head>
 
-	<body>
+	<body onload="visualizar()">
 	    <div class="container-fluid">
 		     <header class="clearfix">
 		        <header class="clearfix">
@@ -46,52 +47,46 @@
 
 	      
 	        <div class="content">
-		        <div class="col-xs-12 col-sm-8 col-md-6 center clearfix seleccionador">
-		        	<p class="instruccion">
-		        		<i class="fa fa-info-circle"></i>
-
-		        		Elige el sabor, la cantidad de tamales con los que cuentas para venta. Te llegará una notificación avisando pedidos y localización de los clientes.
-		        	</p>				
-				</div> 
-
 				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-					<table>
-					  <p>Mi inventario</p>
-					  <tr id="">
-					    <td class="sabor">Verde</td>
-					    <td class="cantidad">5</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Dulce</td>
-					    <td class="cantidad">1</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Mole</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Rajas</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Oaxaqueño</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					</table>
+					<table id="tabla">
+						<p>Mi inventario</p>
 
-					<button class="btn btn-primary btn-lg center block" data-toggle="modal" data-target="#myModal">
-					  Confirmar Inventario
-					</button>
+						<tr id="tablaDulce">
+							<td class="sabor">Dulce</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaVerde">
+							<td class="sabor">Verde</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+
+						<tr id="tablaMole">
+							<td class="sabor">Mole</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaRajas">
+							<td class="sabor">Rajas</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaOaxaqueño">
+							<td class="sabor">Oaxaqueño</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+					</table>
 				</div><!--INVENTARIO-->
 				
 	        </div><!--CONTENT-->
