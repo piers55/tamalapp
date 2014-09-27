@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
+	<meta charset="utf-8" />
 	    <meta http-equiv="pragma" content="no-cache" />
 	    <title>Tamalapp</title>
 
 	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	    <script src="js/pedido.js"></script>
 	</head>
 
-	<body>
+	<body onload="visualizar()">
 	    <div class="container-fluid">
 		     <header class="clearfix">
 		        <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -45,49 +46,56 @@
 
 	      
 	        <div class="content">
-		        <div class="col-xs-12 col-sm-8 col-md-6 center clearfix seleccionador">
+	        
+		<!--        <div class="col-xs-12 col-sm-8 col-md-6 center clearfix seleccionador">
 		        	<p class="instruccion">
 		        		<i class="fa fa-info-circle"></i>
 
 		        		Elige el sabor, la cantidad de tamales y envía una tamalerta. Te llegará una notificación avisando que tu pedido ha sido confirmado y va en camino.
 		        	</p>				
-				</div> 
+				</div> -->
 
 				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-					<table>
-					  <p>Mi inventario</p>
-					  <tr id="">
-					    <td class="sabor">Verde</td>
-					    <td class="cantidad">5</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Dulce</td>
-					    <td class="cantidad">1</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Mole</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Rajas</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
-					  <tr id="">
-					    <td class="sabor">Oaxaqueño</td>
-					    <td class="cantidad">2</td>		
-					    <td class="eliminar"><button><i class="restar fa fa-minus-circle"></i></button></td>
-					    <td class="eliminar"><button><i class=" sumar fa fa-plus-circle"></i></button></td>
-					  </tr>
+					<table id="tabla">
+						<p>Mi pedido</p>
+
+						<tr id="tablaDulce">
+							<td class="sabor">Dulce</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaVerde">
+							<td class="sabor">Verde</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+
+						<tr id="tablaMole">
+							<td class="sabor">Mole</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaRajas">
+							<td class="sabor">Rajas</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
+
+						<tr id="tablaOaxaqueño">
+							<td class="sabor">Oaxaqueño</td>
+							<td class="cantidad">NA</td>		
+							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+						</tr>
 					</table>
-				</div><!--ORDEN-->
+				</div><!--INVENTARIO-->
 
 				
 					<a class="tamalerta center block" href="#"><img class="center block" src="images/tamalerta-boton.png" alt=""></a>
