@@ -6405,8 +6405,15 @@ button {
 .menu-dropdown:hover {
   color: #720541 !important;
 }
+.boton-orden {
+  position: relative;
+  bottom: 15px;
+}
 .boton-orden a {
   color: #7aaf29;
+}
+.boton-orden i {
+  color: #fff;
 }
 .primary {
   color: #ff0379;
