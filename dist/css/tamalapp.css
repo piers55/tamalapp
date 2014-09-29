@@ -6263,24 +6263,11 @@ button.close {
 
   src: url(../fonts/Cabin-SemiBoldItalic.otf);
 }
-body {
-  min-height: 480px;
-}
 a {
   cursor: pointer;
 }
 button {
   cursor: pointer;
-}
-.translate {
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-       -o-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-.center-bottom {
-  position: relative;
-  top: 220px;
 }
 .block {
   display: block !important;
@@ -6365,7 +6352,6 @@ button {
   padding: 0;
 }
 .container-fluid.login {
-  min-height: 480px;
   background-image: url(images/tamalapp-bg.jpg) !important;
   background-repeat: no-repeat;
   -webkit-background-size: 100% 100%;
@@ -6405,11 +6391,12 @@ button {
 .menu-dropdown:hover {
   color: #720541 !important;
 }
+.boton-orden {
+  top: 480px;
+  z-index: 1000;
+}
 .boton-orden a {
   color: #7aaf29;
-}
-.primary {
-  color: #ff0379;
 }
 .seleccionador {
   margin-bottom: 30px;
@@ -6463,7 +6450,6 @@ select {
 }
 .orden table {
   width: 100%;
-  margin-bottom: 25px;
   font-size: 16px;
 }
 .orden table th {
@@ -6493,14 +6479,14 @@ button {
 }
 .tamalerta {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
 }
 .tamalerta img {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
 }
 h4 {
@@ -6536,7 +6522,6 @@ h4 {
 }
 #nivel-tamalero h3 {
   padding: 20px 0;
-  margin: 0;
   color: #fff;
   text-align: center;
 }
@@ -6546,9 +6531,28 @@ h4 {
   z-index: 9999;
   width: 100%;
   padding: 10px 0;
-  background-color: rgba(255, 255, 255, .7);
+  background-color: rgba(91, 192, 222, .7);
 }
 .aviso-pedido button {
   margin: 10px 0;
+}
+#panel {
+  position: absolute;
+  top: 70%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-bottom: 100px;
+  margin-left: auto;
+}
+#map {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  left: 0;
+  width: 320px;
+  height: 420px;
+  margin-right: auto;
+  margin-left: auto;
 }
 /*# sourceMappingURL=tamalapp.css.map */

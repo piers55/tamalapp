@@ -291,12 +291,14 @@ function setMarkers(map, locations) {
       content: contentString,
       maxWidth: 200
   });
-
+  	
     google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });
 
   }
+
+  
 }
 
 
