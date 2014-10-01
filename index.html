@@ -9,12 +9,12 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0">
     </script>
-    <script src="map-app.js"></script>
     <script src="js/pedido.js"></script>    
 
 
+
   </head>
-  <body onload="geolocateUser()">
+  <body onload="geolocateUser()" class="tamaleros" id="tamaleros">
             <header class="clearfix">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,4 +61,9 @@
   </body>
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/tamalapp.min.js"></script>
+
+    <script src="js/ws.js"></script>
+<script>
+  tamaleros();
+</script>
 </html>

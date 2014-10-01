@@ -15,7 +15,7 @@ function login(){
 		  	data,
 		  	function(response){
 		  		console.log(response);
-		  		//alert();
+
 				if(response.error == false){
 					infoUsuario=response;
 					window.location.replace('index.html');
@@ -29,54 +29,53 @@ function login(){
 	});
 } 
 
-
-
-					//alert(" "+infoUsuario.email);
-
 function register(){
 	$('form.register').on('submit', function(e){
 		e.preventDefault();
 		var data = $(this).serialize();
 		console.log(data);
-
 		$.post(
 		  	'http://nextlab.org/tamal-app/v1/register',
 		  	data,
 		  	function(response){
 		  		console.log(response);
-		  		//alert();
-				if(response.error == false){
-					//infoUsuario=response;
-					alert("event Registrar");
-					//window.location.replace('index.html');
 
+				if(response.error == false){
+					infoUsuario=response;
+					//window.location.replace('index.html');
 				}else{
 					document.getElementById('password').value="";
-					alert();
 				}	  		
 		  	}
 		);
 	});
+} 
+
+
+var key = '7e8c6d8b48bd0a1a02483a8f00f628a2';
+
+
+function tamaleros(){
+console.log("tamal");
+$.ajax({
+    url: 'http://nextlab.org/tamal-app/v1/tamaleros',
+    type: 'GET',
+    headers:{ 'X-Authorization' : key},
+    success: function(response) {
+        console.log(response);
+    },
+    error: function(){
+    	alert('error');
+    }
+});
 }
 
 
-
-
-
-function otro(){
-	$('form.login').on('submit', function(e){
-		e.preventDefault();
-		var data = $(this).serialize();
-		console.log(data);
-
-		$.post(
-		  	'http://nextlab.org/tamal-app/v1/login',
-		  	data,
-		  	function(response){
-		  		console.log(response);
-		  		alert("Response");
-
-		  	}
-		);
-	});
-} 
+function tamaleros0(){
+	console.log("tamaleros");
+	$.get(
+		'http://nextlab.org/tamal-app/v1/tamaleros',
+		function( response) {
+		console.log( "response: " +response );	
+});
+}
