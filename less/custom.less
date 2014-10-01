@@ -51,7 +51,7 @@ button{
 	font-size: 50px;
 	font-family: cabinItalic;
 	text-align: center;
-	margin: 40px 0 25px 0;
+	margin: 25px 0;
 	color: white;
 }
 
@@ -79,8 +79,7 @@ button{
 	}
 
 	.registro{
-		border-left: solid 2px #fff;
-		border-right:solid 2px #fff;
+		border: solid 2px #fff;
 	}
 
 	.tamalero{
@@ -129,7 +128,7 @@ button{
 	}
 
 	.form-group{
-		margin-bottom: 100px;
+		margin-bottom: 50px;
 
 		
 	}
@@ -192,23 +191,52 @@ button{
 		}
 }
 
-
-.boton-orden{
-	z-index: 1000;
-	top: 480px;
-
-	position: relative;
-	bottom: 15px;
-
-	a{
-		color: @brand-good;
-	}
-
-	i{
-		color: #fff;
-	}
+.modal-title{
+	text-align: center;
 }
 
+
+.boton-orden{
+	z-index: 9999;
+	position: absolute;
+	bottom:5%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	box-shadow: 1px 1px 4px @gray-darker;
+	
+	a{
+		color: @brand-good;
+		
+	}
+
+	p{
+		padding: 2%;
+		font-size: 1.3em;
+		margin: 0;
+		
+		i{
+		color: #fff;
+		}
+	}		
+}
+
+.vovler{
+	background-color: rgba(0, 0, 0, 0.8);
+	padding   : 10px 25px;
+	height    : 	 50px;
+
+	a{
+		color: #fff;
+		font-size: 1.3em;
+		text-decoration: none;
+
+		&:hover{
+			opacity: 0.5;
+		}
+	}
+}
 
 
 //PEDIDO *************
@@ -394,16 +422,7 @@ h4{ text-align: center;}
 
 // INDEX******************
 
-      #panel {
-      position: absolute;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 100px;
-      left: 0;
-      right: 0;
-      top: 70%;
 
-      }
       #map {
         position: absolute;
         margin-left: auto;
@@ -412,7 +431,7 @@ h4{ text-align: center;}
         right: 0;
         top: 60px;
         width: 320px;
-        height: 420px;
+        height: 100%;
       }
 
 

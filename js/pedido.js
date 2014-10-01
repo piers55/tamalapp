@@ -293,7 +293,8 @@ function setMarkers(map, locations) {
   });
   	
     google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
+    
+    $('#myModal').modal('show');
   });
 
   }
@@ -340,3 +341,4 @@ function setMarkers(map, locations) {
         else
           document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
       }
+
