@@ -16,10 +16,6 @@
     src: url(../fonts/Cabin-SemiBoldItalic.otf);
 }
 
-body{
-	min-height: 480px;
-}
-
 a{
 	cursor: pointer;
 }
@@ -29,17 +25,6 @@ button{
 }
 
 
-.translate {
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-       -o-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
-.center-bottom {
-  position: relative;
-  top: 220px;
-}
 
 //CENTRAR COLUMNAS *************
 
@@ -162,7 +147,6 @@ button{
 		background-image: url(images/tamalapp-bg.jpg) !important;
 	background-repeat: no-repeat;
 	background-size: 100%;
-	min-height: 480px;
 	}
 }
 
@@ -210,6 +194,8 @@ button{
 
 
 .boton-orden{
+	z-index: 1000;
+	top: 480px;
 
 	position: relative;
 	bottom: 15px;
@@ -221,10 +207,6 @@ button{
 	i{
 		color: #fff;
 	}
-}
-
-.primary{
-	color: @brand-primary;
 }
 
 
@@ -296,7 +278,6 @@ select{
 	table{
 		width: 100%;
 		font-size: 16px;
-		margin-bottom: 25px;
 
 		th{ 
 			text-align: center;
@@ -326,10 +307,10 @@ button{
 .tamalerta{ 
 	cursor: pointer;
 	display: block;
-	width: 70px;
-	height:70px;
+	width: 100px;
+	height:100px;
 
-	img{width: 70px; height: 70px; margin: 0 auto; display: block;}
+	img{width: 100px; height: 100px; margin: 0 auto; display: block;}
 }
 
 h4{ text-align: center;}
@@ -383,7 +364,6 @@ h4{ text-align: center;}
 			text-align: center;
 			color: #fff;
 			padding: 20px 0;
-			margin: 0;
 		}
 }
 
@@ -393,7 +373,7 @@ h4{ text-align: center;}
 //TAMALERO-PEDIDO*****************
 
 .aviso-pedido{
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(91, 192, 222, 0.7);
 	padding: 10px 0;
 	position: absolute;
 	bottom: 0;
@@ -404,4 +384,36 @@ h4{ text-align: center;}
 		margin: 10px 0;
 	}
 }
+
+
+
+
 //****************************
+
+
+
+// INDEX******************
+
+      #panel {
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 100px;
+      left: 0;
+      right: 0;
+      top: 70%;
+
+      }
+      #map {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto; 
+        left: 0;
+        right: 0;
+        top: 60px;
+        width: 320px;
+        height: 420px;
+      }
+
+
+      //************************

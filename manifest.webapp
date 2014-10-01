@@ -10,5 +10,13 @@
   },
   "developer": {
     "name": "Antonio Pieras"
-  }
+  }, 
+  "permissions": {
+        "geolocation": {
+            "description" : "Used to locate me"
+        },
+    "systemXHR": { 
+        "description": "Required to make Network calls" 
+      }
+    }
 }
