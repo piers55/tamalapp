@@ -341,4 +341,3 @@ function setMarkers(map, locations) {
         else
           document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
       }
-
