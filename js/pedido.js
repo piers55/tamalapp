@@ -226,7 +226,7 @@
 function setMarkers(map, locations) {
 
   var image = {
-    url: 'images/fijo-icon.png',
+    url: 'images/fijo-icon_01.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(32, 32),
     // The origin for this image is 0,0.
