@@ -6269,6 +6269,9 @@ a {
 button {
   cursor: pointer;
 }
+.right {
+  float: right !important;
+}
 .block {
   display: block !important;
 }
@@ -6522,8 +6525,34 @@ button {
 h4 {
   text-align: center;
 }
+.carousel-inner {
+  min-height: 320px;
+  max-height: 800px;
+}
+.item p {
+  color: #222;
+}
+.carousel-indicators {
+  position: relative;
+  left: 0;
+}
+.carousel-indicators li {
+  background-color: #555;
+}
+.carousel-indicators li.active {
+  background-color: #ff0379;
+}
+.carousel-control.right,
+.carousel-control.left {
+  background-image: none;
+}
+.carousel-control.right span,
+.carousel-control.left span {
+  color: #ff0379;
+  opacity: none;
+}
 .perfil {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .perfil h1 {
   color: #ff0379;
@@ -6546,6 +6575,19 @@ h4 {
 }
 .perfil form label {
   font-size: 18px;
+}
+.btn-tamalerta {
+  margin-bottom: 25px;
+}
+.btn-tamalerta h1 {
+  text-align: center;
+}
+.switch {
+  width: 101px;
+}
+#comprados,
+#tamalerta-activada {
+  text-align: center;
 }
 #nivel-tamalero {
   background: #7aaf29;
