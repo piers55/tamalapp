@@ -25,8 +25,6 @@ function login(){
 					document.getElementById('password').value="";
 					msj.innerHTML = "";
 					msj.innerHTML ="Error: "+ response.message;
-					
-					//alert();
 				}	  		
 		  	}
 		);
@@ -62,14 +60,14 @@ var key = '7e8c6d8b48bd0a1a02483a8f00f628a2';
 function tamaleros(){
 console.log("tamal");
 $.ajax({
-    url: 'http://nextlab.org/tamal-app/v1/tamaleros',
     type: 'GET',
+    url: 'http://nextlab.org/tamal-app/v1/tamaleros',
     headers:{ 'X-Authorization' : key},
     success: function(response) {
         console.log(response);
     },
-    error: function(){
-    	alert('error');
+    error: function(response){
+    	console.log(response);
     }
 });
 }

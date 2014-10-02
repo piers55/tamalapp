@@ -17,6 +17,7 @@
         },
     "systemXHR": { 
         "description": "Required to make Network calls" 
-      }
+      },
+      "desktop-notification":{}
     }
 }
