@@ -1,9 +1,4 @@
 
-
-
-
-
-
 //BOOSTRAP SWIPE SLIDER************************
 
 
