@@ -14,15 +14,19 @@ function login(){
 		  	'http://nextlab.org/tamal-app/v1/login',
 		  	data,
 		  	function(response){
-		  		console.log(response);
 
 				if(response.error == false){
 					infoUsuario=response;
 					window.location.replace('index.html');
 
 				}else{
+					console.log(response);
+					var msj = document.getElementById('notificacionError');
 					document.getElementById('password').value="";
-					alert();
+					msj.innerHTML = "";
+					msj.innerHTML ="Error: "+ response.message;
+					
+					//alert();
 				}	  		
 		  	}
 		);
