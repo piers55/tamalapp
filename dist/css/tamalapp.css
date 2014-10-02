@@ -6394,6 +6394,7 @@ button {
   color: #720541 !important;
 }
 .modal-title {
+  color: #ff0379;
   text-align: center;
 }
 .boton-orden {
@@ -6605,7 +6606,7 @@ h4 {
   padding: 10px 0;
   background-color: rgba(91, 192, 222, .7);
 }
-.aviso-pedido button {
+.aviso-pedido a {
   margin: 10px 0;
 }
 #map {

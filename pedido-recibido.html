@@ -55,33 +55,24 @@
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                  <h4 class="modal-title" id="myModalLabel">Jesús Ramírez</h4>
-                 <p class="modal-title" id="distancia">00</p>
+                 <p class="modal-title" id="distancia">Distancia aproximada: 4km</p>
                </div>
                <div class="modal-body">
                  <div class="[ orden ][ col-xs-12 col-sm-8 col-md-6 center clearfix ]">
-                              <table id="tabla">
+                              <table>
                                 <p>Mi inventario</p>
-                                <tr id="tablaDulce">
-                                  <td class="sabor">Dulce</td>
-                                  <td class="cantidad">NA</td>        
-                                </tr>
-                                <tr id="tablaVerde">
+                                <tr id="">
                                   <td class="sabor">Verde</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">5</td>        
                                 </tr>
-                                <tr id="tablaMole">
+                                <tr id="">
+                                  <td class="sabor">Dulce</td>
+                                  <td class="cantidad">1</td>        
+                                </tr>
+                                <tr id="">
                                   <td class="sabor">Mole</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">2</td>        
                                 </tr>
-                                <tr id="tablaRajas">
-                                  <td class="sabor">Rajas</td>
-                                  <td class="cantidad">NA</td>        
-                                </tr>
-                                <tr id="tablaOaxaqueño">
-                                  <td class="sabor">Oaxaqueño</td>
-                                  <td class="cantidad">NA</td>        
-                                </tr>
-                                                                                                
                               </table>
                           </div><!--INVENTARIO-->
                </div>
@@ -90,29 +81,16 @@
            </div>
           </div>    <!-- Modal -->
 
-          <!-- Modal TU PEDIDO VA EN CAMINO -->
-          <div class="modal fade" id="pedidoEnCamino" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                 <h1 class="modal-title" id="myModalLabel"><i class="fa fa-bicycle fa-4x"></i> <br> ¡Tu pedido va en camino!</h1>
-               </div> 
-             </div>
-           </div>
-          </div>    <!-- Modal -->
-
   				<a href="orden.html" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
   					<p><i class="fa fa-cutlery"></i> ¡Haz tu pedido!</p>
   				</a>
 	    </div><!--CONTAINER-->
-      <div id= "audioContainer"></div>
+
       <script src="dist/js/jquery.min.js"></script>
       <script src="dist/js/tamalapp.min.js"></script>
       <script src="js/ws.js"></script>
       <script>
-       //escucha();
-       tamaleros();
+       // tamaleros();
       </script>
   </body>
 </html>
