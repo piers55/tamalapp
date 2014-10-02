@@ -1,10 +1,5 @@
-
-	var dulce = 0;
-	var verde = 0;
-	var mole = 0;
-	var rajas = 0;		
-	var oaxaqueño = 0;
-
+	var userLatLng;
+	var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
 
 	function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
@@ -24,7 +19,7 @@
 		var buttonSumar = tdEliminar2.appendChild(document.createElement('button'));
 
 		var iRestar = buttonRestar.appendChild(document.createElement('i'));
-		var iSumar = buttonSumar.appendChild(document.createElement('i'));			;
+		var iSumar = buttonSumar.appendChild(document.createElement('i'));
 
 
 			
@@ -133,23 +128,23 @@
 			switch(sabor){
 
 				case "Dulce": 
-				dulce+=parseInt(cantidad);
+				dulce+=parseInt(cantidad, 10);
 				break;
 
 				case "Verde": 
-				verde+=parseInt(cantidad);
+				verde+=parseInt(cantidad, 10);
 				break;
 
 				case "Mole": 
-				mole+=parseInt(cantidad);
+				mole+=parseInt(cantidad, 10);
 				break;
 
 				case "Rajas": 
-				rajas+=parseInt(cantidad);
+				rajas+=parseInt(cantidad, 10);
 				break;
 
 				case "Oaxaqueño": 
-				oaxaqueño+=parseInt(cantidad);
+				oaxaqueño+=parseInt(cantidad, 10);
 				break;
 
 			}
@@ -198,14 +193,56 @@
 //___________________________________________________________________________________
 
 
-		//(<alt>, y, x, z-index)
-      var beaches = [
-        ['Juan', 19.415, -99.170, 'fijo', 0, 7, 3, 4, 5],
-        ['Pedro', 19.41, -99.170, 'fijo', 1, 2, 0, 7, 5],
-        ['Adolfo', 19.405,  -99.170, 'movil', 1, 2, 3, 4, 5],
-        ['Carlos', 19.405,  -99.175, 'movil', 1, 7, 3, 0, 5],
-        ['Gerardo', 19.41,  -99.175, 'fijo', 1, 0, 3, 4, 5],
-        ['Juana', 19.415,  -99.175, 'movil', 1, 7, 7, 4, 0]
+function createModal(){
+		//var idModal =""+nombre+""+index;
+		var idModal = "myModal0";
+		var body = document.getElementById('tamaleros');
+		var div0= body.appendChild(document.createElement('div'));
+		div0.setAttribute("class", "modal fade");
+		div0.setAttribute("id", idModal);			
+		div0.setAttribute("tabindex", "-1");			
+		div0.setAttribute("role", "dialog");					
+		div0.setAttribute("aria-labelledby", "myModalLabel");
+		div0.setAttribute("aria-hidden", "true");		
+
+		var div1 = div0.appendChild(document.createElement('div'));
+		div1.setAttribute("class", "modal-dialog");
+
+		var div2 = div1.appendChild(document.createElement('div'));
+		div2.setAttribute("class", "modal-header");
+
+		var b0 = div2.appendChild(document.createElement('button'));
+		b0.setAttribute("type", "button");		
+		b0.setAttribute("class", "close");
+		b0.setAttribute("data-dismiss", "modal");
+
+		var span0= b0.appendChild(createElement('span'));
+		span0.setAttribute("aria-hidden", "true");
+
+		var span1=b0.appendChild(createElement('span'));
+		span1.setAttribute("class", "sr-only");
+		span1.innerHTML = "Close";
+
+
+
+
+//		    tdSabor.innerHTML = ""+saborTemp;
+//		    tdCantidad.innerHTML = cantidadTemp;
+
+}
+
+
+
+
+
+
+
+	//(id, nombre, apellido, lat, lon, tiempo_contenido)
+
+      var tamalerosInfo = [
+        ['5' ,'Franciso A','Salazar', 19.415, -99.170, "2014-09-30"],
+        ['6','Camilo','Salazar', 19.41, -99.170, "2014-09-30"],
+        ['9' ,'Adolfo','Salazar', 19.405,  -99.170, "2014-09-30"],
       ]; 
 
       var nombreT = "Jesús Ramírez";
@@ -223,89 +260,68 @@
         x: tamaleroX
       }
 
+
+      function calcularDistancia(){
+
+      }
+
 function setMarkers(map, locations) {
 
   var image = {
     url: 'images/fijo-icon_01.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(32, 32),
-    // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(0, 32)
   };
-  // Shapes define the clickable region of the icon.
-  // The type defines an HTML &lt;area&gt; element 'poly' which
-  // traces out a polygon as a series of X,Y points. The final
-  // coordinate closes the poly by connecting to the first
-  // coordinate.
+
+
+
   var shape = {
       coords: [1, 1, 1, 34, 34, 34, 34 , 1],
       type: 'poly'
   };
-  for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-    var marker = new google.maps.Marker({
+   
+ for (var i = 0; i < locations.length; i++) {
+    var pos = locations[i];
+    var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
+    	var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
         icon: image,
         shape: shape,
-        title: beach[0],
+        id: pos[0],
+        title: pos[1]
     });
 
-    var contentString = '<div class="modal-header">'+
-        '<h4 class="modal-title" id="myModalLabel">'+ tamalero.nombre +'</h4>'+
-        '<h4 class="modal-title" id="distancia">Distancia aproximada: 4km</h4>'+
-      '</div>'+
-      '<div class="modal-body">'+
-        '<div class="orden center clearfix">'+
-          '<table id = "tabla">'+
-            '<p>Mi inventario</p>'+
-            '<tr id="tablaDulce">'+
-              '<td class="sabor">Dulce</td>'+
-              '<td class="cantidad">'+tamalero.dulce+'</td>'+   
-            '</tr>'+
+  		google.maps.event.addListener(marker, 'click', function() {
+    	$('#myModal').modal('show');
+    	
+    	var pos0= ""+this.position.k;
+    	var pos1= ""+this.position.B;
 
-            '<tr id="Verde">'+
-              '<td class="sabor">Verde</td>'+
-              '<td class="cantidad">'+ tamalero.verde+'</td>'+   
-            '</tr>'+
-            '<tr id="Mole">'+
-              '<td class="sabor">Mole</td>'+
-              '<td class="cantidad">'+ tamalero.mole+'</td>'+   
-            '</tr>'+
-            '<tr id="Rajas">'+
-              '<td class="sabor">Rajas</td>'+
-              '<td class="cantidad">'+ tamalero.rajas+'</td>'+   
-            '</tr>'+
-            '<tr id="Oaxaqueño">'+
-              '<td class="sabor">Oaxaqueño</td>'+
-              '<td class="cantidad">'+ tamalero.oaxaqueño+'</td>'+   
-            '</tr>'+
-          '</table>'+
-        '</div><!--INVENTARIO-->'+
-    '</div>';
+    	var origen=userLatLng;
+    	var destino= this.position;//new google.maps.LatLng(pos0);
+    	var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
+    	console.log(distancia);
+    	//console.log(pos0 + ",   " + pos1);
+    	for(var j=0; j<tamalerosInfo.length; j++){
+    		//console.log(""+tamalerosInfo[j][3]);
 
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString,
-      maxWidth: 200
-  });
-  	
-    google.maps.event.addListener(marker, 'click', function() {
-    
-    $('#myModal').modal('show');
-  });
+    		//if(((""+tamalerosInfo[j][3])==(pos0))&&((""+tamalerosInfo[j][4])==pos1))
+    		//console.log("I'm "+ i);
+    		//alert("");
+    	}
 
+
+
+  	}, this);
   }
-
-  
 }
 
-
+		
 
       function geolocationSuccess(position) {
-        var userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
  
         var myOptions = {
           zoom : 16,
@@ -315,7 +331,7 @@ function setMarkers(map, locations) {
         // Draw the map
         var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
         
-        setMarkers(mapObject, beaches);
+        setMarkers(mapObject, tamalerosInfo);
 
         // Place the marker
         new google.maps.Marker({
