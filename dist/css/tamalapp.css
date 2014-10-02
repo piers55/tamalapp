@@ -6525,6 +6525,32 @@ button {
 h4 {
   text-align: center;
 }
+.carousel-inner {
+  min-height: 320px;
+  max-height: 800px;
+}
+.item p {
+  color: #222;
+}
+.carousel-indicators {
+  position: relative;
+  left: 0;
+}
+.carousel-indicators li {
+  background-color: #555;
+}
+.carousel-indicators li.active {
+  background-color: #ff0379;
+}
+.carousel-control.right,
+.carousel-control.left {
+  background-image: none;
+}
+.carousel-control.right span,
+.carousel-control.left span {
+  color: #ff0379;
+  opacity: none;
+}
 .perfil {
   margin-bottom: 20px;
 }

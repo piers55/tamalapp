@@ -351,6 +351,54 @@ h4{ text-align: center;}
 
 
 
+
+//CÓMO FUNCIONA? **************************
+
+.carousel-inner{
+	min-height: 320px;
+	max-height: 800px;
+}
+
+.item{
+
+	p{
+		color: @gray-darker;
+	}
+}
+
+.carousel-indicators {
+
+	position: relative;
+	left: 0;
+	
+	li{
+		background-color: @gray;
+
+		&.active{
+			background-color: @brand-primary;
+		}
+	}
+
+	
+}
+
+.carousel-control{
+	&.right, &.left{
+		background-image: none;
+
+		span{
+			color: @brand-primary;
+
+			opacity: none
+		}
+	}
+}
+
+
+//*****************************************
+
+
+
 //PERFIL *************
 
 .perfil{

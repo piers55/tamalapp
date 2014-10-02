@@ -1,5 +1,8 @@
 
 +function ($) { "use strict";
+
+//BOTON DE ON Y OFF ************************************
+
     $('.btn-toggle').click(function() {
         $(this).find('.btn').toggleClass('active');  
         
@@ -24,5 +27,26 @@
         alert($(this["options"]).val());
         return false;
     });
+
+//********************************************************
+
+
+
+
+//SLIDES PARA COMO FUNCIONA********************************
+
+
+  $("#myCarousel").carousel();
+
+  $('#myCarousel').on('slide', '', function() {
+  if($('.carousel-inner .item:last').hasClass('active')) {
+    $(this).carousel('stop');
+  }
+});
+
+
+
+
+//*********************************************************
 }(window.jQuery);
 
