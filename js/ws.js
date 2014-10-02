@@ -24,7 +24,7 @@ function login(){
 					var msj = document.getElementById('notificacionError');
 					document.getElementById('password').value="";
 					msj.innerHTML = "";
-					msj.innerHTML ="Error: "+ response.message;
+					msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
 					
 					//alert();
 				}	  		
