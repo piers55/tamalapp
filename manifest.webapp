@@ -2,6 +2,9 @@
   "name": "Tamalapp",
   "version": "1.0",
   "description": "Tamales a domicilio",
+  "icons": {
+    "60": "/images/logo-app-60x60.png"
+  },
   "launch_path": "/preLogin.html",
   "permissions": {
     "geolocation": {
