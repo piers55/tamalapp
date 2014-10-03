@@ -31,16 +31,27 @@
 
 
 //SLIDES PARA COMO FUNCIONA********************************
-  $("#myCarousel").carousel();
-  $('#myCarousel').on('slide', '', function() {
-  if($('.carousel-inner .item:last').hasClass('active')) {
-    $(this).carousel('stop');
-  }
+$("#myCarousel").carousel();
+$('#myCarousel').on('slide', '', function() {
+    if( $('.carousel-inner .item:last').hasClass('active') ) {
+        $(this).carousel('stop');
+    }
 });
 
+//*********************************************************
 
 
+
+
+
+
+//MENU COLLAPSE*********************************************
+
+    $(document).on('click',function(){
+        $('.collapse').collapse('hide');
+    });
 
 //*********************************************************
+
 }(window.jQuery);
 
