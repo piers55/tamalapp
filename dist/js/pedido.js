@@ -238,7 +238,7 @@ function buscarPedido(){
 function setMarkers(map, locations) {
 
   var image = {
-    url: 'images/ambulante-icon_04.png',
+    url: 'images/tamaleros-icon.png',
     size: new google.maps.Size(32, 32),
     origin: new google.maps.Point(0,0),
     anchor: new google.maps.Point(0, 32)
@@ -309,8 +309,8 @@ function setMarkers(map, locations) {
         setMarkers(mapObject, tamalerosInfo);
 		
 		var imageUser = {
-			url: 'images/fijo-icon_01.png',
-			size: new google.maps.Size(32, 32),
+			url: 'images/user-icon.png',
+			size: new google.maps.Size(24, 40),
 			origin: new google.maps.Point(0,0),
 			anchor: new google.maps.Point(0, 32)
 		};
