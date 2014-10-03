@@ -13,7 +13,6 @@ function escucha(){
 
 function buscarPedido(){
 	k++;
-	console.log(""+k);
 	if (statusPedido==true){
 		console.log("Pedido");
 		
@@ -212,123 +211,101 @@ function buscarPedido(){
 			visualizar();
 		}
 
-      var tamalerosInfo = [
-        ['5' ,'Franciso A','Salazar', 19.415, -99.170, "2014-09-30"],
-        ['6','Camilo','Pérez', 19.41, -99.170, "2014-09-30"],
-        ['9' ,'Adolfo','López', 19.405,  -99.170, "2014-09-30"],
-      ]; 
-
-      var nombreT = "Jesús Ramírez";
-      var cantidadDulce =0, cantidadVerde = 0, cantidadMole=0, cantidadRajas=0, cantidadOaxaqueño=0;
-      var tamaleroY=19.415, tamaleroX=-99.170;
-
-      var tamalero = {
-        nombre: nombreT,
-        dulce: cantidadDulce,
-        verde: cantidadVerde,
-        mole: cantidadMole,
-        rajas: cantidadRajas,
-        oaxaqueño: cantidadOaxaqueño,
-        y: tamaleroY,
-        x: tamaleroX
-      }
-
-
-
 function setMarkers(map, locations) {
+	var image = {
+		url: 'images/ambulante-icon_04.png',
+		size: new google.maps.Size(32, 32),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(0, 32)
+	};
 
-  var image = {
-    url: 'images/ambulante-icon_04.png',
-    size: new google.maps.Size(32, 32),
-    origin: new google.maps.Point(0,0),
-    anchor: new google.maps.Point(0, 32)
-  };
-
-
-
-  var shape = {
-      coords: [1, 1, 1, 34, 34, 34, 34 , 1],
-      type: 'poly'
-  };
+	var shape = {
+		coords: [1, 1, 1, 34, 34, 34, 34 , 1],
+		type: 'poly'
+	};
    
- for (var i = 0; i < locations.length; i++) {
-    var pos = locations[i];
-    var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
-    	var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        icon: image,
-        shape: shape,
-        id: pos[0],
-        title: pos[1]
-    });
+   	window.markers = new Array();
+	for (var i = 0; i < locations.length; i++) {
+		var pos = locations[i];
+		var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
+		var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			icon: image,
+			shape: shape,
+			id: pos[0],
+			title: pos[1]
+		});
+		window.markers.push(marker);
 
   		google.maps.event.addListener(marker, 'click', function() {
-    	$('#myModal').modal('show');
+    		$('#myModal').modal('show');
     	
-    	var pos0= ""+this.position.k.toFixed(3);
-    	var pos1= ""+this.position.B.toFixed(3);
+	    	var pos0= ""+this.position.k.toFixed(3);
+	    	var pos1= ""+this.position.B.toFixed(3);
 
-    	var origen=userLatLng;
-    	var destino= this.position;//new google.maps.LatLng(pos0);
-    	var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
+	    	var origen=userLatLng;
+	    	var destino= this.position;//new google.maps.LatLng(pos0);
+	    	var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
     	
-    	//Modificar Valores
-    	var x = document.getElementById('distancia');
-    	x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
+	    	//Modificar Valores
+	    	var x = document.getElementById('distancia');
+	    	x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
 
-    	var nomTamalero = document.getElementById('myModalLabel');
+    		var nomTamalero = document.getElementById('myModalLabel');
 
-    	var des0, des1;
-    	for(var j=0; j<tamalerosInfo.length; j++){
-    		des0= ""+tamalerosInfo[j][3].toFixed(3);
-    		des1= ""+tamalerosInfo[j][4].toFixed(3);
+    		var des0, des1;
+	    	for(var j=0; j<tamalerosInfo.length; j++){
+	    		des0= ""+tamalerosInfo[j][3].toFixed(3);
+	    		des1= ""+tamalerosInfo[j][4].toFixed(3);
 
-    		if((des0==pos0)&&(des1==pos1)){
-    		nomTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
-    		statusPedido= !statusPedido;
-			}
-    	}
-  	}, this);
-  }
+	    		if((des0==pos0)&&(des1==pos1)){
+	    		nomTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
+	    		statusPedido= !statusPedido;
+				}
+	    	}// for
+  		}, this);
+  	}
+}// setMarkers
+
+
+
+function geolocationSuccess(position) {
+	userLatLng = new google.maps.LatLng(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3));
+
+	var myOptions = {
+		zoom : 16,
+		center : userLatLng, //disableDefaultUI: true
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+
+	// Draw the map
+	window.mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+
+	setMarkers(window.mapObject, window.tamalerosInfo);
+
+	var imageUser = {
+		url: 'images/fijo-icon_01.png',
+		size: new google.maps.Size(32, 32),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(0, 32)
+	};
+
+	// Place the marker
+	new google.maps.Marker({
+		map: window.mapObject,
+		icon: imageUser,
+		title: "Yo",
+		position: userLatLng
+	});
+
+	localStorage.setItem("lat", position.coords.latitude.toFixed(3));
+	localStorage.setItem("lon", position.coords.longitude.toFixed(3));
 }
-
-
-
-      function geolocationSuccess(position) {
-        userLatLng = new google.maps.LatLng(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3));
  
-        var myOptions = {
-          zoom : 16,
-          center : userLatLng, //disableDefaultUI: true
-          mapTypeId : google.maps.MapTypeId.ROADMAP
-        };
-        // Draw the map
-        var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
-        
-        setMarkers(mapObject, tamalerosInfo);
-		
-		var imageUser = {
-			url: 'images/fijo-icon_01.png',
-			size: new google.maps.Size(32, 32),
-			origin: new google.maps.Point(0,0),
-			anchor: new google.maps.Point(0, 32)
-		};
-        // Place the marker
-        new google.maps.Marker({
-          map: mapObject,
-          icon: imageUser,
-          title: "Yo",
-          position: userLatLng
-        });
-
-        localStorage.setItem("lat", position.coords.latitude.toFixed(3));
-        localStorage.setItem("lon", position.coords.longitude.toFixed(3));
-      }
- 
-      function geolocationError(positionError) {
-        document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
-      }
+function geolocationError(positionError) {
+	document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
+}// geolocationError
  
 function geolocateUser() {
 	// If the browser supports the Geolocation API
@@ -340,9 +317,7 @@ function geolocateUser() {
 	  };
 	  navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
 	}
-	else
-	  document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
-}
+}// geolocateUser
 
 function hacerPedido(){
 	$('.boton-orden').on('click', function(e){
@@ -353,9 +328,6 @@ function hacerPedido(){
 		var lon = localStorage.getItem("lon");
 		var tamales = damePedido();
 
-		console.log(tamales);
-	
-		var p = JSON.stringify(pedido);
 		$.ajax({
 		    type: 'POST',
 		    url: 'http://nextlab.org/tamal-app/v1/pedidos',
