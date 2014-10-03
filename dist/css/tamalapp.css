@@ -6419,17 +6419,17 @@ button {
 .boton-orden p i {
   color: #fff;
 }
-.vovler {
+.volver {
   height: 50px;
   padding: 10px 25px;
   background-color: rgba(0, 0, 0, .8);
 }
-.vovler a {
+.volver a {
   font-size: 1.3em;
   color: #fff;
   text-decoration: none;
 }
-.vovler a:hover {
+.volver a:hover {
   opacity: .5;
 }
 .seleccionador {
@@ -6531,6 +6531,7 @@ h4 {
   max-height: 800px;
 }
 .item p {
+  margin-bottom: 25px;
   color: #222;
 }
 .carousel-indicators {
@@ -6551,6 +6552,10 @@ h4 {
 .carousel-control.left span {
   color: #ff0379;
   opacity: none;
+}
+.carousel-control.right:hover,
+.carousel-control.left:hover {
+  margin: 0;
 }
 .perfil {
   margin-bottom: 20px;
