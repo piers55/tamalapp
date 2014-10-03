@@ -47,6 +47,7 @@
 	      
 	        <div class="content">
 	        
+<<<<<<< HEAD
 		<!--        <div class="col-xs-12 col-sm-8 col-md-6 center clearfix seleccionador">
 		        	<p class="instruccion">
 		        		<i class="fa fa-info-circle"></i>
@@ -109,9 +110,66 @@
 				</div>
 				
 	        </div><!--CONTENT-->
-	    </div><!--CONTAINER-->
-  </body>
+=======
+				<form action="orden.html" method="post" role="form" class="sesion pedido clearfix" style="min-height:350px">
+					<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
+						
+						<table id="tabla-pedido">
+							<p>Mi pedido</p>
 
-<script src="dist/js/jquery.min.js"></script>
-<script src="dist/js/tamalapp.min.js"></script>
+							<tr id="tablaDulce" data-id="1">
+								<td class="sabor">Dulce</td>
+								<td class="cantidad">NA</td>		
+								<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							</tr>
+
+							<tr id="tablaVerde" data-id="2">
+								<td class="sabor">Verde</td>
+								<td class="cantidad">NA</td>		
+								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							</tr>
+
+
+							<tr id="tablaMole" data-id="3">
+								<td class="sabor">Mole</td>
+								<td class="cantidad">NA</td>		
+								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							</tr>
+
+							<tr id="tablaRajas" data-id="4">
+								<td class="sabor">Rajas</td>
+								<td class="cantidad">NA</td>		
+								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							</tr>
+
+							<tr id="tablaOaxaqueño" data-id="5">
+								<td class="sabor">Oaxaqueño</td>
+								<td class="cantidad">NA</td>		
+								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							</tr>
+							<div class="clear"></div>
+							<a href="#" type="submit" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
+			  					<p><i class="fa fa-cutlery" type="submit"></i> ¡Haz tu pedido!</p>
+			  				</a>
+						</table>
+						
+					</div><!--INVENTARIO-->
+				</form>
+	    	</div><!--CONTENT-->
+>>>>>>> fdebdd1cccfffa9d9604aefbdca96cbdbbbc9030
+	    </div><!--CONTAINER-->
+  	</body>
+
+	<script src="dist/js/jquery.min.js"></script>
+	<script src="dist/js/tamalapp.min.js"></script>
+	<script src="js/ws.js"></script>
+	<script>
+		hacerPedido();
+	</script>
+
 </html>

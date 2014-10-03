@@ -1,22 +1,29 @@
 {
-  "name": "Tamalapp.",
+  "name": "Tamalapp",
   "version": "1.0",
   "description": "Tamales a domicilio",
   "launch_path": "/preLogin.html",
   "permissions": {
-    "storage": {
-      "description": "I need some storage"
+    "geolocation": {
+      "description": "Used to locate me"
+    },
+    "systemXHR": {
+      "description": "Required to make Network calls"
+    },
+    "desktop-notification": {},
+    "push": {
+      "description": "Se usan para pedidos"
     }
   },
   "developer": {
-    "name": "Antonio Pieras"
-  }, 
-  "permissions": {
-        "geolocation": {
-            "description" : "Used to locate me"
-        },
-    "systemXHR": { 
-        "description": "Required to make Network calls" 
-      }
+    "name": "Pequeño Cuervo"
+  },
+  "messages": [
+    {
+      "push": "/tamalero-inventario.html"
+    },
+    {
+      "push-register": "/tamalero-inventario.html"
     }
+  ]
 }
