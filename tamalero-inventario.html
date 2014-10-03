@@ -4,12 +4,11 @@
 		<meta charset="utf-8" />
 	    <meta http-equiv="pragma" content="no-cache" />
 	    <title>Tamalapp</title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
 	    <script src="dist/js/pedido.js"></script>
 	</head>
-
 	<body onload="visualizar()">
 	    <div class="container-fluid">
 		     <header class="clearfix">
@@ -31,7 +30,7 @@
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
 				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-				      </ul> 
+				      </ul>
 					</div>
 					<div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
 				      <ul class=" nav navbar-nav">
@@ -39,58 +38,58 @@
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
 				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-				      </ul>  
+				      </ul>
 				    </div><!-- /.navbar-mobile -->
 				</nav>
 
 		    </header>
 
-	      
+
 	        <div class="content">
 	        <form role="form" class="sesion" action="index.html">
 				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-				
+
 					<table id="tabla">
 						<p>Mi inventario</p>
 
 						<tr id="tablaDulce">
 							<td class="sabor">Dulce</td>
-							<td class="cantidad">NA</td>		
+							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaVerde">
 							<td class="sabor">Verde</td>
-							<td class="cantidad">NA</td>		
+							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaMole">
 							<td class="sabor">Mole</td>
-							<td class="cantidad">NA</td>		
+							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaRajas">
 							<td class="sabor">Rajas</td>
-							<td class="cantidad">NA</td>		
+							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaOaxaqueño">
 							<td class="sabor">Oaxaqueño</td>
-							<td class="cantidad">NA</td>		
+							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 					</table>
 				</div><!--INVENTARIO-->
 				<button type="submit" class="col-xs-8 btn btn-good center block boton boton-ok">Ok</button>
-					</form>				
+					</form>
 	        </div><!--CONTENT-->
 	    </div><!--CONTAINER-->
   </body>
@@ -104,6 +103,6 @@
 	$(document).ready(function(){
 		registrarEndpoint();
 	})
-	
+
 </script>
 </html>

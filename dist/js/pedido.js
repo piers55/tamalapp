@@ -301,7 +301,7 @@ function geolocationSuccess(position) {
 
 	localStorage.setItem("lat", position.coords.latitude.toFixed(3));
 	localStorage.setItem("lon", position.coords.longitude.toFixed(3));
-}
+}// geolocationSuccess
  
 function geolocationError(positionError) {
 	document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
