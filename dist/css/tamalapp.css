@@ -6494,6 +6494,7 @@ h4 {
 }
 .item p {
   color: #222222;
+  margin-bottom: 25px;
 }
 .carousel-indicators {
   position: relative;
