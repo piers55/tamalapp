@@ -52,6 +52,14 @@ $('#myCarousel').on('slide', '', function() {
     });
 
 //*********************************************************
+    cerrarSesion();
+    function cerrarSesion(){
+        console.log('cerrar');
+        $('.navbar-mobile ul li:last-child a').on('click', function(e){
+            e.preventDefault();
+            console.log('cerrar');
+        });
+    }
 
 }(window.jQuery);
 
