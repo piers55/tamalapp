@@ -6393,17 +6393,17 @@ button {
 .boton-orden.boton-orden-orden {
   margin-bottom: 0;
 }
-.vovler {
+.volver {
   height: 50px;
   padding: 10px 25px;
   background-color: rgba(0, 0, 0, 0.8);
 }
-.vovler a {
+.volver a {
   color: #fff;
   font-size: 1.3em;
   text-decoration: none;
 }
-.vovler a:hover {
+.volver a:hover {
   opacity: 0.5;
 }
 .seleccionador {
@@ -6499,6 +6499,9 @@ button {
 }
 h4 {
   text-align: center;
+}
+h4 i {
+  color: #fff;
 }
 .carousel-inner {
   min-height: 320px;
