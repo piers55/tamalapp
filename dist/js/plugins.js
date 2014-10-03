@@ -1,6 +1,4 @@
-
 //BOOSTRAP SWIPE SLIDER************************
-
 
 +function ($) {
   'use strict';
@@ -23,7 +21,7 @@
     this.$active     =
     this.$items      =
     this.$next       =
-    this.$prev       = 
+    this.$prev       =
     this.dx          = null
 
     this.$element

@@ -2,22 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-          <meta http-equiv="pragma" content="no-cache" />
-      <title>Tamalapp</title>
-          <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
-      <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry">
-    </script>
-    <script src="dist/js/pedido.js"></script>    
-
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>Tamalapp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry"></script>
+    <script src="dist/js/pedido.js"></script>
   </head>
   <body onload="geolocateUser()" class="tamaleros" id="tamaleros">
             <header class="clearfix">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="background-image: url(images/nav-bg.png)">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <button type="button" role="navigation" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only"></span>
                 <i class="fa fa-bars"></i>
               </button>
@@ -31,7 +29,7 @@
                 <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
                 <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
                 <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-              </ul> 
+              </ul>
           </div>
           <div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
               <ul class=" nav navbar-nav">
@@ -39,7 +37,7 @@
                 <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
                 <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
                 <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-              </ul>  
+              </ul>
             </div><!-- /.navbar-mobile -->
         </nav>
 
@@ -60,32 +58,32 @@
                <div class="modal-body">
                  <div class="[ orden ][ col-xs-12 col-sm-8 col-md-6 center clearfix ]">
                               <table id="tabla">
-                                <p>Mi inventario</p>
+                                <p>Inventario</p>
                                 <tr id="tablaDulce">
                                   <td class="sabor">Dulce</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">NA</td>
                                 </tr>
                                 <tr id="tablaVerde">
                                   <td class="sabor">Verde</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">NA</td>
                                 </tr>
                                 <tr id="tablaMole">
                                   <td class="sabor">Mole</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">NA</td>
                                 </tr>
                                 <tr id="tablaRajas">
                                   <td class="sabor">Rajas</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">NA</td>
                                 </tr>
                                 <tr id="tablaOaxaqueño">
                                   <td class="sabor">Oaxaqueño</td>
-                                  <td class="cantidad">NA</td>        
+                                  <td class="cantidad">NA</td>
                                 </tr>
-                                                                                                
+
                               </table>
                           </div><!--INVENTARIO-->
                </div>
-               
+
              </div>
            </div>
           </div>    <!-- Modal -->
@@ -97,7 +95,7 @@
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                  <h1 class="modal-title" id="myModalLabel"><i class="fa fa-bicycle fa-4x"></i> <br> ¡Tu pedido va en camino!</h1>
-               </div> 
+               </div>
              </div>
            </div>
           </div>    <!-- Modal -->
