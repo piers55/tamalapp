@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	    <meta http-equiv="pragma" content="no-cache" />
 	    <title>Tamalapp</title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
 	    <script src="dist/js/pedido.js"></script>
@@ -30,7 +30,7 @@
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
 				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-				      </ul> 
+				      </ul>
 					</div>
 					<div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
 				      <ul class=" nav navbar-nav">
@@ -38,54 +38,42 @@
 				        <li ><a class="menu-dropdown" href="como-funciona.html">¿Cómo funciona?</a></li>
 				        <li><a class="menu-dropdown" href="perfil.html">Mi perfil</a></li>
 				        <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-				      </ul>  
+				      </ul>
 				    </div><!-- /.navbar-mobile -->
 				</nav>
-
 		    </header>
-
-	      
 	        <div class="content">
-	        
-
 				<form action="orden.html" method="post" role="form" class="sesion pedido clearfix" style="min-height:350px">
 					<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-						
 						<table id="tabla-pedido">
 							<p>Mi pedido</p>
-
 							<tr id="tablaDulce" data-id="1">
 								<td class="sabor">Dulce</td>
-								<td class="cantidad">NA</td>		
+								<td class="cantidad">NA</td>
 								<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
-
 							<tr id="tablaVerde" data-id="2">
 								<td class="sabor">Verde</td>
-								<td class="cantidad">NA</td>		
+								<td class="cantidad">NA</td>
 								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
-
-
 							<tr id="tablaMole" data-id="3">
 								<td class="sabor">Mole</td>
-								<td class="cantidad">NA</td>		
+								<td class="cantidad">NA</td>
 								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
-
 							<tr id="tablaRajas" data-id="4">
 								<td class="sabor">Rajas</td>
-								<td class="cantidad">NA</td>		
+								<td class="cantidad">NA</td>
 								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
-
 							<tr id="tablaOaxaqueño" data-id="5">
 								<td class="sabor">Oaxaqueño</td>
-								<td class="cantidad">NA</td>		
+								<td class="cantidad">NA</td>
 								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
@@ -94,19 +82,16 @@
 			  					<p><i class="fa fa-cutlery" type="submit"></i> ¡Haz tu pedido!</p>
 			  				</a>
 						</table>
-						
 					</div><!--INVENTARIO-->
 				</form>
 	    	</div><!--CONTENT-->
 
 	    </div><!--CONTAINER-->
   	</body>
-
 	<script src="dist/js/jquery.min.js"></script>
 	<script src="dist/js/tamalapp.min.js"></script>
 	<script src="js/ws.js"></script>
 	<script>
 		hacerPedido();
 	</script>
-
 </html>
