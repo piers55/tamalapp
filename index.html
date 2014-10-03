@@ -7,10 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry"></script>
-    <script src="dist/js/pedido.js"></script>
   </head>
-  <body onload="geolocateUser()" class="tamaleros" id="tamaleros">
+  <body class="tamaleros" id="tamaleros">
             <header class="clearfix">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -105,13 +103,17 @@
   				</a>
 	    </div><!--CONTAINER-->
       <div id= "audioContainer"></div>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry"></script>
       <script src="dist/js/jquery.min.js"></script>
       <script src="dist/js/tamalapp.min.js"></script>
+      <script src="dist/js/pedido.js"></script>
       <script src="js/ws.js"></script>
+      <script src="dist/js/functions.js"></script>
       <script>
-       //escucha();
-       //tamaleros();
-       //var info;
+        obtenerInfoTamaleros();
+        geolocateUser();
+        actualizaPosicionTamaleros();
+        buscarTamalerosCerca();
       </script>
   </body>
 </html>
