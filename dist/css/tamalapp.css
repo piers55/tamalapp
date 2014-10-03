@@ -6237,6 +6237,7 @@ button {
   margin-left: auto !important;
   margin-right: auto !important;
   float: none !important;
+<<<<<<< HEAD
 }
 html,
 body {
@@ -6250,6 +6251,8 @@ body {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+=======
+>>>>>>> 4ab911a45a99b1f58f9358ebc8d88fba4d7037c0
 }
 .background {
   width: 100%;
@@ -6487,6 +6490,9 @@ select {
 .orden table tr:last-child {
   border-bottom: none;
 }
+.orden table td {
+  padding: 5px 0;
+}
 .orden table td.sabor {
   width: 60%;
   padding: 10px;
@@ -6495,6 +6501,15 @@ select {
 .orden table td.eliminar {
   width: 20%;
   padding: 10px;
+  text-align: center;
+}
+.orden h4 i {
+  color: #fff;
+  float: left;
+  padding-left: 15px;
+}
+.orden button {
+  margin: 30px 0 0 0;
 }
 button {
   border: none;
@@ -6514,9 +6529,6 @@ button {
 }
 h4 {
   text-align: center;
-}
-h4 i {
-  color: #fff;
 }
 .carousel-inner {
   min-height: 320px;

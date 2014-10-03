@@ -43,7 +43,7 @@
 		    </header>
 	        <div class="content">
 				<form action="orden.html" method="post" role="form" class="sesion pedido clearfix" style="min-height:350px">
-					<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
+					<div class="orden col-xs-11 col-sm-8 col-md-6 center clearfix">
 						<table id="tabla-pedido">
 							<p>Mi pedido</p>
 							<tr id="tablaDulce" data-id="1">
@@ -67,7 +67,7 @@
 							<tr id="tablaRajas" data-id="4">
 								<td class="sabor">Rajas</td>
 								<td class="cantidad">NA</td>
-								<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
+								<td class="eliminar"><button onclick="sumarRestar(1)" class="center-full"><i class="restar fa fa-minus-circle"></i></button></td>
 								<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 							</tr>
 							<tr id="tablaOaxaqueño" data-id="5">
@@ -86,6 +86,7 @@
 	    	</div><!--CONTENT-->
 	    </div><!--CONTAINER-->
   	</body>
+
 	<script src="dist/js/jquery.min.js"></script>
 	<script src="dist/js/tamalapp.min.js"></script>
 	<script src="js/ws.js"></script>
