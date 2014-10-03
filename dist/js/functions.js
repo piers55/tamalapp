@@ -52,7 +52,10 @@ $('#myCarousel').on('slide', '', function() {
     });
 
 //*********************************************************
-    cerrarSesion();
+    $(document).ready(function(){
+        console.log('hola');
+        cerrarSesion();
+    });
     function cerrarSesion(){
         console.log('cerrar');
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
