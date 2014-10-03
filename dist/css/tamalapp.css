@@ -6344,10 +6344,21 @@ body {
 .navbar-default .navbar-brand {
   font-family: 'cabinItalic';
 }
+.navbar-brand {
+  height: auto;
+}
+a.navbar-brand {
+  border-right: 1px solid #fff;
+}
+p.navbar-brand {
+  margin: 0;
+}
 .navbar-header {
   color: #fff;
 }
 .navbar-toggle {
+  margin: 0;
+  padding: 15px;
   border: none;
 }
 .navbar-toggle i {
