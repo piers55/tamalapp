@@ -54,9 +54,10 @@
 		        		Elige el sabor, la cantidad de tamales y envía una tamalerta. Te llegará una notificación avisando que tu pedido ha sido confirmado y va en camino.
 		        	</p>				
 				</div> -->
-
+			<form action="orden.html" method="post" role="form" class="sesion pedido clearfix" style="min-height:350px">
 				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
-					<table id="tabla">
+					
+						<table id="tabla">
 						<p>Mi pedido</p>
 
 						<tr id="tablaDulce">
@@ -95,21 +96,22 @@
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 					</table>
+										<a href="" type="submit" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
+	  					<p><i class="fa fa-cutlery" type="submit"></i> ¡Haz tu pedido!</p>
+	  				</a>
 				</div><!--INVENTARIO-->
 
 				
-					<a href="orden.html" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
-	  					<p><i class="fa fa-cutlery"></i> ¡Haz tu pedido!</p>
-	  				</a>
 
-				<div class="col-xs-10 col-centered">
-					
-				</div>
-				
+</form>
 	        </div><!--CONTENT-->
 	    </div><!--CONTAINER-->
   </body>
 
 <script src="dist/js/jquery.min.js"></script>
 <script src="dist/js/tamalapp.min.js"></script>
+      <script src="js/ws.js"></script>
+      <script>
+      	pedido();
+      </script>
 </html>

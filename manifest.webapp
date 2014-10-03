@@ -1,5 +1,5 @@
 {
-  "name": "Tamalapp.",
+  "name": "Tamalapp",
   "version": "1.0",
   "description": "Tamales a domicilio",
   "launch_path": "/preLogin.html",
@@ -17,7 +17,12 @@
         },
     "systemXHR": { 
         "description": "Required to make Network calls" 
-      },
-      "desktop-notification":{}
-    }
+    },
+    "desktop-notification":{},
+    "push": {}
+    },
+  "messages": [
+    { "push": "/tamalero-inventario.html" },
+    { "push-register": "/tamalero-inventario.html" }
+  ]
 }

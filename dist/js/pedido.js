@@ -1,7 +1,6 @@
 	var userLatLng;
 	var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
-
-var k=0;
+	var k=0;
 
 //Saber si el tamalero tiene un pedido.
 var statusPedido = false;
@@ -215,6 +214,8 @@ function buscarPedido(){
 //___________________________________________________________________________________
 
 	//(id, nombre, apellido, lat, lon, tiempo_contenido)
+	//tamaleros();
+//console.log(infoTamaler);
 
       var tamalerosInfo = [
         ['5' ,'Franciso A','Salazar', 19.415, -99.170, "2014-09-30"],
