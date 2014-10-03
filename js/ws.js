@@ -15,9 +15,8 @@ function login(){
 		  	'http://nextlab.org/tamal-app/v1/login',
 		  	data,
 		  	function(response){
-
 				if(response.error == false){
-					infoUsuario=response;
+					localStorage.setItem("key",response.api_key);
 					window.location.replace('index.html');
 
 				}else{
@@ -90,14 +89,12 @@ function registrarEndpoint(){
 	var regs = navigator.push.registrations();
 
 	regs.onsuccess = function(e) {
-		console.log('success');
-		console.log(regs.result.length);
 		if (regs.result.length == 0) {
 	    	var req = navigator.push.register();
 	      	req.onsuccess = function() {
 	        	var endpoint = req.result;
 	        	console.log(endpoint);
-	        	//$.post('/endpoint', { endpoint: endpoint })
+	        	$.post('http://nextlab.org/tamal-app/v1/endpoint', { endpoint: endpoint })
 	    	}
 	    	req.onerror = function(e) {
 			  	console.log("Error registering the endpoint: " + JSON.stringify(e));
@@ -107,6 +104,15 @@ function registrarEndpoint(){
 				console.log("Existing registration", regs.result[i].pushEndpoint, regs.result[i].version);
 			}
 			// Reuse existing endpoints.
+			var req = navigator.push.register();
+	      	req.onsuccess = function() {
+	        	var endpoint = req.result;
+	        	console.log(endpoint);
+	        	$.post('http://nextlab.org/tamal-app/v1/endpoint', { endpoint: endpoint });
+	    	}
+	    	req.onerror = function(e) {
+			  	console.log("Error registering the endpoint: " + JSON.stringify(e));
+			}
 		} else {
 			// Register for a new endpoint.
 			var register = navigator.push.register();
@@ -114,25 +120,23 @@ function registrarEndpoint(){
 				console.log("Registered new endpoint", register.result);
 			}
 		}
+
+		pushHandler();
 	}
 }// registrarEndpoint
 
-function getPushNotification(){
-	console.log('getting push...');
-	navigator.mozSetMessageHandler('push', function(message) {
-		console.log('msg ' + message);
-		
-	});
-}
-
-function registrar(){
-  	var req = navigator.push.register();
-    req.onsuccess = function() {
-        var endpoint = req.result;
-    	console.log(endpoint);
-    	//$.post('/endpoint', { endpoint: endpoint })
-	}
-	req.onerror = function(e) {
-	  	console.log("Error registering the endpoint: " + JSON.stringify(e));
+function pushHandler(){
+	console.log('pushHandler');
+	if (window.navigator.mozSetMessageHandler) {
+		window.navigator.mozSetMessageHandler('push', function(e) {
+			console.log('My endpoint is ' + e.pushEndpoint);
+			console.log('My new version is ' +  e.version);
+			var notification = navigator.mozNotification.createNotification("¿De qué color?", 'black dick');
+			notification.show();
+			//Remember that you can handle here if you have more than
+			//one pushEndpoint
+		});
+	} else {
+		console.log('No message handler');
 	}
 }

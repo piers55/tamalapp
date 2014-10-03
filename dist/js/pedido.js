@@ -211,11 +211,6 @@ function buscarPedido(){
 			}
 			visualizar();
 		}
-//___________________________________________________________________________________
-
-	//(id, nombre, apellido, lat, lon, tiempo_contenido)
-	//tamaleros();
-//console.log(infoTamaler);
 
       var tamalerosInfo = [
         ['5' ,'Franciso A','Salazar', 19.415, -99.170, "2014-09-30"],
@@ -326,22 +321,69 @@ function setMarkers(map, locations) {
           title: "Yo",
           position: userLatLng
         });
+
+        localStorage.setItem("lat", position.coords.latitude.toFixed(3));
+        localStorage.setItem("lon", position.coords.longitude.toFixed(3));
       }
  
       function geolocationError(positionError) {
         document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
       }
  
-      function geolocateUser() {
-        // If the browser supports the Geolocation API
-        if (navigator.geolocation)
-        {
-          var positionOptions = {
-            enableHighAccuracy: true,
-            timeout: 10 * 1000 // 10 seconds
-          };
-          navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
-        }
-        else
-          document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
-      }
+function geolocateUser() {
+	// If the browser supports the Geolocation API
+	if (navigator.geolocation)
+	{
+	  var positionOptions = {
+	    enableHighAccuracy: true,
+	    timeout: 10 * 1000 // 10 seconds
+	  };
+	  navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
+	}
+	else
+	  document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
+}
+
+function hacerPedido(){
+	$('.boton-orden').on('click', function(e){
+		e.preventDefault();
+		var pedido = {};
+		var key = localStorage.getItem("key");
+		var lat = localStorage.getItem("lat");
+		var lon = localStorage.getItem("lon");
+		var tamales = damePedido();
+
+		console.log(tamales);
+	
+		var p = JSON.stringify(pedido);
+		$.ajax({
+		    type: 'POST',
+		    url: 'http://nextlab.org/tamal-app/v1/pedidos',
+		    headers:{ 'X-Authorization' : key},
+		    data: {
+		    	lat: lat, lon: lon, data: tamales
+		    },
+		    success: function(response) {
+		        console.log(response);
+		    },
+		    error: function(response){
+		    	console.log(response);
+		    }
+		});
+	});
+}
+
+function damePedido(){
+	var data = '{';
+	$('#tabla-pedido tr').each(function(i, val){
+		var idTamal = $(this).data('id');
+		var cantidad = $(this).find('.cantidad').text();
+
+		if(cantidad != '0')
+			data = data + '{ id:' + idTamal + ', c:' + cantidad + '},';
+
+	});
+	data = data.substring(0, data.length - 1);
+	data = data + '}';
+	return data;
+}
