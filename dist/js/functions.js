@@ -20,11 +20,6 @@
         $(this).find('.btn').toggleClass('btn-default');
     });
 
-    $('form').submit(function(){
-        alert($(this["options"]).val());
-        return false;
-    });
-
 //********************************************************
 
 
@@ -65,6 +60,7 @@ $('#myCarousel').on('slide', '', function() {
             localStorage.removeItem('key');
             localStorage.removeItem('lat');
             localStorage.removeItem('lon');
+            localStorage.removeItem('radio');
             window.location = '/tamalapp/preLogin.html';
         });
     }
@@ -74,23 +70,6 @@ $('#myCarousel').on('slide', '', function() {
     var userLatLng;
     var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
     var k=0;
-
-//Saber si el tamalero tiene un pedido.
-var statusPedido = false;
-
-function escucha(){
-    window.setInterval("buscarPedido()", 1000); 
-    
-    //window.setTimeOut(function(){statusPedido= true;}, 15000);    
-}
-
-function buscarPedido(){
-    k++;
-    if (statusPedido==true){
-        console.log("Pedido");
-        
-    }
-}
 
 
 

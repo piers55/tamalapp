@@ -3,17 +3,16 @@ function login(){
 	$('form.login').on('submit', function(e){
 		e.preventDefault();
 		var data = $(this).serialize();
-		console.log(data);
 
 		$.post(
 		  	'http://nextlab.org/tamal-app/v1/login',
 		  	data,
 		  	function(response){
 				if(response.error == false){
-					console.log(response.api_key);
 					localStorage.setItem("key",response.api_key);
+					localStorage.setItem("radio",response.radio_tamalerta);
 					window.location.replace('index.html');
-				}else{
+				} else{
 					console.log(response);
 					var msj = document.getElementById('notificacionError');
 					document.getElementById('password').value="";
@@ -164,21 +163,48 @@ function pushHandler(){
 }
 
 function activarTamalerta(){
-	console.log(localStorage.getItem('key'));
 	$('.btn-tamalerta button').on('click', function(){
+		var radio;
+
 		if($(this).hasClass('on')){
-			var radio = $('#radio-tamalerta option:selected').attr('value');
+			radio = $('#radio-tamalerta option:selected').attr('value');
 			$('form').removeClass('hidden');
-			console.log('radio: ' + radio);
 		}
 		else{
 			$('form').addClass('hidden');
-			console.log('off');
+			radio = -1;
 		}
+
+		actualizaTamalerta(radio);
 	});
 
 	$('form select').change(function(){
 		var radio = $('#radio-tamalerta option:selected').attr('value');
-		console.log('radio: ' + radio);
+		actualizaTamalerta(radio);
 	});
+
+	function actualizaTamalerta(r){
+        $.ajax({
+            type: 'POST',
+            url: 'http://nextlab.org/tamal-app/v1/radioTamalerta',
+            headers:{ 'X-Authorization' : localStorage.getItem('key')},
+            data: {
+                radio: r
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+	}
+}
+
+function setTamalerta(radio){
+	console.log(radio);
+	if(radio != '-1'){
+		// activar boton de ON y poner como seleccionado
+		// la "option" del "select" que tenga value=radio
+	} 
 }
