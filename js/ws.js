@@ -68,6 +68,13 @@ function borraMarkers(){
 	window.markers.length = 0;
 }// borraMarkers
 
+/**
+	Descripcion: Buscar tamaleros cerca si está activada la tamalerta
+*/
+function buscarTamalerosCerca(){
+	
+}// buscarTamalerosCerca
+
 function register(){
 	$('form.register').on('submit', function(e){
 		e.preventDefault();
