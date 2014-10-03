@@ -1,10 +1,4 @@
-$(document).ready(function(){
-});
-
-
-var infoUsuario;
-
-
+// Login usuario
 function login(){
 	$('form.login').on('submit', function(e){
 		e.preventDefault();
@@ -29,13 +23,62 @@ function login(){
 		  	}
 		);
 	});
-} 
+}// login
+
+// obtiene información de tamaleros de WS
+function obtenerInfoTamaleros(){
+	$.ajax({
+	    type: 'GET',
+	    url: 'http://nextlab.org/tamal-app/v1/tamaleros',
+	    headers:{ 'X-Authorization' : localStorage.getItem('key')},
+	    success: function(response) {
+	    	window.tamalerosInfo = [];
+	        $.each(response.tamaleros, function(i, val){
+	        	var tamalero = [];
+	        	tamalero.push(val.id);
+	        	tamalero.push(val.nombre);
+	        	tamalero.push(val.apellido);
+	        	tamalero.push(parseFloat(val.lat));
+	        	tamalero.push(parseFloat(val.lon));
+
+	        	tamalerosInfo.push(tamalero);
+	        });
+	    },
+	    error: function(response){
+	    	console.log(response);
+	    }
+	});
+}
+
+// revisa cada 30 segundo si se actualizó la posición del tamalero
+function actualizaPosicionTamaleros(){
+	setInterval(function(){
+		obtenerInfoTamaleros();		
+		// actualiza marcadores con nueva posición
+		borraMarkers();
+		setMarkers(window.mapObject, window.tamalerosInfo);
+		console.log("se ha actualizado la posición de los tamaleros");
+	}, 30000);
+}// actualizaPosicionTamaleros
+
+function borraMarkers(){
+	for (var i = 0; i < window.markers.length; i++ ) {
+		window.markers[i].setMap(null);
+	}
+	window.markers.length = 0;
+}// borraMarkers
+
+/**
+	Descripcion: Buscar tamaleros cerca si está activada la tamalerta
+*/
+function buscarTamalerosCerca(){
+	
+}// buscarTamalerosCerca
 
 function register(){
 	$('form.register').on('submit', function(e){
 		e.preventDefault();
 		var data = $(this).serialize();
-		console.log(data);
 		$.post(
 		  	'http://nextlab.org/tamal-app/v1/register',
 		  	data,
@@ -55,24 +98,6 @@ function register(){
 
 
 var key = '7e8c6d8b48bd0a1a02483a8f00f628a2';
-
-
-function tamaleros(){
-console.log("tamal");
-$.ajax({
-    type: 'GET',
-    url: 'http://nextlab.org/tamal-app/v1/tamaleros',
-    headers:{ 'X-Authorization' : key},
-    success: function(response) {
-        console.log(response);
-        infoTamaleros= response;
-    },
-    error: function(response){
-    	console.log(response);
-    }
-});
-}
-
 
 function buscarPedidos(){
 	actualizaCoordenadas();
