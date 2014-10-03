@@ -10,9 +10,9 @@ function login(){
 		  	data,
 		  	function(response){
 				if(response.error == false){
+					console.log(response.api_key);
 					localStorage.setItem("key",response.api_key);
 					window.location.replace('index.html');
-
 				}else{
 					console.log(response);
 					var msj = document.getElementById('notificacionError');
@@ -72,7 +72,7 @@ function borraMarkers(){
 	Descripcion: Buscar tamaleros cerca si está activada la tamalerta
 */
 function buscarTamalerosCerca(){
-	
+
 }// buscarTamalerosCerca
 
 function register(){
@@ -95,9 +95,6 @@ function register(){
 		);
 	});
 } 
-
-
-var key = '7e8c6d8b48bd0a1a02483a8f00f628a2';
 
 function buscarPedidos(){
 	actualizaCoordenadas();
@@ -164,4 +161,24 @@ function pushHandler(){
 	} else {
 		console.log('No message handler');
 	}
+}
+
+function activarTamalerta(){
+	console.log(localStorage.getItem('key'));
+	$('.btn-tamalerta button').on('click', function(){
+		if($(this).hasClass('on')){
+			var radio = $('#radio-tamalerta option:selected').attr('value');
+			$('form').removeClass('hidden');
+			console.log('radio: ' + radio);
+		}
+		else{
+			$('form').addClass('hidden');
+			console.log('off');
+		}
+	});
+
+	$('form select').change(function(){
+		var radio = $('#radio-tamalerta option:selected').attr('value');
+		console.log('radio: ' + radio);
+	});
 }
