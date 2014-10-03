@@ -47,9 +47,12 @@ $('#myCarousel').on('slide', '', function() {
 
 //MENU COLLAPSE*********************************************
 
-    $(document).on('click',function(){
-        $('.collapse').collapse('hide');
+    $(document).on('click',function(e){
+        if( ! $(e.target).is('.fa.fa-bars') ) {
+            $('.navbar-collapse').removeClass('in');
+        }
     });
+
 
 //*********************************************************
 
