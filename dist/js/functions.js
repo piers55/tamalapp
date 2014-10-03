@@ -51,6 +51,7 @@ $('#myCarousel').on('slide', '', function() {
         if( ! $(e.target).is('.fa.fa-bars') ) {
             $('.navbar-collapse').removeClass('in');
         }
+        console.log( $(e.target) );
     });
 
 
