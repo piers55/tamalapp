@@ -1,4 +1,4 @@
-	var userLatLng;
+/*	var userLatLng;
 	var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
 	var k=0;
 
@@ -352,10 +352,10 @@ function damePedido(){
 		var cantidad = $(this).find('.cantidad').text();
 
 		if(cantidad != '0')
-			data = data + '{ id:' + idTamal + ', c:' + cantidad + '},';
+			data = data + '{ "id":' + idTamal + ', "c":' + cantidad + '},';
 
 	});
 	data = data.substring(0, data.length - 1);
 	data = data + '}';
 	return data;
-}
+}*/

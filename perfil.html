@@ -63,21 +63,22 @@
 					<h1>Activar Tamalerta</h1>
 
 					<div class="btn-group btn-toggle switch center block">
-					    <button class="btn btn-md btn-default">ON</button>
-					    <button class="btn btn-md btn-primary active">OFF</button>
+					    <button class="btn btn-md btn-default on">ON</button>
+					    <button class="btn btn-md btn-primary active off">OFF</button>
 					</div>
 				</div>
 
-		        <form class="col-xs-12 col-sm-8 col-md-6 center block" action="">
+		        <form class="col-xs-12 col-sm-8 col-md-6 center block hidden" action="">
 		        	<label for="radio">Radio de activación de tamalerta</label>
-		        	<select class="form-control col-xs-9 center" id="radio">
-					  <option>1000 mts</option>
-					  <option>1500 mts</option>
-					  <option>2000 mts</option>
-					  <option>2500 mts</option>
-					  <option>3000 mts</option>
+		        	<select class="form-control col-xs-9 center" id="radio-tamalerta">
+					  <option selected value="1000">1000 mts</option>
+					  <option value="1500">1500 mts</option>
+					  <option value="2000">2000 mts</option>
+					  <option value="2500">2500 mts</option>
+					  <option value="3000">3000 mts</option>
 					</select>
 				</form>
+
 				<h4>Total de tamales comprados</h4>
 				<h1 id="comprados">54</h1>
 				<h4>Total de tamalertas activadas</h4>
@@ -91,4 +92,9 @@
 	<script src="dist/js/jquery.min.js"></script>
 	<script src="dist/js/tamalapp.min.js"></script>
 	<script src="dist/js/functions.js"></script>
+	<script src="js/ws.js"></script>
+
+	<script>
+		activarTamalerta();
+	</script>
 </html>
