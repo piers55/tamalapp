@@ -20,14 +20,6 @@
         $(this).find('.btn').toggleClass('btn-default');
     });
 
-
-
-
-//********************************************************
-
-
-
-
 //SLIDES PARA COMO FUNCIONA********************************
 $("#myCarousel").carousel();
 $('#myCarousel').on('slide', '', function() {
@@ -49,7 +41,6 @@ $('#myCarousel').on('slide', '', function() {
         if( ! $(e.target).is('.fa.fa-bars') ) {
             $('.navbar-collapse').removeClass('in');
         }
-        //console.log( $(e.target) );
     });
 
 
@@ -74,8 +65,6 @@ $('#myCarousel').on('slide', '', function() {
     var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
     var k=0;
 
-
-
     function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
         var nomTabla = "tabla"+saborTemp;
@@ -97,7 +86,7 @@ $('#myCarousel').on('slide', '', function() {
         var iSumar = buttonSumar.appendChild(document.createElement('i'));
 
 
-            
+
             tdSabor.setAttribute("class", "sabor");
             tdCantidad.setAttribute("class", "cantidad");
             tdEliminar1.setAttribute("class", "eliminar");
@@ -115,7 +104,7 @@ $('#myCarousel').on('slide', '', function() {
         function removeAllChilds(a){
             var a=document.getElementById(a);
             while(a.hasChildNodes())
-                a.removeChild(a.firstChild);    
+                a.removeChild(a.firstChild);
         }
 
 
@@ -202,23 +191,23 @@ $('#myCarousel').on('slide', '', function() {
 
             switch(sabor){
 
-                case "Dulce": 
+                case "Dulce":
                 dulce+=parseInt(cantidad, 10);
                 break;
 
-                case "Verde": 
+                case "Verde":
                 verde+=parseInt(cantidad, 10);
                 break;
 
-                case "Mole": 
+                case "Mole":
                 mole+=parseInt(cantidad, 10);
                 break;
 
-                case "Rajas": 
+                case "Rajas":
                 rajas+=parseInt(cantidad, 10);
                 break;
 
-                case "Oaxaqueño": 
+                case "Oaxaqueño":
                 oaxaqueño+=parseInt(cantidad, 10);
                 break;
 
@@ -232,12 +221,12 @@ $('#myCarousel').on('slide', '', function() {
 
         function sumarRestar(caso, caller){
             var nombreTabla = caller.parentNode.parentNode.getAttribute("id");
-            
+
 
             switch(nombreTabla){
                 case "tablaDulce":
                 if (caso==1 && dulce>0) dulce--;
-                else if (caso==2) dulce++;                          
+                else if (caso==2) dulce++;
 
                 break;
 
@@ -278,7 +267,7 @@ function setMarkers(map, locations) {
         coords: [1, 1, 1, 34, 34, 34, 34 , 1],
         type: 'poly'
     };
-   
+
     window.markers = new Array();
     for (var i = 0; i < locations.length; i++) {
         var pos = locations[i];
@@ -295,14 +284,14 @@ function setMarkers(map, locations) {
 
         google.maps.event.addListener(marker, 'click', function() {
             $('#myModal').modal('show');
-        
+
             var pos0= ""+this.position.k.toFixed(3);
             var pos1= ""+this.position.B.toFixed(3);
 
             var origen=userLatLng;
             var destino= this.position;//new google.maps.LatLng(pos0);
             var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
-        
+
             //Modificar Valores
             var x = document.getElementById('distancia');
             x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
@@ -364,11 +353,11 @@ function geolocationSuccess(position) {
     localStorage.setItem("lat", position.coords.latitude.toFixed(3));
     localStorage.setItem("lon", position.coords.longitude.toFixed(3));
 }// geolocationSuccess
- 
+
 function geolocationError(positionError) {
     document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
 }// geolocationError
- 
+
 function geolocateUser() {
     // If the browser supports the Geolocation API
     if (navigator.geolocation)
@@ -452,3 +441,4 @@ function cargaInventario(){
         }
     });
 }// cargaInventario
+
