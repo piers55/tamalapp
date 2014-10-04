@@ -14,10 +14,8 @@ function login(){
 					window.location.replace('index.html');
 				} else{
 					console.log(response);
-					var msj = document.getElementById('notificacionError');
-					document.getElementById('password').value="";
-					msj.innerHTML = "";
-					msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
+					var msj = $('#notificacionError').modal('show');
+					document.getElementById('password').value="";	
 				}	  		
 		  	}
 		);
