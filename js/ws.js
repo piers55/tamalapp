@@ -25,6 +25,35 @@ function login(){
 	});
 }// login
 
+//Login Tamalero
+
+function tamaleroLogin(){
+	$('form.tamaleroLogin').on('submit', function(e){
+		e.preventDefault();
+		var data = $(this).serialize();
+		console.log(data);
+
+		$.post(
+		  	'http://nextlab.org/tamal-app/v1/logintamalero',
+		  	data,
+		  	function(response){
+				if(response.error == false){
+					console.log(response.api_key);
+					localStorage.setItem("key",response.api_key);
+					window.location.replace('tamalero-inventario.html');
+				}else{
+					console.log(response);
+					var msj = document.getElementById('notificacionError');
+					document.getElementById('password').value="";
+					msj.innerHTML = "";
+					msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
+				}	  		
+		  	}
+		);
+	});   
+} //tamaleroLogin
+
+
 // obtiene información de tamaleros de WS
 function obtenerInfoTamaleros(){
 	$.ajax({
@@ -109,14 +138,28 @@ function registrarEndpoint(){
 	console.log('registrar endpoint');
 
 	var regs = navigator.push.registrations();
-
+	var key = localStorage.getItem('key');
+	
 	regs.onsuccess = function(e) {
 		if (regs.result.length == 0) {
 	    	var req = navigator.push.register();
 	      	req.onsuccess = function() {
 	        	var endpoint = req.result;
 	        	console.log(endpoint);
-	        	$.post('http://nextlab.org/tamal-app/v1/endpoint', { endpoint: endpoint })
+	        	 $.ajax({
+		            type: 'POST',
+		            url: 'http://nextlab.org/tamal-app/v1/endpoint',
+		            headers:{ 'X-Authorization' : key },
+		            data: {
+		                endpoint: endpoint
+		            },
+		            success: function(response) {
+		                console.log(response);
+		            },
+		            error: function(response){
+		                console.log(response);
+		            }
+		        });
 	    	}
 	    	req.onerror = function(e) {
 			  	console.log("Error registering the endpoint: " + JSON.stringify(e));
@@ -130,7 +173,20 @@ function registrarEndpoint(){
 	      	req.onsuccess = function() {
 	        	var endpoint = req.result;
 	        	console.log(endpoint);
-	        	$.post('http://nextlab.org/tamal-app/v1/endpoint', { endpoint: endpoint });
+	        	 $.ajax({
+		            type: 'POST',
+		            url: 'http://nextlab.org/tamal-app/v1/endpoint',
+		            headers:{ 'X-Authorization' : key },
+		            data: {
+		                endpoint: endpoint
+		            },
+		            success: function(response) {
+		                console.log(response);
+		            },
+		            error: function(response){
+		                console.log(response);
+		            }
+		        });;
 	    	}
 	    	req.onerror = function(e) {
 			  	console.log("Error registering the endpoint: " + JSON.stringify(e));
@@ -182,3 +238,5 @@ function activarTamalerta(){
 		console.log('radio: ' + radio);
 	});
 }
+
+

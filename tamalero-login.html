@@ -23,11 +23,11 @@
 	        <div class="content">
 		        <div class="col-xs-10 center seleccionador">
 
-				    <form role="form" class="sesion" action="tamalero-inventario.html">
+				    <form role="form" class="sesion tamaleroLogin">
 
 				      <h3 for="">Iniciar sesión</h3>
 					  <div class="form-group login-form tamalero">
-					    <input type="text" class="form-control" id="no-registro" placeholder="Número de registro">
+					    <input type="text" class="form-control" id="no-registro" placeholder="Número de registro" name="id">
 					  </div>
 
 					  <button type="submit" class="col-xs-8 btn btn-good center block boton">Ingresar</button>
@@ -41,4 +41,9 @@
 	<script src="dist/js/jquery.min.js"></script>
 	<script src="dist/js/tamalapp.min.js"></script>
 	<script src="dist/js/functions.js"></script>
+	<script src="js/ws.js"></script>
+
+	<script>
+		tamaleroLogin();
+	</script>
 </html>
