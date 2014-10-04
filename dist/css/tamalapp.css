@@ -6502,6 +6502,9 @@ select {
 .orden table tr:last-child {
   border-bottom: none;
 }
+.orden table td {
+  padding: 5px 0;
+}
 .orden table td.sabor {
   width: 60%;
   padding: 10px;
@@ -6510,6 +6513,15 @@ select {
 .orden table td.eliminar {
   width: 20%;
   padding: 10px;
+  text-align: center;
+}
+.orden h4 i {
+  float: none;
+  padding: 0 15px;
+  color: #fff;
+}
+.orden button {
+  margin: 30px 0 0 0;
 }
 button {
   background: none;
@@ -6529,9 +6541,6 @@ button {
 }
 h4 {
   text-align: center;
-}
-h4 i {
-  color: #fff;
 }
 .carousel-inner {
   min-height: 320px;

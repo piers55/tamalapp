@@ -62,6 +62,7 @@ $('#myCarousel').on('slide', '', function() {
             localStorage.removeItem('key');
             localStorage.removeItem('lat');
             localStorage.removeItem('lon');
+            localStorage.removeItem('radio');
             window.location = '/tamalapp/preLogin.html';
         });
     }
@@ -71,7 +72,6 @@ $('#myCarousel').on('slide', '', function() {
     var userLatLng;
     var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
     var k=0;
-
 
     function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
