@@ -45,7 +45,8 @@ function obtenerInfoTamaleros(){
 	    },
 	    error: function(response){
 	    	console.log(response);
-	    }
+	    },
+	    async: false
 	});
 }
 
@@ -201,7 +202,7 @@ function activarTamalerta(){
 	}
 }
 
-function setTamalerta(radio){
+function setTamalertaPerfil(radio){
 	console.log(radio);
 	if(radio != '-1'){
 		// activar boton de ON y poner como seleccionado
