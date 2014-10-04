@@ -23,8 +23,19 @@ a, button{ cursor: pointer; }
 .block{ display: block !important; }
 .center{ margin-left: auto !important; margin-right: auto !important; float: none !important; }
 
-//******************************
+//MIXINS******************************
+.center-full() {
+  position: absolute;
+  top: 50%; left: 50%;
+  .translate(-50%, -50%);
+}
 
+
+
+//GENERAL******************************
+html, body{ height: 100%; }
+
+.center-full{ .center-full; }
 
 
 //LOGIN *************
@@ -108,9 +119,16 @@ a, button{ cursor: pointer; }
 	}
 }
 
-.navbar-header{ color: #fff; }
+.navbar-brand{ height: auto; }
+a.navbar-brand{ border-right: 1px solid #fff; }
+p.navbar-brand{ margin: 0; }
+.navbar-brand.chico{ font-size: 22px; }
 
-.navbar-toggle{ border: none;
+.navbar-header{ color: #fff;
+	margin: 0;
+}
+
+.navbar-toggle{ margin: 0; padding: 15px; border: none;
 	i{ color: #fff; font-size: 25px; }
 	&:hover{ background: none;}
 }
@@ -155,6 +173,7 @@ a, button{ cursor: pointer; }
 			color: #fff;
 		}
 	}
+	&.boton-orden-orden{ margin-bottom: 0; position: relative; }
 }
 
 .volver{ height: 50px; padding: 10px 25px; background-color: rgba(0, 0, 0, 0.8);
@@ -195,34 +214,25 @@ a, button{ cursor: pointer; }
 	}
 }
 
-select{
-	margin-bottom: 25px;
-}
+select{ margin-bottom: 25px; }
 
-.btn-good{
-	border: none;
-}
+.btn-good{ border: none; }
 
 .orden{
-
 	font-family: dinAlternate;
 	margin-bottom: 30px;
-
 	i{
 		float: right;
 		margin: 0 auto;
 		color: @brand-danger;
 		font-size: 20px;
-
 		&.sumar{
 			color: @brand-good;
 		}
-
 		&.restar{
 			color: @brand-danger;
 		}
 	}
-
 	p{
 		background: @brand-info;
 		color: #fff;
@@ -230,25 +240,20 @@ select{
 		text-align: center;
 		padding: 5px 0;
 	}
-	
-
 	table{
 		width: 100%;
 		font-size: 16px;
-
 		th{
 			text-align: center;
 			background: @brand-info;
 			width: 100%;
 		}
-
 		tr{
 			min-height: 50px;
 			border-bottom: solid 1px @gray-darker;
 
 			&:last-child{border-bottom: none}
 		}
-
 		td{
 			padding: 5px 0;
 			&.sabor{ width: 60%; padding: 10px}
@@ -270,16 +275,15 @@ select{
 }
 
 button{
-		border: none;
-		background: none;
-	}
+	border: none;
+	background: none;
+}
 
 .tamalerta{
 	cursor: pointer;
 	display: block;
 	width: 100px;
 	height:100px;
-
 	img{width: 100px; height: 100px; margin: 0 auto; display: block;}
 }
 
@@ -300,7 +304,6 @@ h4{ text-align: center;}
 }
 
 .item{
-
 	p{
 		color: @gray-darker;
 		margin-bottom: 25px;
@@ -308,10 +311,8 @@ h4{ text-align: center;}
 }
 
 .carousel-indicators {
-
 	position: relative;
 	left: 0;
-
 	li{
 		background-color: @gray;
 
@@ -319,20 +320,15 @@ h4{ text-align: center;}
 			background-color: @brand-primary;
 		}
 	}
-
-
 }
 
 .carousel-control{
 	&.right, &.left{
 		background-image: none;
-
 		span{
 			color: @brand-primary;
-
 			opacity: none
 		}
-
 		&:hover{
 			margin:0;
 		}
@@ -347,14 +343,11 @@ h4{ text-align: center;}
 //PERFIL *************
 
 .perfil{
-
 	margin-bottom: 20px;
-
 	h1{
 		text-align: center;
 		color: @brand-primary;
 	}
-
 	p{
 		font-size: 18px;
 		color: @gray-darker;
@@ -366,24 +359,17 @@ h4{ text-align: center;}
 			font-weight: 800;
 		}
 	}
-
 	form{
-
 		label{
 			font-size: 18px;
 		}
-
 		border-bottom: solid 3px @brand-primary;
 		margin-bottom: 20px;
 	}
-
-
 }
 
 
-.btn-tamalerta{
-margin-bottom: 25px;
-
+.btn-tamalerta{ margin-bottom: 25px;
 	h1{
 		text-align: center;
 	}
