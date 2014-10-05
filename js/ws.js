@@ -222,7 +222,7 @@ function buscarTamalerosCerca(){
 		var radioTamalerta = localStorage.getItem('radio');
 
 		if(parseInt(distancia) < parseInt(radioTamalerta)){
-			var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalerta en tu radio.');
+			var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
 			notification.show();
 			localStorage.setItem('tamalero_cerca', 1);
 		}
