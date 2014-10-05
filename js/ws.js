@@ -11,6 +11,8 @@ function login(){
 				if(response.error == false){
 					localStorage.setItem("key",response.api_key);
 					localStorage.setItem("radio",response.radio_tamalerta);
+					localStorage.setItem("nombre", response.nombre + ' ' + response.apellido);
+					localStorage.setItem("email", response.email);
 					window.location.replace('index.html');
 				} else{
 					console.log(response);
@@ -252,6 +254,11 @@ function activarTamalerta(){
             }
         });
 	}
+}
+
+function setPerfil(nombre, email){
+	$('#nombre').text(nombre);
+	$('#email').text(email);
 }
 
 function setTamalertaPerfil(radio){
