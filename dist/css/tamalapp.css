@@ -6377,7 +6377,6 @@ body {
   padding: 0;
 }
 .container-fluid.login {
-  background-image: url(images/tamalapp-bg.jpg) !important;
   background-repeat: no-repeat;
   -webkit-background-size: 100% 100%;
           background-size: 100%;
@@ -6474,8 +6473,8 @@ p.navbar-brand {
   margin-bottom: 0;
 }
 .volver {
-  height: 50px;
-  padding: 10px 25px;
+  height: 35px;
+  padding: 5px 15px;
   background-color: rgba(0, 0, 0, .8);
 }
 .volver a {
@@ -6596,6 +6595,7 @@ h4 {
 .carousel-inner {
   min-height: 320px;
   max-height: 800px;
+  margin-bottom: 20px;
 }
 .item p {
   margin-bottom: 25px;

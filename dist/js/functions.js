@@ -330,8 +330,8 @@ function geolocationSuccess(position) {
     setMarkers(window.mapObject, window.tamalerosInfo);
 
     var imageUser = {
-        url: 'images/user-icon.png',
-        size: new google.maps.Size(32, 32),
+        url: 'images/user-marker.png',
+        size: new google.maps.Size(32, 40),
         origin: new google.maps.Point(0,0),
         anchor: new google.maps.Point(0, 32)
     };
