@@ -50,34 +50,34 @@
 					<table id="tabla">
 						<p>Mi inventario</p>
 
-						<tr id="tablaDulce">
+						<tr id="tablaDulce" data-id="6">
 							<td class="sabor">Dulce</td>
 							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
-						<tr id="tablaVerde">
+						<tr id="tablaVerde" data-id="1">
 							<td class="sabor">Verde</td>
 							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
-						<tr id="tablaMole">
+						<tr id="tablaMole" data-id="2"> 
 							<td class="sabor">Mole</td>
 							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
-						<tr id="tablaRajas">
+						<tr id="tablaRajas" data-id="3">
 							<td class="sabor">Rajas</td>
 							<td class="cantidad">NA</td>
 							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
 							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
-
+						
 						<tr id="tablaAtole">
 							<td class="sabor">Atole</td>
 							<td class="cantidad">NA</td>
@@ -96,6 +96,7 @@
 	<script src="js/ws.js"></script>
 	<script src="dist/js/functions.js"></script>
 	<script>
+		cargaInventario();
 		$(document).ready(function(){
 			registrarEndpoint();
 		})

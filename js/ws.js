@@ -11,6 +11,8 @@ function login(){
 				if(response.error == false){
 					localStorage.setItem("key",response.api_key);
 					localStorage.setItem("radio",response.radio_tamalerta);
+					localStorage.setItem("nombre", response.nombre + ' ' + response.apellido);
+					localStorage.setItem("email", response.email);
 					window.location.replace('index.html');
 				} else{
 					console.log(response);
@@ -28,18 +30,16 @@ function tamaleroLogin(){
 	$('form.tamaleroLogin').on('submit', function(e){
 		e.preventDefault();
 		var data = $(this).serialize();
-		console.log(data);
 
 		$.post(
 		  	'http://nextlab.org/tamal-app/v1/logintamalero',
 		  	data,
 		  	function(response){
 				if(response.error == false){
-					console.log(response.api_key);
 					localStorage.setItem("key",response.api_key);
+					localStorage.setItem("id",response.id);
 					window.location.replace('tamalero-inventario.html');
 				}else{
-					console.log(response);
 					var msj = document.getElementById('notificacionError');
 					document.getElementById('password').value="";
 					msj.innerHTML = "";
@@ -72,7 +72,8 @@ function obtenerInfoTamaleros(){
 	    },
 	    error: function(response){
 	    	console.log(response);
-	    }
+	    },
+	    async: false
 	});
 }
 
@@ -258,7 +259,12 @@ function activarTamalerta(){
 	}
 }
 
-function setTamalerta(radio){
+function setPerfil(nombre, email){
+	$('#nombre').text(nombre);
+	$('#email').text(email);
+}
+
+function setTamalertaPerfil(radio){
 	console.log(radio);
 	if(radio != '-1'){
 		// activar boton de ON y poner como seleccionado

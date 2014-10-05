@@ -20,13 +20,6 @@
         $(this).find('.btn').toggleClass('btn-default');
     });
 
-    
-
-//********************************************************
-
-
-
-
 //SLIDES PARA COMO FUNCIONA********************************
 $("#myCarousel").carousel();
 $('#myCarousel').on('slide', '', function() {
@@ -62,7 +55,7 @@ $('#myCarousel').on('slide', '', function() {
             localStorage.removeItem('lat');
             localStorage.removeItem('lon');
             localStorage.removeItem('radio');
-            window.location = '/tamalapp/preLogin.html';
+            window.location.replace('preLogin.html');
         });
     }
 
@@ -188,16 +181,11 @@ $('#myCarousel').on('slide', '', function() {
             }
         }
 
-
-
-
-
         function añadirInventario(){
             var sabor = document.getElementById("sabor").value;
             var cantidad = document.getElementById("cantidad").value;
 
             switch(sabor){
-
                 case "Dulce":
                 dulce+=parseInt(cantidad, 10);
                 break;
@@ -232,9 +220,12 @@ $('#myCarousel').on('slide', '', function() {
 
             switch(nombreTabla){
                 case "tablaDulce":
-                if (caso==1 && dulce>0) dulce--;
-                else if (caso==2) dulce++;
-
+                if (caso==1 && dulce>0) {
+                    dulce--;
+                }else if (caso==2) {
+                    dulce++;
+                }
+                
                 break;
 
                 case "tablaVerde":
@@ -303,23 +294,30 @@ function setMarkers(map, locations) {
             var x = document.getElementById('distancia');
             x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
 
-            var nomTamalero = document.getElementById('myModalLabel');
+            var infoTamalero = document.getElementById('myModalLabel');
 
             var des0, des1;
-            for(var j=0; j<tamalerosInfo.length; j++){
+            for(var j=0; j<window.tamalerosInfo.length; j++){
                 des0= ""+tamalerosInfo[j][3].toFixed(3);
                 des1= ""+tamalerosInfo[j][4].toFixed(3);
+                console.log('i: ' + dameInventarioTamalero(tamalerosInfo[j][0]));
+                var inventario = dameInventarioTamalero(tamalerosInfo[j][0]);
+
+                if(inventario != -1){
+                    console.log(inventario);
+                    if(inventario.length > 0)
+                        console.log('si hay!');
+                    else
+                        console.log('no hay');
+                }
 
                 if((des0==pos0)&&(des1==pos1)){
-                nomTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
-                statusPedido= !statusPedido;
+                    infoTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
                 }
             }// for
         }, this);
     }
 }// setMarkers
-
-
 
 function geolocationSuccess(position) {
     userLatLng = new google.maps.LatLng(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3));
@@ -411,4 +409,42 @@ function damePedido(){
     data = data.substring(0, data.length - 1);
     data = data + ']';
     return data;
+}// damePedido
+
+function dameInventarioTamalero(id_tamalero){
+    $.ajax({
+        url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
+        headers:{ 'X-Authorization' : localStorage.getItem('key')},
+        success: function(response) {
+            localStorage.setItem('inventario', response.inventario);
+        },
+        error: function(response){
+            return -1;
+        }
+    });
+
+    return response.inventario;
 }
+
+function cargaInventario(){
+    var id_tamalero = localStorage.getItem('id');
+    $.ajax({
+        url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
+        headers:{ 'X-Authorization' : localStorage.getItem('key')},
+        success: function(response) {
+
+            $.each(response.inventario, function(i, val){
+                var id = val.tamal_id;
+                var filaSabor = $('#tabla').find('[data-id="' + id + '"]');
+                
+                filaSabor.find('.cantidad').text(val.cantidad);
+            });
+            
+        },
+        error: function(response){
+            return -1;
+        }
+    });
+}// cargaInventario
+
+
