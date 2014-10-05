@@ -70,7 +70,6 @@ $('#myCarousel').on('slide', '', function() {
         var nomTabla = "tabla"+saborTemp;
         if(padreTemp.hasChildNodes){
             removeAllChilds(nomTabla);
-
         }
 
 
@@ -211,9 +210,6 @@ $('#myCarousel').on('slide', '', function() {
             visualizar();
         }
 
-
-
-
         function sumarRestar(caso, caller){
             var nombreTabla = caller.parentNode.parentNode.getAttribute("id");
 
@@ -225,7 +221,7 @@ $('#myCarousel').on('slide', '', function() {
                 }else if (caso==2) {
                     dulce++;
                 }
-                
+
                 break;
 
                 case "tablaVerde":
@@ -255,7 +251,7 @@ $('#myCarousel').on('slide', '', function() {
 
 function setMarkers(map, locations) {
     var image = {
-        url: 'images/ambulante-icon_04.png',
+        url: 'images/tamaleros-icon.png',
         size: new google.maps.Size(32, 32),
         origin: new google.maps.Point(0,0),
         anchor: new google.maps.Point(0, 32)
@@ -334,7 +330,7 @@ function geolocationSuccess(position) {
     setMarkers(window.mapObject, window.tamalerosInfo);
 
     var imageUser = {
-        url: 'images/fijo-icon_01.png',
+        url: 'images/user-icon.png',
         size: new google.maps.Size(32, 32),
         origin: new google.maps.Point(0,0),
         anchor: new google.maps.Point(0, 32)

@@ -82,16 +82,19 @@
 				<button type="submit" class="col-xs-8 btn btn-good center block boton boton-ok">Ok</button>
 					</form>
 	        </div><!--CONTENT-->
+	        <div id="map"></div>
 	    </div><!--CONTAINER-->
   </body>
 	<script src="dist/js/jquery.min.js"></script>
 	<script src="dist/js/tamalapp.min.js"></script>
 	<script src="js/ws.js"></script>
 	<script src="dist/js/functions.js"></script>
+
 	<script>
+		actualizaPosicionTamalero();
 		cargaInventario();
 		$(document).ready(function(){
 			registrarEndpoint();
-		})
+		});
 	</script>
 </html>

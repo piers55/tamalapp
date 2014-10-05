@@ -83,10 +83,116 @@ function actualizaPosicionTamaleros(){
 		obtenerInfoTamaleros();		
 		// actualiza marcadores con nueva posición
 		borraMarkers();
-		setMarkers(window.mapObject, window.tamalerosInfo);
+		actualizaMarkers(window.mapObject, window.tamalerosInfo);
 		console.log("se ha actualizado la posición de los tamaleros");
 	}, 30000);
 }// actualizaPosicionTamaleros
+
+function actualizaPosicionTamalero(){
+	setInterval(function(){
+		getPosicionTamalero();
+	}, 30000);
+}// actualizaPosicionTamalero
+
+function getPosicionTamalero(){
+	 if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(showPosition);
+	} else {
+		alert("Geolocation is not supported by this browser.");
+	}
+
+	function showPosition(position){
+		var lat = position.coords.latitude;
+		var lon = position.coords.longitude;
+
+		setPosicionTamalero(localStorage.getItem('key'), lat, lon);
+	}
+}
+
+function setPosicionTamalero(key, lat, lon){
+	$.ajax({
+        type: 'POST',
+        url: 'http://nextlab.org/tamal-app/v1/ruta',
+        headers:{ 'X-Authorization' : key },
+        data: {
+            lat: lat,
+            lon: lon
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response){
+            console.log(response);
+        }
+    });
+}
+
+function actualizaMarkers(map, locations) {
+	console.log(locations);
+    var image = {
+        url: 'images/tamaleros-icon.png',
+        size: new google.maps.Size(32, 32),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(0, 32)
+    };
+
+    var shape = {
+        coords: [1, 1, 1, 34, 34, 34, 34 , 1],
+        type: 'poly'
+    };
+
+    window.markers = new Array();
+    for (var i = 0; i < locations.length; i++) {
+        var pos = locations[i];
+        var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            icon: image,
+            shape: shape,
+            id: pos[0],
+            title: pos[1]
+        });
+        window.markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', function() {
+            $('#myModal').modal('show');
+
+            var pos0= ""+this.position.k.toFixed(3);
+            var pos1= ""+this.position.B.toFixed(3);
+
+            var origen=userLatLng;
+            var destino= this.position;//new google.maps.LatLng(pos0);
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
+
+            //Modificar Valores
+            var x = document.getElementById('distancia');
+            x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
+
+            var infoTamalero = document.getElementById('myModalLabel');
+
+            var des0, des1;
+            for(var j=0; j<window.tamalerosInfo.length; j++){
+                des0= ""+tamalerosInfo[j][3].toFixed(3);
+                des1= ""+tamalerosInfo[j][4].toFixed(3);
+                console.log('i: ' + dameInventarioTamalero(tamalerosInfo[j][0]));
+                var inventario = dameInventarioTamalero(tamalerosInfo[j][0]);
+
+                if(inventario != -1){
+                    console.log(inventario);
+                    if(inventario.length > 0)
+                        console.log('si hay!');
+                    else
+                        console.log('no hay');
+                }
+
+                if((des0==pos0)&&(des1==pos1)){
+                    infoTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
+                }
+            }// for
+        }, this);
+    }
+}// setMarkers
 
 function borraMarkers(){
 	for (var i = 0; i < window.markers.length; i++ ) {
