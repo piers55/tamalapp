@@ -55,7 +55,7 @@ $('#myCarousel').on('slide', '', function() {
             localStorage.removeItem('lat');
             localStorage.removeItem('lon');
             localStorage.removeItem('radio');
-            window.location = '/tamalapp/preLogin.html';
+            window.location.replace('preLogin.html');
         });
     }
 
@@ -181,16 +181,11 @@ $('#myCarousel').on('slide', '', function() {
             }
         }
 
-
-
-
-
         function añadirInventario(){
             var sabor = document.getElementById("sabor").value;
             var cantidad = document.getElementById("cantidad").value;
 
             switch(sabor){
-
                 case "Dulce":
                 dulce+=parseInt(cantidad, 10);
                 break;
@@ -225,9 +220,12 @@ $('#myCarousel').on('slide', '', function() {
 
             switch(nombreTabla){
                 case "tablaDulce":
-                if (caso==1 && dulce>0) dulce--;
-                else if (caso==2) dulce++;
-
+                if (caso==1 && dulce>0) {
+                    dulce--;
+                }else if (caso==2) {
+                    dulce++;
+                }
+                
                 break;
 
                 case "tablaVerde":
@@ -429,16 +427,24 @@ function dameInventarioTamalero(id_tamalero){
 }
 
 function cargaInventario(){
-    var id_tamalero = localStorage.
+    var id_tamalero = localStorage.getItem('id');
     $.ajax({
         url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
         headers:{ 'X-Authorization' : localStorage.getItem('key')},
         success: function(response) {
-            localStorage.setItem('inventario', response.inventario);
+
+            $.each(response.inventario, function(i, val){
+                var id = val.tamal_id;
+                var filaSabor = $('#tabla').find('[data-id="' + id + '"]');
+                
+                filaSabor.find('.cantidad').text(val.cantidad);
+            });
+            
         },
         error: function(response){
             return -1;
         }
     });
 }// cargaInventario
+
 
