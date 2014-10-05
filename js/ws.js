@@ -220,10 +220,13 @@ function register(){
 
 				if(response.error == false){
 					infoUsuario=response;
-					//window.location.replace('index.html');
+					var msj = $('#registroExitoso').modal('show');
+					//window.location.replace('login.html');
 				}else{
-					document.getElementById('password').value="";
-				}	  		
+					console.log(response);
+					var msj = $('#notificacionError').modal('show');
+					document.getElementById('password').value="";	
+				}	 		
 		  	}
 		);
 	});

@@ -62,7 +62,7 @@ $('#myCarousel').on('slide', '', function() {
 }(window.jQuery);
 
     var userLatLng;
-    var dulce = 0, verde = 0, mole = 0, rajas = 0, oaxaqueño = 0;
+    var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
     var k=0;
 
     function crearElemento( padreTemp, saborTemp, cantidadTemp){
@@ -167,16 +167,16 @@ $('#myCarousel').on('slide', '', function() {
 
 
 
-            if (oaxaqueño=="condición para remover"){
-                tempTabla= document.getElementById("tablaOaxaqueño");
+            if (atole=="condición para remover"){
+                tempTabla= document.getElementById("tablaAtole");
                 padre = tempTabla.parentNode;
 
                 if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaOaxaqueño");
+                    removeAllChilds("tablaAtole");
                 }
             }else {
-                tempTabla= document.getElementById("tablaOaxaqueño");
-                crearElemento(tempTabla, "Oaxaqueño", oaxaqueño);
+                tempTabla= document.getElementById("tablaAtole");
+                crearElemento(tempTabla, "Atole", atole);
             }
         }
 
@@ -201,8 +201,8 @@ $('#myCarousel').on('slide', '', function() {
                 rajas+=parseInt(cantidad, 10);
                 break;
 
-                case "Oaxaqueño":
-                oaxaqueño+=parseInt(cantidad, 10);
+                case "Atole":
+                atole+=parseInt(cantidad, 10);
                 break;
 
             }
@@ -240,9 +240,9 @@ $('#myCarousel').on('slide', '', function() {
                 else if (caso==2) rajas++;
                 break;
 
-                case "tablaOaxaqueño":
-                if (caso==1 && oaxaqueño>0) oaxaqueño--;
-                else if (caso==2) oaxaqueño++;
+                case "tablaAtole":
+                if (caso==1 && atole>0) atole--;
+                else if (caso==2) atole++;
                 break;
 
             }

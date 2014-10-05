@@ -6354,6 +6354,12 @@ body {
 .errorPassword i {
   color: #f0ad4e;
 }
+.registro-exitoso {
+  text-align: center;
+}
+.registro-exitoso i {
+  color: #7aaf29;
+}
 .password p {
   margin-bottom: 50px;
   font-size: 16px;
@@ -6420,10 +6426,16 @@ p.navbar-brand {
   background: none;
 }
 .navbar-nav > li > a {
+  border: none;
+}
+.navbar-mobile > ul > li > a {
   line-height: 20px;
   color: #fff;
   text-align: center;
   border-bottom: solid 1px #fff;
+}
+.navbar-desktop > ul > li > a {
+  border: none;
 }
 .menu-dropdown {
   background: none !important;
@@ -6526,6 +6538,7 @@ select {
 }
 .orden table {
   width: 100%;
+  margin-bottom: 30px;
   font-size: 16px;
 }
 .orden table th {
@@ -6559,7 +6572,7 @@ select {
   color: #fff;
 }
 .orden button {
-  margin: 30px 0 0 0;
+  margin: 0;
 }
 button {
   background: none;
