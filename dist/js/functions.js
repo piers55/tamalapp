@@ -283,13 +283,13 @@ function setMarkers(map, locations) {
             var pos1= ""+this.position.B.toFixed(3);
 
             var origen=userLatLng;
-            var destino= this.position;//new google.maps.LatLng(pos0);
+            var destino= this.position;
+            console.log(destino);
             var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
 
             //Modificar Valores
             var x = document.getElementById('distancia');
             x.innerHTML="Distancia aproximada: "+ parseInt(distancia,10) +" m";
-
             var infoTamalero = document.getElementById('myModalLabel');
 
             var des0, des1;
@@ -419,7 +419,7 @@ function dameInventarioTamalero(id_tamalero){
         }
     });
 
-    return response.inventario;
+    //return response.inventario;
 }
 
 function cargaInventario(){

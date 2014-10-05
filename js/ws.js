@@ -13,6 +13,7 @@ function login(){
 					localStorage.setItem("radio",response.radio_tamalerta);
 					localStorage.setItem("nombre", response.nombre + ' ' + response.apellido);
 					localStorage.setItem("email", response.email);
+					localStorage.setItem('tamalero_cerca', 0);
 					window.location.replace('index.html');
 				} else{
 					console.log(response);
@@ -85,6 +86,11 @@ function actualizaPosicionTamaleros(){
 		borraMarkers();
 		actualizaMarkers(window.mapObject, window.tamalerosInfo);
 		console.log("se ha actualizado la posición de los tamaleros");
+		if(localStorage.getItem('tamalero_cerca') == 0){
+			console.log('busando tamaleros cerca...');
+			buscarTamalerosCerca();
+
+		}
 	}, 30000);
 }// actualizaPosicionTamaleros
 
@@ -205,7 +211,22 @@ function borraMarkers(){
 	Descripcion: Buscar tamaleros cerca si está activada la tamalerta
 */
 function buscarTamalerosCerca(){
+	var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
 
+	for(var j=0; j<window.tamalerosInfo.length; j++){
+        des0= tamalerosInfo[j][3].toFixed(3);
+        des1= tamalerosInfo[j][4].toFixed(3);
+
+        var tamalero = new google.maps.LatLng(des0, des1);
+		var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
+		var radioTamalerta = localStorage.getItem('radio');
+
+		if(parseInt(distancia) < parseInt(radioTamalerta)){
+			var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalerta en tu radio.');
+			notification.show();
+			localStorage.setItem('tamalero_cerca', 1);
+		}
+    }// for
 }// buscarTamalerosCerca
 
 function register(){
