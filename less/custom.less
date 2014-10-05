@@ -81,6 +81,11 @@ html, body{ height: 100%; }
 	i{color: @brand-warning;}
 }
 
+.registro-exitoso{
+	text-align: center;
+	i{color: @brand-good;}
+}
+
 //******************************
 
 
@@ -139,10 +144,18 @@ p.navbar-brand{ margin: 0; }
 }
 
 .navbar-nav > li > a {
+	border: none;
+}
+
+.navbar-mobile > ul > li > a {
   border-bottom: solid 1px #fff;
   line-height: 20px;
   text-align: center;
   color: #fff;
+}
+
+.navbar-desktop  > ul > li > a {
+	border: none;
 }
 
 .menu-dropdown{
@@ -248,6 +261,7 @@ select{ margin-bottom: 25px; }
 	table{
 		width: 100%;
 		font-size: 16px;
+		margin-bottom: 30px;
 		th{
 			text-align: center;
 			background: @brand-info;
@@ -275,7 +289,7 @@ select{ margin-bottom: 25px; }
 	}
 
 	button{
-		margin: 30px 0 0 0;
+		margin: 0;
 	}
 }
 
