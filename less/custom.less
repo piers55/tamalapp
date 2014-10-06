@@ -164,34 +164,21 @@ p.navbar-brand{ margin: 0; }
 	}
 }
 
-.modal-title{
-	text-align: center;
-	color: @brand-primary;
+.modal-title{ text-align: center; color: @brand-primary; }
+.modal-header{
+	i{ font-size: 2em; color: @brand-primary; }
 }
 
-
-.boton-orden{
-	z-index: 99;
-	position: absolute;
-	bottom:5%;
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
-	right: 0;
-	box-shadow: 1px 1px 4px @gray-darker;
-	a{
-		color: @brand-good;
+.boton-orden, .boton-back-to-my-location{ position: absolute; z-index: 99;
+	p{ margin: 0; font-size: 1.3em;
+		i{ color: #fff; }
 	}
-	p{
-		padding: 2%;
-		font-size: 1.3em;
-		margin: 0;
-		i{
-			color: #fff;
-		}
-	}
+}
+.boton-orden{ margin-left: auto; margin-right: auto;  right: 0; bottom:5%; left: 0;
+	a{ color: @brand-good; }
 	&.boton-orden-orden{ margin-bottom: 0; position: relative; }
 }
+.boton-back-to-my-location{ right: 4%; bottom: 16%; }
 
 .volver{ height: 35px; padding: 5px 15px; background-color: rgba(0, 0, 0, 0.8);
 	a{

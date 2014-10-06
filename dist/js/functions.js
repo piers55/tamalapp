@@ -1,5 +1,6 @@
 +function ($) { "use strict";
 
+
 //BOTON DE ON Y OFF ************************************
 
     $('.btn-toggle').click(function() {
@@ -375,8 +376,8 @@ function hacerPedido(){
             success: function(response) {
                 console.log(response);
                 //Redirije al index.html y le manda la instrucción de que se realizó un pedido
-                window.location.replace('login.html');
                 localStorage.setItem('pedido', 1);
+                window.location.replace('index.html');
             },
             error: function(response){
                 console.log(response);
@@ -438,9 +439,16 @@ function cargaInventario(){
     });
 }// cargaInventario
 
+
 function hayPedido(){
     var hayPedido = localStorage.getItem('pedido');
-    console.log(hayPedido);
+    if ( hayPedido == 1 ){
+        $('#buscandoTamalero').modal('show');
+    }
+}
+
+function solicitudDePedido(){
+     $('#solicitudDePedido').modal('show');
 }
 
 // Login usuario
@@ -648,6 +656,15 @@ function borraMarkers(){
     }
     window.markers.length = 0;
 }// borraMarkers
+
+function backToMyLocation(){
+    $('.boton-back-to-my-location').on('click', function(e){
+        e.preventDefault();
+        console.log( 'backToMyLocation');
+        //console.log( myLatLng );
+        //map.panTo( window.mapObject.getCenter() );
+    });
+}
 
 /**
     Descripcion: Buscar tamaleros cerca si está activada la tamalerta
