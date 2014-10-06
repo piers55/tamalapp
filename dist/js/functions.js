@@ -620,6 +620,7 @@ function actualizaPosicionTamalero(){
 
 function getPosicionTamalero(){
      if (navigator.geolocation) {
+        console.log('getting pos tamalero');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         alert("Geolocation is not supported by this browser.");
@@ -634,6 +635,7 @@ function getPosicionTamalero(){
 }
 
 function setPosicionTamalero(key, lat, lon){
+    console.log(lat);
     $.ajax({
         type: 'POST',
         url: 'http://nextlab.org/tamal-app/v1/ruta',
@@ -720,7 +722,8 @@ function backToMyLocation(){
         e.preventDefault();
         console.log( 'backToMyLocation');
         //console.log( myLatLng );
-        //map.panTo( window.mapObject.getCenter() );
+        window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
+        console.log('aqui');
     });
 }
 
@@ -784,7 +787,7 @@ function buscarPedidos(){
         url: 'http://nextlab.org/tamal-app/v1/pedidos',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
-            dameInfoPedido(id);
+            //dameInfoPedido(id);
         },
         error: function(response){
             console.log(response);
@@ -849,7 +852,7 @@ function registrarEndpoint(){
                     error: function(response){
                         console.log(response);
                     }
-                });;
+                });
             }
             req.onerror = function(e) {
                 console.log("Error registering the endpoint: " + JSON.stringify(e));
