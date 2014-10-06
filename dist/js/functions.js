@@ -237,33 +237,33 @@ $('#myCarousel').on('slide', '', function() {
 
             switch(nombreTabla){
                 case "tablaDulce":
-                if (caso==1 && dulce>0) {
-                    dulce--;
-                }else if (caso==2) {
-                    dulce++;
-                }
-
+                if (caso==1 && dulce>0) dulce--;
+                else if (caso==2) dulce++;
+               // actualizarInventario(,dulce);
                 break;
 
                 case "tablaVerde":
                 if (caso==1 && verde>0) verde--;
                 else if (caso==2) verde++;
+               // actualizarInventario(,verde);
                 break;
 
                 case "tablaMole":
                 if (caso==1 && mole>0) mole--;
                 else if (caso==2) mole++;
-
+               // actualizarInventario(,mole);
                 break;
 
                 case "tablaRajas":
                 if (caso==1 && rajas>0) rajas--;
                 else if (caso==2) rajas++;
+               // actualizarInventario(,rajas);
                 break;
 
                 case "tablaAtole":
                 if (caso==1 && atole>0) atole--;
                 else if (caso==2) atole++;
+               // actualizarInventario(,atole);
                 break;
 
             }
@@ -621,6 +621,8 @@ function actualizaPosicionTamalero(){
 
 function getPosicionTamalero(){
      if (navigator.geolocation) {
+
+        console.log('si hay geolocation');
         console.log('getting pos tamalero');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -630,13 +632,11 @@ function getPosicionTamalero(){
     function showPosition(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        console.log(lat);
         setPosicionTamalero(localStorage.getItem('key'), lat, lon);
     }
 }
 
 function setPosicionTamalero(key, lat, lon){
-    console.log(lat);
     $.ajax({
         type: 'POST',
         url: 'http://nextlab.org/tamal-app/v1/ruta',
@@ -746,12 +746,14 @@ function buscarTamalerosCerca(){
         var radioTamalerta = localStorage.getItem('radio');
 
         if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
+
            /* var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
             console.log("Empezar Canción");
             myAudio.play();
             console.log("Canción comenzada");
             localStorage.setItem('tamalero_cerca', 1);*/
+
         }
     }// for
 }// buscarTamalerosCerca
@@ -945,6 +947,27 @@ function setTamalertaPerfil(radio){
     } 
 }
 
+//Función para actualizar el inventario con botones de +/-
+function actualizarInventario(id, cantidad){
+    console.log("actualizando inventario");
+    $.ajax({
+        type: 'POST',
+        url: 'http://nextlab.org/tamal-app/v1/inventario',
+        headers:{ 'X-Authorization' : key },
+        data: {
+            id_tamal: id,
+            cantidad: cantidad
+        },
+        success: function(response) {
+            console.log(response);
+        }
+
+        error: function(response){
+            console.log(response);
+        }
+    }); 
+}
+
 /*********************
 BORRAR DESPUES DEL DEMO
 **********************/
@@ -954,11 +977,10 @@ function tamalertaEmergencia(){
         url: 'http://nextlab.org/tamal-app/v1/alerta',
         success: function(response) {
             if(response.message == 1){
-
             }
         },
         error: function(response){
             console.log(response);
         }
-    });
-}
+    }); 
+}//borrar demo
