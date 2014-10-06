@@ -937,18 +937,16 @@ function setPerfil(nombre, email){
     $('#nombre').text(nombre);
     $('#email').text(email);
 }
+
 function setTamalertaPerfil(radio){
-    radio = 3000;
+    radio = -1;
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-
         $('form').removeClass('hidden');
         $('.checkbox_tamalerta input').prop('checked', true);
         $('form select option[value="'+ radio +'"]').attr('selected','selected');
-
     } else {
-        console.log('off');
         $('.checkbox_tamalerta input').prop('checked', false);
         $('form').addClass('hidden');
     }
@@ -972,7 +970,7 @@ function actualizarInventario(id, cantidad){
         error: function(response){
             console.log(response);
         }
-    }); 
+    });
 }
 
 /*********************
@@ -989,5 +987,5 @@ function tamalertaEmergencia(){
         error: function(response){
             console.log(response);
         }
-    }); 
+    });
 }//borrar demo
