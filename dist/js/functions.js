@@ -893,11 +893,12 @@ function pushHandler(){
 }
 
 function activarTamalerta(){
-    $('.btn-tamalerta button').on('click', function(){
+    $('.checkbox_tamalerta input').on('click', function(){
         var radio;
-        if( $(this).hasClass('on') & ! $(this).hasClass('active') ){
+        if( $(this).prop('checked') ){
             radio = $('#radio-tamalerta option:selected').attr('value');
             $('form').removeClass('hidden');
+            $('.checkbox_tamalerta input').prop('checked', true);
         }
         else{
             $('form').addClass('hidden');
@@ -933,17 +934,19 @@ function setPerfil(nombre, email){
     $('#nombre').text(nombre);
     $('#email').text(email);
 }
-
 function setTamalertaPerfil(radio){
-    radio = -1;
+    radio = 3000;
     if(radio != '-1'){
-        console.log('on');
-        var botonOn = $('.switch .on');
-        var botonOff = $('.switch .off');
-        //botonOn.
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
+
+        $('form').removeClass('hidden');
+        $('.checkbox_tamalerta input').prop('checked', true);
+        $('form select option[value="'+ radio +'"]').attr('selected','selected');
+
     } else {
         console.log('off');
+        $('.checkbox_tamalerta input').prop('checked', false);
+        $('form').addClass('hidden');
     }
 }

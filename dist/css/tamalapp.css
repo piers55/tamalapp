@@ -6642,9 +6642,10 @@ h4 {
   background: #7aaf29;
 }
 #nivel-tamalero h3 {
+  padding: 20px 0;
+  margin: 0;
   text-align: center;
   color: #fff;
-  padding: 20px 0;
 }
 .aviso-pedido {
   background-color: rgba(91, 192, 222, 0.7);
