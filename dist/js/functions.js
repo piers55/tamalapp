@@ -48,7 +48,7 @@ $('#myCarousel').on('slide', '', function() {
 //*********************************************************
     $(document).ready(function(){
         cerrarSesion();
-        tamalertaEmergencia();
+        //tamalertaEmergencia();
     });
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
@@ -960,8 +960,7 @@ function actualizarInventario(id, cantidad){
         },
         success: function(response) {
             console.log(response);
-        }
-
+        },
         error: function(response){
             console.log(response);
         }
@@ -972,11 +971,20 @@ function actualizarInventario(id, cantidad){
 BORRAR DESPUES DEL DEMO
 **********************/
 function tamalertaEmergencia(){
+    console.log("tamalertaEmergencia");
     $.ajax({
         headers:{ 'X-Authorization' : localStorage.getItem('key')},
         url: 'http://nextlab.org/tamal-app/v1/alerta',
         success: function(response) {
+            console.log(response);
             if(response.message == 1){
+                var bodee = document.getElementById('audioContainer');
+                removeAllChilds('audioContainer');
+                var myAudio = bodee.appendChild(document.createElement('audio'));
+                myAudio.setAttribute('src','audio/tamales.mp3');
+                myAudio.setAttribute('id', 'mus');
+                myAudio.play();
+                $('#tamalertaEmergencia').modal('show');
             }
         },
         error: function(response){
@@ -984,3 +992,10 @@ function tamalertaEmergencia(){
         }
     }); 
 }//borrar demo
+
+
+function activarTamalertaEmergencia(){
+    setInterval(function(){tamalertaEmergencia();}, 5000);
+}
+
+
