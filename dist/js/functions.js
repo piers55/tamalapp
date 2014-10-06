@@ -939,7 +939,7 @@ function setPerfil(nombre, email){
 }
 
 function setTamalertaPerfil(radio){
-    radio = -1;
+    radio = 3000;
 
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
