@@ -48,6 +48,7 @@ $('#myCarousel').on('slide', '', function() {
 //*********************************************************
     $(document).ready(function(){
         cerrarSesion();
+        tamalertaEmergencia();
     });
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
@@ -629,7 +630,7 @@ function getPosicionTamalero(){
     function showPosition(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-
+        console.log(lat);
         setPosicionTamalero(localStorage.getItem('key'), lat, lon);
     }
 }
@@ -720,10 +721,7 @@ function borraMarkers(){
 function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
-        console.log( 'backToMyLocation');
-        //console.log( myLatLng );
         window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
-        console.log('aqui');
     });
 }
 
@@ -746,14 +744,14 @@ function buscarTamalerosCerca(){
         var tamalero = new google.maps.LatLng(des0, des1);
         var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
         var radioTamalerta = localStorage.getItem('radio');
-        console.log(radioTamalerta);
+
         if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
-            var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
+           /* var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
             console.log("Empezar Canción");
             myAudio.play();
             console.log("Canción comenzada");
-            localStorage.setItem('tamalero_cerca', 1);
+            localStorage.setItem('tamalero_cerca', 1);*/
         }
     }// for
 }// buscarTamalerosCerca
@@ -945,4 +943,24 @@ function setTamalertaPerfil(radio){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
     } 
+}
+
+
+
+/*********************
+BORRAR DESPUES DEL DEMO
+**********************/
+function tamalertaEmergencia(){
+    $.ajax({
+        headers:{ 'X-Authorization' : localStorage.getItem('key')},
+        url: 'http://nextlab.org/tamal-app/v1/alerta',
+        success: function(response) {
+            if(response.message == 1){
+                
+            }
+        },
+        error: function(response){
+            console.log(response);
+        }
+    });
 }
