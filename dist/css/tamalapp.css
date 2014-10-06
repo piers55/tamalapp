@@ -6251,6 +6251,10 @@ body {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+.close {
+  font-size: 30px;
+  line-height: 22px;
+}
 .background {
   width: 100%;
   position: fixed;
@@ -6624,9 +6628,6 @@ h4 {
 .btn-tamalerta {
   margin-bottom: 25px;
 }
-.btn-tamalerta h1 {
-  text-align: center;
-}
 .switch {
   width: 101px;
 }
@@ -6638,9 +6639,10 @@ h4 {
   background: #7aaf29;
 }
 #nivel-tamalero h3 {
+  padding: 20px 0;
+  margin: 0;
   text-align: center;
   color: #fff;
-  padding: 20px 0;
 }
 .aviso-pedido {
   background-color: rgba(91, 192, 222, 0.7);
