@@ -940,6 +940,7 @@ function setPerfil(nombre, email){
 
 function setTamalertaPerfil(radio){
     radio = -1;
+
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
