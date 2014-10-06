@@ -52,7 +52,7 @@ $('#myCarousel').on('slide', '', function() {
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
             e.preventDefault();
-            
+
             if(localStorage.getItem('rol') == 'tamalero'){
                 console.log('loggin out');
                 console.log(localStorage.getItem('key'));
@@ -445,7 +445,7 @@ function dameInventarioTamalero(id_tamalero){
 
                     case "Verde":
                         $('#tablaVerde').show();
-                        $('#verdeCantidad').text(tamales.cantidad);            
+                        $('#verdeCantidad').text(tamales.cantidad);
                     break;
 
                     case "Mole":
@@ -720,10 +720,7 @@ function borraMarkers(){
 function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
-        console.log( 'backToMyLocation');
-        //console.log( myLatLng );
         window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
-        console.log('aqui');
     });
 }
 
@@ -898,8 +895,7 @@ function pushHandler(){
 function activarTamalerta(){
     $('.btn-tamalerta button').on('click', function(){
         var radio;
-
-        if($(this).hasClass('on')){
+        if( $(this).hasClass('on') & ! $(this).hasClass('active') ){
             radio = $('#radio-tamalerta option:selected').attr('value');
             $('form').removeClass('hidden');
         }
@@ -907,7 +903,6 @@ function activarTamalerta(){
             $('form').addClass('hidden');
             radio = -1;
         }
-
         actualizaTamalerta(radio);
     });
 
@@ -940,9 +935,15 @@ function setPerfil(nombre, email){
 }
 
 function setTamalertaPerfil(radio){
-    console.log(radio);
+    radio = -1;
     if(radio != '-1'){
+        console.log('on');
+        var botonOn = $('.switch .on');
+        var botonOff = $('.switch .off');
+        //botonOn.
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-    } 
+    } else {
+        console.log('off');
+    }
 }

@@ -6251,6 +6251,10 @@ body {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+.close {
+  font-size: 30px;
+  line-height: 22px;
+}
 .background {
   width: 100%;
   position: fixed;
