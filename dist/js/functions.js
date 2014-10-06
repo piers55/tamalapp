@@ -48,6 +48,7 @@ $('#myCarousel').on('slide', '', function() {
 //*********************************************************
     $(document).ready(function(){
         cerrarSesion();
+        tamalertaEmergencia();
     });
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
@@ -620,7 +621,11 @@ function actualizaPosicionTamalero(){
 
 function getPosicionTamalero(){
      if (navigator.geolocation) {
+<<<<<<< HEAD
         console.log('si hay geolocation');
+=======
+        console.log('getting pos tamalero');
+>>>>>>> cf7821bd3e436d71934cbd3da2967247f9455fc0
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         alert("Geolocation is not supported by this browser.");
@@ -629,13 +634,21 @@ function getPosicionTamalero(){
     function showPosition(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
+<<<<<<< HEAD
         console.log(lat + ', ' + lon);
+=======
+        console.log(lat);
+>>>>>>> cf7821bd3e436d71934cbd3da2967247f9455fc0
         setPosicionTamalero(localStorage.getItem('key'), lat, lon);
     }
 }
 
 function setPosicionTamalero(key, lat, lon){
+<<<<<<< HEAD
     console.log(key);
+=======
+    console.log(lat);
+>>>>>>> cf7821bd3e436d71934cbd3da2967247f9455fc0
     $.ajax({
         type: 'POST',
         url: 'http://nextlab.org/tamal-app/v1/ruta',
@@ -720,9 +733,7 @@ function borraMarkers(){
 function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
-        console.log( 'backToMyLocation');
-        //console.log( myLatLng );
-        //map.panTo( window.mapObject.getCenter() );
+        window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
     });
 }
 
@@ -745,14 +756,16 @@ function buscarTamalerosCerca(){
         var tamalero = new google.maps.LatLng(des0, des1);
         var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
         var radioTamalerta = localStorage.getItem('radio');
-        console.log(radioTamalerta);
+
         if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
-            //var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
-            //notification.show();
-            //console.log("Empezar Canción");
-            //myAudio.play();
-            //console.log("Canción comenzada");
-            //localStorage.setItem('tamalero_cerca', 1);
+
+           /* var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
+            notification.show();
+            console.log("Empezar Canción");
+            myAudio.play();
+            console.log("Canción comenzada");
+            localStorage.setItem('tamalero_cerca', 1);*/
+
         }
     }// for
 }// buscarTamalerosCerca
@@ -786,7 +799,7 @@ function buscarPedidos(){
         url: 'http://nextlab.org/tamal-app/v1/pedidos',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
-            
+            //dameInfoPedido(id);
         },
         error: function(response){
             console.log(response);
@@ -794,7 +807,7 @@ function buscarPedidos(){
     });
 }
 
-function actualizaCoordenadas(){
+function dameInfoPedido(id){
 
 }
 
@@ -943,8 +956,9 @@ function setTamalertaPerfil(radio){
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-    }
+    } 
 }
+
 
 
 //Función para actualizar el inventario con botones de +/-
@@ -960,10 +974,28 @@ function actualizarInventario(id, cantidad){
         },
         success: function(response) {
             console.log(response);
-        },
+        }
+
         error: function(response){
             console.log(response);
         }
     }); 
+}
 
-}//actualizarInventario
+/*********************
+BORRAR DESPUES DEL DEMO
+**********************/
+function tamalertaEmergencia(){
+    $.ajax({
+        headers:{ 'X-Authorization' : localStorage.getItem('key')},
+        url: 'http://nextlab.org/tamal-app/v1/alerta',
+        success: function(response) {
+            if(response.message == 1){
+               
+            },
+            error: function(response){
+                console.log(response);
+            }
+        }); 
+
+}//borrar demo
