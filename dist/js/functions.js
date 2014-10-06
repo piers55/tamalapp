@@ -945,8 +945,6 @@ function setTamalertaPerfil(radio){
     } 
 }
 
-
-
 /*********************
 BORRAR DESPUES DEL DEMO
 **********************/
@@ -956,7 +954,7 @@ function tamalertaEmergencia(){
         url: 'http://nextlab.org/tamal-app/v1/alerta',
         success: function(response) {
             if(response.message == 1){
-                
+
             }
         },
         error: function(response){
