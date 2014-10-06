@@ -1,5 +1,6 @@
 +function ($) { "use strict";
 
+
 //BOTON DE ON Y OFF ************************************
 
     $('.btn-toggle').click(function() {
@@ -315,7 +316,7 @@ function setMarkers(map, locations) {
             for(var j=0; j<window.tamalerosInfo.length; j++){
                 des0= ""+tamalerosInfo[j][3];
                 des1= ""+tamalerosInfo[j][4];
-                
+
                 if((des0==pos0)&&(des1==pos1)){
                     console.log('match');
                     dameInventarioTamalero(tamalerosInfo[j][0]);
@@ -383,9 +384,7 @@ function hacerPedido(){
         var lat = localStorage.getItem("lat");
         var lon = localStorage.getItem("lon");
         var tamales = damePedido();
-
         console.log(tamales);
-
         $.ajax({
             type: 'POST',
             url: 'http://nextlab.org/tamal-app/v1/pedidos',
@@ -395,6 +394,9 @@ function hacerPedido(){
             },
             success: function(response) {
                 console.log(response);
+                //Redirije al index.html y le manda la instrucción de que se realizó un pedido
+                localStorage.setItem('pedido', 1);
+                window.location.replace('index.html');
             },
             error: function(response){
                 console.log(response);
@@ -433,7 +435,7 @@ function dameInventarioTamalero(id_tamalero){
     });
 
     //return response.inventario;
-}
+} //dameInventarioTamalero
 
 function cargaInventario(){
     var id_tamalero = localStorage.getItem('id');
@@ -445,16 +447,28 @@ function cargaInventario(){
             $.each(response.inventario, function(i, val){
                 var id = val.tamal_id;
                 var filaSabor = $('#tabla').find('[data-id="' + id + '"]');
-                
+
                 filaSabor.find('.cantidad').text(val.cantidad);
             });
-            
+
         },
         error: function(response){
             return -1;
         }
     });
 }// cargaInventario
+
+
+function hayPedido(){
+    var hayPedido = localStorage.getItem('pedido');
+    if ( hayPedido == 1 ){
+        $('#buscandoTamalero').modal('show');
+    }
+}
+
+function solicitudDePedido(){
+     $('#solicitudDePedido').modal('show');
+}
 
 // Login usuario
 function login(){
@@ -478,8 +492,8 @@ function login(){
                 } else{
                     console.log(response);
                     var msj = $('#notificacionError').modal('show');
-                    document.getElementById('password').value="";   
-                }           
+                    document.getElementById('password').value="";
+                }
             }
         );
     });
@@ -506,10 +520,10 @@ function tamaleroLogin(){
                     document.getElementById('password').value="";
                     msj.innerHTML = "";
                     msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
-                }           
+                }
             }
         );
-    });   
+    });
 } //tamaleroLogin
 
 
@@ -548,7 +562,7 @@ function obtenerInfoTamaleros(){
 // revisa cada 30 segundo si se actualizó la posición del tamalero
 function actualizaPosicionTamaleros(){
     setInterval(function(){
-        obtenerInfoTamaleros();     
+        obtenerInfoTamaleros();
         // actualiza marcadores con nueva posición
         borraMarkers();
         actualizaMarkers(window.mapObject, window.tamalerosInfo);
@@ -647,7 +661,7 @@ function actualizaMarkers(map, locations) {
             for(var j=0; j<window.tamalerosInfo.length; j++){
                 des0= ""+tamalerosInfo[j][3];
                 des1= ""+tamalerosInfo[j][4];
-               
+
                 if((des0==pos0)&&(des1==pos1)){
                     infoTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
                     dameInventarioTamalero(tamalerosInfo[j][0]);
@@ -663,6 +677,15 @@ function borraMarkers(){
     }
     window.markers.length = 0;
 }// borraMarkers
+
+function backToMyLocation(){
+    $('.boton-back-to-my-location').on('click', function(e){
+        e.preventDefault();
+        console.log( 'backToMyLocation');
+        //console.log( myLatLng );
+        //map.panTo( window.mapObject.getCenter() );
+    });
+}
 
 /**
     Descripcion: Buscar tamaleros cerca si está activada la tamalerta
@@ -709,12 +732,12 @@ function register(){
                 }else{
                     console.log(response);
                     var msj = $('#notificacionError').modal('show');
-                    document.getElementById('password').value="";   
-                }           
+                    document.getElementById('password').value="";
+                }
             }
         );
     });
-} 
+}
 
 function buscarPedidos(){
     $.ajax({
@@ -739,7 +762,7 @@ function registrarEndpoint(){
 
     var regs = navigator.push.registrations();
     var key = localStorage.getItem('key');
-    
+
     regs.onsuccess = function(e) {
         if (regs.result.length == 0) {
             var req = navigator.push.register();
@@ -820,7 +843,7 @@ function pushHandler(){
 
             //console.log('My endpoint is ' + e.pushEndpoint);
             //console.log('My new version is ' +  e.version);
-            
+
             //Remember that you can handle here if you have more than
             //one pushEndpoint
         });
@@ -878,9 +901,5 @@ function setTamalertaPerfil(radio){
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-    } 
+    }
 }
-
-
-
-
