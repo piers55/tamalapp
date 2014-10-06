@@ -452,6 +452,7 @@ function login(){
                     localStorage.setItem("radio",response.radio_tamalerta);
                     localStorage.setItem("nombre", response.nombre + ' ' + response.apellido);
                     localStorage.setItem("email", response.email);
+                    localStorage.setItem("pedido", "no");
                     localStorage.setItem('tamalero_cerca', 0);
                     window.location.replace('index.html');
                 } else{
@@ -661,7 +662,7 @@ function buscarTamalerosCerca(){
         var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
         var radioTamalerta = localStorage.getItem('radio');
 
-        if(parseInt(distancia) < parseInt(radioTamalerta)){
+        if(parseInt(distancia) < parseInt(radioTamalerta && radioTamalerta != '-1')){
             var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
             myAudio.play();
