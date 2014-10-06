@@ -53,7 +53,7 @@ $('#myCarousel').on('slide', '', function() {
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
             e.preventDefault();
-            
+
             if(localStorage.getItem('rol') == 'tamalero'){
                 console.log('loggin out');
                 console.log(localStorage.getItem('key'));
@@ -446,7 +446,7 @@ function dameInventarioTamalero(id_tamalero){
 
                     case "Verde":
                         $('#tablaVerde').show();
-                        $('#verdeCantidad').text(tamales.cantidad);            
+                        $('#verdeCantidad').text(tamales.cantidad);
                     break;
 
                     case "Mole":
@@ -896,18 +896,17 @@ function pushHandler(){
 }
 
 function activarTamalerta(){
-    $('.btn-tamalerta button').on('click', function(){
+    $('.checkbox_tamalerta input').on('click', function(){
         var radio;
-
-        if($(this).hasClass('on')){
+        if( $(this).prop('checked') ){
             radio = $('#radio-tamalerta option:selected').attr('value');
             $('form').removeClass('hidden');
+            $('.checkbox_tamalerta input').prop('checked', true);
         }
         else{
             $('form').addClass('hidden');
             radio = -1;
         }
-
         actualizaTamalerta(radio);
     });
 
@@ -938,13 +937,21 @@ function setPerfil(nombre, email){
     $('#nombre').text(nombre);
     $('#email').text(email);
 }
-
 function setTamalertaPerfil(radio){
-    console.log(radio);
+    radio = 3000;
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-    } 
+
+        $('form').removeClass('hidden');
+        $('.checkbox_tamalerta input').prop('checked', true);
+        $('form select option[value="'+ radio +'"]').attr('selected','selected');
+
+    } else {
+        console.log('off');
+        $('.checkbox_tamalerta input').prop('checked', false);
+        $('form').addClass('hidden');
+    }
 }
 
 //Función para actualizar el inventario con botones de +/-
