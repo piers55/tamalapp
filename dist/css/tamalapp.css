@@ -6566,9 +6566,12 @@ h4 {
   max-height: 800px;
   margin-bottom: 20px;
 }
+.item {
+  min-height: 280px;
+}
 .item p {
   color: #222222;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 .carousel-indicators {
   position: relative;
