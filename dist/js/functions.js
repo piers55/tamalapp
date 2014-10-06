@@ -350,7 +350,7 @@ function geolocateUser() {
     {
       var positionOptions = {
         enableHighAccuracy: true,
-        timeout: 10 * 1000 // 10 seconds
+        timeout: 30 * 1000 // 10 seconds
       };
       navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
     }
@@ -405,8 +405,45 @@ function dameInventarioTamalero(id_tamalero){
         url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
         headers:{ 'X-Authorization' : localStorage.getItem('key')},
         success: function(response) {
-            console.log(response);
+
             // cuando regrewse algo, actualizar inventario en modal
+                $('#tablaDulce').hide();
+                $('#tablaVerde').hide();
+                $('#tablaMole').hide();
+                $('#tablaOaxaqueno').hide();
+                $('#tablaRajas').hide();
+
+            for(var k=0; k<response.inventario.length; k++){
+                var tamales = response.inventario[k];
+
+                switch(tamales.sabor){
+                    case "Dulce":
+                        $('#tablaDulce').show();
+                        $('#dulceCantidad').text(tamales.cantidad);
+                    break;
+
+                    case "Verde":
+                        $('#tablaVerde').show();
+                        $('#verdeCantidad').text(tamales.cantidad);            
+                    break;
+
+                    case "Mole":
+                        $('#tablaMole').show();
+                        $('#moleCantidad').text(tamales.cantidad);
+                    break;
+
+                    case "Oaxaqueño":
+                        $('#tablaOaxaqueno').show();
+                        $('#oaxaquenoCantidad').text(tamales.cantidad);
+                    break;
+
+                    case "Rajas":
+                        $('#tablaRajas').show();
+                        $('#rajasCantidad').text(tamales.cantidad);
+                    break;
+                }
+
+            }
         },
         error: function(response){
             console.log(response);
@@ -650,6 +687,7 @@ function buscarTamalerosCerca(){
     var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
 
     var bodee = document.getElementById('audio');
+    removeAllChilds('audio');
     var myAudio = bodee.appendChild(document.createElement('audio'));
     myAudio.setAttribute('src','audio/tamales.mp3');
     myAudio.setAttribute('id', 'mus');
@@ -661,11 +699,13 @@ function buscarTamalerosCerca(){
         var tamalero = new google.maps.LatLng(des0, des1);
         var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
         var radioTamalerta = localStorage.getItem('radio');
-
-        if(parseInt(distancia) < parseInt(radioTamalerta && radioTamalerta != '-1')){
+        console.log(radioTamalerta);
+        if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
             var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
+            console.log("Empezar Canción");
             myAudio.play();
+            console.log("Canción comenzada");
             localStorage.setItem('tamalero_cerca', 1);
         }
     }// for
