@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   </head>
   <body class="tamaleros" id="tamaleros">
-            <header class="clearfix">
+    <header class="clearfix">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="background-image: url(images/nav-bg.png)">
@@ -37,9 +37,7 @@
               </ul>
             </div><!-- /.navbar-mobile -->
         </nav>
-
         </header>
-
         <div id="map" style='width:100%; height:100%;'></div>
         <p id="error"></p>
         <div id="audio"></div>
@@ -80,11 +78,22 @@
                               </table>
                           </div><!--INVENTARIO-->
                </div>
-
              </div>
            </div>
           </div>    <!-- Modal -->
-
+          <!-- Buscando tamalero Modal -->
+          <div class="modal fade" id="buscandoTamalero" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <p class="text-center"><i class="fa fa-refresh fa-spin"></i></p>
+               </div>
+               <div class="modal-body">
+                  <h4 class="modal-title" id="myModalLabel">Buscando tamalero</h4>
+               </div>
+             </div>
+           </div>
+          </div>
           <!-- Modal TU PEDIDO VA EN CAMINO -->
           <div class="modal fade" id="pedidoEnCamino" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
@@ -95,9 +104,11 @@
                </div>
              </div>
            </div>
-          </div>    <!-- Modal -->
-
-  				<a href="orden.html" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
+          </div><!-- Modal -->
+          <a href="#" class="btn btn-good btn-lg boton-back-to-my-location">
+            <p><i class="fa fa-location-arrow"></i></p>
+          </a>
+  				<a href="orden.html" class="col-xs-11 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden" id = "panel">
   					<p><i class="fa fa-cutlery"></i> ¡Haz tu pedido!</p>
   				</a>
 	    </div><!--CONTAINER-->
@@ -111,6 +122,8 @@
         obtenerInfoTamaleros();
         geolocateUser();
         actualizaPosicionTamaleros();
+        hayPedido();
+        backToMyLocation();
         //sactualizaPosicionUsuario();
       </script>
   </body>
