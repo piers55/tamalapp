@@ -991,11 +991,10 @@ function tamalertaEmergencia(){
         url: 'http://nextlab.org/tamal-app/v1/alerta',
         success: function(response) {
             if(response.message == 1){
-               
-            },
-            error: function(response){
-                console.log(response);
             }
-        }); 
-
+        },
+        error: function(response){
+            console.log(response);
+        }
+    }); 
 }//borrar demo
