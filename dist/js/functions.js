@@ -648,6 +648,11 @@ function borraMarkers(){
 function buscarTamalerosCerca(){
     var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
 
+    var bodee = document.getElementById('audio');
+    var myAudio = bodee.appendChild(document.createElement('audio'));
+    myAudio.setAttribute('src','audio/tamales.mp3');
+    myAudio.setAttribute('id', 'mus');
+
     for(var j=0; j<window.tamalerosInfo.length; j++){
         des0= tamalerosInfo[j][3];
         des1= tamalerosInfo[j][4];
@@ -659,6 +664,7 @@ function buscarTamalerosCerca(){
         if(parseInt(distancia) < parseInt(radioTamalerta)){
             var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
+            myAudio.play();
             localStorage.setItem('tamalero_cerca', 1);
         }
     }// for
