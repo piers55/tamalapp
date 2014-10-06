@@ -48,7 +48,7 @@ $('#myCarousel').on('slide', '', function() {
 //*********************************************************
     $(document).ready(function(){
         cerrarSesion();
-        tamalertaEmergencia();
+        //tamalertaEmergencia();
     });
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
@@ -965,8 +965,7 @@ function actualizarInventario(id, cantidad){
         },
         success: function(response) {
             console.log(response);
-        }
-
+        },
         error: function(response){
             console.log(response);
         }
@@ -989,3 +988,5 @@ function tamalertaEmergencia(){
         }
     });
 }//borrar demo
+
+
