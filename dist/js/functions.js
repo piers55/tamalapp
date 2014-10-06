@@ -51,10 +51,29 @@ $('#myCarousel').on('slide', '', function() {
     function cerrarSesion(){
         $('.navbar-mobile ul li:last-child a').on('click', function(e){
             e.preventDefault();
+            
+            if(localStorage.getItem('rol') == 'tamalero'){
+                console.log('loggin out');
+                console.log(localStorage.getItem('key'));
+                console.log(localStorage.getItem('id'));
+                $.ajax({
+                    type: 'POST',
+                    headers:{ 'X-Authorization' : localStorage.getItem('key')},
+                    url: 'http://nextlab.org/tamal-app/v1/tamalero/logout',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(response){
+                        console.log(response);
+                    }
+                });
+            }// endif
+
             localStorage.removeItem('key');
             localStorage.removeItem('lat');
             localStorage.removeItem('lon');
             localStorage.removeItem('radio');
+            localStorage.removeItem('pedido');
             window.location.replace('preLogin.html');
         });
     }
@@ -452,7 +471,8 @@ function login(){
                     localStorage.setItem("radio",response.radio_tamalerta);
                     localStorage.setItem("nombre", response.nombre + ' ' + response.apellido);
                     localStorage.setItem("email", response.email);
-                    localStorage.setItem("pedido", "no");
+                    localStorage.setItem("pedido", 0);
+                    localStorage.setItem("rol", "usuario");
                     localStorage.setItem('tamalero_cerca', 0);
                     window.location.replace('index.html');
                 } else{
@@ -479,6 +499,7 @@ function tamaleroLogin(){
                 if(response.error == false){
                     localStorage.setItem("key",response.api_key);
                     localStorage.setItem("id",response.id);
+                    localStorage.setItem("rol", "tamalero");
                     window.location.replace('tamalero-inventario.html');
                 }else{
                     var msj = document.getElementById('notificacionError');
@@ -696,7 +717,16 @@ function register(){
 } 
 
 function buscarPedidos(){
-    actualizaCoordenadas();
+    $.ajax({
+        url: 'http://nextlab.org/tamal-app/v1/pedidos',
+        headers:{ 'X-Authorization' : localStorage.getItem('key') },
+        success: function(response) {
+            
+        },
+        error: function(response){
+            console.log(response);
+        }
+    });
 }
 
 function actualizaCoordenadas(){
@@ -777,6 +807,7 @@ function pushHandler(){
     console.log('pushHandler');
     if (window.navigator.mozSetMessageHandler) {
         window.navigator.mozSetMessageHandler('push', function(e) {
+            buscarPedidos();
             // pedir pedidos
             // ws /pedidos
 
