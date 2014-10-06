@@ -744,7 +744,7 @@ function buscarPedidos(){
         url: 'http://nextlab.org/tamal-app/v1/pedidos',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
-            
+            dameInfoPedido(id);
         },
         error: function(response){
             console.log(response);
@@ -752,7 +752,7 @@ function buscarPedidos(){
     });
 }
 
-function actualizaCoordenadas(){
+function dameInfoPedido(id){
 
 }
 
@@ -901,5 +901,5 @@ function setTamalertaPerfil(radio){
     if(radio != '-1'){
         // activar boton de ON y poner como seleccionado
         // la "option" del "select" que tenga value=radio
-    }
+    } 
 }
