@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   </head>
   <body class="tamaleros" id="tamaleros">
-            <header class="clearfix">
+    <header class="clearfix">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="background-image: url(images/nav-bg.png)">
@@ -37,12 +37,9 @@
               </ul>
             </div><!-- /.navbar-mobile -->
         </nav>
-
         </header>
-
         <div id="map" style='width:100%; height:100%;'></div>
         <p id="error"></p>
-
         <!-- Modal -->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
@@ -54,37 +51,34 @@
                </div>
                <div class="modal-body">
                  <div class="[ orden ][ col-xs-12 col-sm-8 col-md-6 center clearfix ]">
-                              <table id="tabla">
-                                <p>Inventario</p>
-                                <tr id="tablaDulce">
-                                  <td class="sabor">Dulce</td>
-                                  <td class="cantidad"></td>
-                                </tr>
-                                <tr id="tablaVerde">
-                                  <td class="sabor">Verde</td>
-                                  <td class="cantidad"></td>
-                                </tr>
-                                <tr id="tablaMole">
-                                  <td class="sabor">Mole</td>
-                                  <td class="cantidad"></td>
-                                </tr>
-                                <tr id="tablaRajas">
-                                  <td class="sabor">Rajas</td>
-                                  <td class="cantidad"></td>
-                                </tr>
-                                <tr id="tablaOaxaqueño">
-                                  <td class="sabor">Oaxaqueño</td>
-                                  <td class="cantidad"></td>
-                                </tr>
-
-                              </table>
-                          </div><!--INVENTARIO-->
+                    <table id="tabla">
+                      <p>Inventario</p>
+                      <tr id="tablaDulce">
+                        <td class="sabor">Dulce</td>
+                        <td class="cantidad"></td>
+                      </tr>
+                      <tr id="tablaVerde">
+                        <td class="sabor">Verde</td>
+                        <td class="cantidad"></td>
+                      </tr>
+                      <tr id="tablaMole">
+                        <td class="sabor">Mole</td>
+                        <td class="cantidad"></td>
+                      </tr>
+                      <tr id="tablaRajas">
+                        <td class="sabor">Rajas</td>
+                        <td class="cantidad"></td>
+                      </tr>
+                      <tr id="tablaOaxaqueño">
+                        <td class="sabor">Oaxaqueño</td>
+                        <td class="cantidad"></td>
+                      </tr>
+                    </table>
+                </div><!--INVENTARIO-->
                </div>
-
              </div>
            </div>
           </div>    <!-- Modal -->
-
           <!-- Modal TU PEDIDO VA EN CAMINO -->
           <div class="modal fade" id="pedidoEnCamino" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
@@ -96,7 +90,6 @@
              </div>
            </div>
           </div>    <!-- Modal -->
-
   				<a href="orden.html" class="col-xs-10 col-sm-6 col-md-3 btn btn-good btn-lg boton-orden center block" id = "panel">
   					<p><i class="fa fa-cutlery"></i> ¡Haz tu pedido!</p>
   				</a>
@@ -112,6 +105,7 @@
         obtenerInfoTamaleros();
         geolocateUser();
         actualizaPosicionTamaleros();
+        hayPedido();
         //sactualizaPosicionUsuario();
       </script>
   </body>

@@ -372,9 +372,7 @@ function hacerPedido(){
         var lat = localStorage.getItem("lat");
         var lon = localStorage.getItem("lon");
         var tamales = damePedido();
-
         console.log(tamales);
-
         $.ajax({
             type: 'POST',
             url: 'http://nextlab.org/tamal-app/v1/pedidos',
@@ -384,6 +382,9 @@ function hacerPedido(){
             },
             success: function(response) {
                 console.log(response);
+                //Redirije al index.html y le manda la instrucción de que se realizó un pedido
+                window.location.replace('login.html');
+                localStorage.setItem('pedido', 1);
             },
             error: function(response){
                 console.log(response);
@@ -420,7 +421,7 @@ function dameInventarioTamalero(id_tamalero){
     });
 
     //return response.inventario;
-}
+} //dameInventarioTamalero
 
 function cargaInventario(){
     var id_tamalero = localStorage.getItem('id');
@@ -432,15 +433,20 @@ function cargaInventario(){
             $.each(response.inventario, function(i, val){
                 var id = val.tamal_id;
                 var filaSabor = $('#tabla').find('[data-id="' + id + '"]');
-                
+
                 filaSabor.find('.cantidad').text(val.cantidad);
             });
-            
+
         },
         error: function(response){
             return -1;
         }
     });
 }// cargaInventario
+
+function hayPedido(){
+    var hayPedido = localStorage.getItem('pedido');
+    console.log(hayPedido);
+}
 
 
