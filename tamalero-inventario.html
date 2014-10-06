@@ -9,7 +9,7 @@
 	    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
 	    <script src="dist/js/pedido.js"></script>
 	</head>
-	<body onload="visualizar()">
+	<body>
 	    <div class="container-fluid">
 		     <header class="clearfix">
 		        <header class="clearfix">
@@ -88,7 +88,6 @@
 				<button type="submit" class="col-xs-8 btn btn-good center block boton boton-ok">Ok</button>
 					</form>
 	        </div><!--CONTENT-->
-	        <div id="map"></div>
 	    </div><!--CONTAINER-->
 	    <!-- Modal -->
           <div class="modal fade" id="solicitudDePedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -142,6 +141,7 @@
 	<script src="dist/js/functions.js"></script>
 
 	<script>
+		visualizar();
 		actualizaPosicionTamalero();
 		cargaInventario();
 		$(document).ready(function(){
