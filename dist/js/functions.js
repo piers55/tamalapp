@@ -1001,5 +1001,5 @@ function tamalertaEmergencia(){
 
 
 function activarTamalertaEmergencia(){
-    setInterval(function(){tamalertaEmergencia();}, 5000);
+    setInterval(function(){tamalertaEmergencia();}, 15000);
 }
