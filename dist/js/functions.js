@@ -86,6 +86,7 @@ $('#myCarousel').on('slide', '', function() {
     var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
     var k=0;
 
+/*
     function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
         var nomTabla = "tabla"+saborTemp;
@@ -119,15 +120,112 @@ $('#myCarousel').on('slide', '', function() {
 
             tdSabor.innerHTML = ""+saborTemp;
             tdCantidad.innerHTML = cantidadTemp;
-        }
+        } */
 
         function removeAllChilds(a){
             var a=document.getElementById(a);
+            if(a!=null)
             while(a.hasChildNodes())
                 a.removeChild(a.firstChild);
         }
 
+        //Realizar orden/pedido.
+        function orden(){
+            $('#tablaDulce').find('.eliminar').find('.jsSumar').on('click', function(e){
+                e.preventDefault();
+                var tmp=$('#tablaDulce').find('.cantidad').text();
+                tmp++;
+                $('#tablaDulce').find('.cantidad').text(tmp);
+            });
 
+            $('#tablaVerde').find('.eliminar').find('.jsSumar').on('click', function(e){
+                e.preventDefault();
+                var tmp=$('#tablaVerde').find('.cantidad').text();
+                tmp++;
+                $('#tablaVerde').find('.cantidad').text(tmp);
+            });
+
+            $('#tablaMole').find('.eliminar').find('.jsSumar').on('click', function(e){
+                e.preventDefault();
+                var tmp=$('#tablaMole').find('.cantidad').text();
+                tmp++;
+                $('#tablaMole').find('.cantidad').text(tmp);
+            });
+
+            $('#tablaRajas').find('.eliminar').find('.jsSumar').on('click', function(e){
+                e.preventDefault();
+                var tmp=$('#tablaRajas').find('.cantidad').text();
+                tmp++;
+                $('#tablaRajas').find('.cantidad').text(tmp);
+            });
+
+
+            $('#tablaAtole').find('.eliminar').find('.jsSumar').on('click', function(e){
+                e.preventDefault();
+                var tmp=$('#tablaAtole').find('.cantidad').text();
+                tmp++;
+                $('#tablaAtole').find('.cantidad').text(tmp);
+            });
+
+//Restar
+$('#tablaDulce').find('.eliminar').find('.jsRestar').on('click', function(e){
+    e.preventDefault();
+    var tmp=$('#tablaDulce').find('.cantidad').text();
+    if(tmp>0){
+        tmp--;
+    }else{
+        tmp=0;
+    }
+    $('#tablaDulce').find('.cantidad').text(tmp);
+});
+
+$('#tablaVerde').find('.eliminar').find('.jsRestar').on('click', function(e){
+    e.preventDefault();
+    var tmp=$('#tablaVerde').find('.cantidad').text();
+    if(tmp>0){
+        tmp--;
+    }else{
+        tmp=0;
+    }
+    $('#tablaVerde').find('.cantidad').text(tmp);
+});
+
+$('#tablaMole').find('.eliminar').find('.jsRestar').on('click', function(e){
+    e.preventDefault();
+    var tmp=$('#tablaMole').find('.cantidad').text();
+    if(tmp>0){
+        tmp--;
+    }else{
+        tmp=0;
+    }
+    $('#tablaMole').find('.cantidad').text(tmp);
+});
+
+$('#tablaRajas').find('.eliminar').find('.jsRestar').on('click', function(e){
+    e.preventDefault();
+    var tmp=$('#tablaRajas').find('.cantidad').text();
+    if(tmp>0){
+        tmp--;
+    }else{
+        tmp=0;
+    }
+    $('#tablaRajas').find('.cantidad').text(tmp);
+});
+
+
+$('#tablaAtole').find('.eliminar').find('.jsRestar').on('click', function(e){
+    e.preventDefault();
+    var tmp=$('#tablaAtole').find('.cantidad').text();
+    if(tmp>0){
+        tmp--;
+    }else{
+        tmp=0;
+    }
+    $('#tablaAtole').find('.cantidad').text(tmp);
+});
+
+        }//orden
+/*
         function visualizar(){
             var tempTabla, padre;
 
@@ -234,42 +332,41 @@ $('#myCarousel').on('slide', '', function() {
         function sumarRestar(caso, caller){
             var nombreTabla = caller.parentNode.parentNode.getAttribute("id");
 
-
             switch(nombreTabla){
                 case "tablaDulce":
                 if (caso==1 && dulce>0) dulce--;
                 else if (caso==2) dulce++;
-               // actualizarInventario(,dulce);
+                //actualizarInventario('01',dulce);
                 break;
 
                 case "tablaVerde":
                 if (caso==1 && verde>0) verde--;
                 else if (caso==2) verde++;
-               // actualizarInventario(,verde);
+                //actualizarInventario('02',verde);
                 break;
 
                 case "tablaMole":
                 if (caso==1 && mole>0) mole--;
                 else if (caso==2) mole++;
-               // actualizarInventario(,mole);
+                //actualizarInventario('03',mole);
                 break;
 
                 case "tablaRajas":
                 if (caso==1 && rajas>0) rajas--;
                 else if (caso==2) rajas++;
-               // actualizarInventario(,rajas);
+                //actualizarInventario('04',rajas);
                 break;
 
                 case "tablaAtole":
                 if (caso==1 && atole>0) atole--;
                 else if (caso==2) atole++;
-               // actualizarInventario(,atole);
+                //actualizarInventario('05',atole);
                 break;
 
             }
-            visualizar();
+            //visualizar();
         }
-
+*/
 function setMarkers(map, locations) {
     var image = {
         url: 'images/tamaleros-icon.png',
@@ -377,6 +474,91 @@ function geolocateUser() {
     }
 }// geolocateUser
 
+
+
+function geolocateTamalero() {
+    // If the browser supports the Geolocation API
+    if (navigator.geolocation)
+    {
+      var positionOptions = {
+        enableHighAccuracy: true,
+        timeout: 30 * 1000 // 10 seconds
+      };
+      navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, geolocationError, positionOptions);
+    }
+}// geolocateUser
+
+
+
+//Dibujar el mapa del tamalero, más sencillo pues solo carga su posición y el destino
+function geolocationSuccessTamalero(position) {
+    tamaleroLatLng = new google.maps.LatLng(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3));
+    pedidoLatLng = new google.maps.LatLng(localStorage.getItem('pedido-lat'), localStorage.getItem('pedido-lon'));
+    
+    var myOptions = {
+        zoom : 16,
+        center : tamaleroLatLng, //disableDefaultUI: true
+        mapTypeId : google.maps.MapTypeId.ROADMAP
+    };
+
+    // Draw the map
+    window.mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    var imageUser = {
+        url: 'images/user-marker.png',
+        size: new google.maps.Size(32, 40),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(0, 32)
+    };
+
+    var imageTamalero = {
+        url: 'images/tamaleros-icon.png',
+        size: new google.maps.Size(32, 40),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(0, 32)
+    };
+
+    // Place the marker Tamalero
+    var tamaleroMarker = new google.maps.Marker({
+        map: window.mapObject,
+        icon: imageTamalero,
+        title: "Yo - Tamalero",
+        id: '0',
+        position: tamaleroLatLng
+    });
+
+ // Place the marker Tamalero
+    new google.maps.Marker({
+        map: window.mapObject,
+        icon: imageUser,
+        title: "Pedido",
+        position: pedidoLatLng
+    });
+
+
+    setInterval(function(){
+        tamaleroMarker.setMap(null);
+        navigator.geolocation.getCurrentPosition(actualizaPos);
+        
+        function actualizaPos(position){
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        localStorage.setItem('tamaleroLat', lat.toFixed(3));
+        localStorage.setItem('tamaleroLng', lon.toFixed(3))
+    }
+        tamaleroLatLng = new google.maps.LatLng(localStorage.getItem('tamaleroLat'), localStorage.getItem('tamaleroLng'));
+        tamaleroMarker.position= tamaleroLatLng;
+
+        tamaleroMarker.setMap(window.mapObject);
+        console.log("Posición Actualizada");
+
+    }, 10000);
+
+
+}// geolocationSuccessTamalero
+
+
+
 function hacerPedido(){
     $('.boton-orden').on('click', function(e){
         e.preventDefault();
@@ -386,6 +568,7 @@ function hacerPedido(){
         var lon = localStorage.getItem("lon");
         var tamales = damePedido();
         console.log(tamales);
+        console.log(lon, lat);
         $.ajax({
             type: 'POST',
             url: 'http://nextlab.org/tamal-app/v1/pedidos',
@@ -400,6 +583,7 @@ function hacerPedido(){
                 window.location.replace('index.html');
             },
             error: function(response){
+                console.log("Error al hacer pedido");
                 console.log(response);
             }
         });
@@ -481,14 +665,14 @@ function cargaInventario(){
         url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
         headers:{ 'X-Authorization' : localStorage.getItem('key')},
         success: function(response) {
-
             $.each(response.inventario, function(i, val){
                 var id = val.tamal_id;
                 var filaSabor = $('#tabla').find('[data-id="' + id + '"]');
 
                 filaSabor.find('.cantidad').text(val.cantidad);
             });
-
+            console.log("Inventario Cargado");
+                        console.log(response);
         },
         error: function(response){
             return -1;
@@ -506,7 +690,36 @@ function hayPedido(){
 
 function solicitudDePedido(){
      $('#solicitudDePedido').modal('show');
+     aceptarPedido();
+     rechazarPedido();
 }
+
+//Aceptar Pedido - Botón en el modal.
+function aceptarPedido(){
+    var pedidoLat=19.418;
+    var pedidoLng=-99.17;
+
+
+    $('.jsAceptar').on('click', function(e){
+        e.preventDefault();
+        console.log("Aceptado");
+        localStorage.setItem("pedido-lat", pedidoLat.toFixed(3));
+        localStorage.setItem("pedido-lon", pedidoLng.toFixed(3));
+        window.location.replace('tamalero-index.html');
+    });
+}//aceptarPedido
+
+
+//Rechazar Pedido - Botón en el modal.
+function rechazarPedido(){
+    $('.jsRechazar').on('click', function(e){
+        e.preventDefault();
+        console.log("Rechazado");
+
+        $('#solicitudDePedido').modal('hide');
+
+    });
+}//rechazarPedido
 
 // Login usuario
 function login(){
@@ -746,8 +959,9 @@ function buscarTamalerosCerca(){
         var radioTamalerta = localStorage.getItem('radio');
 
         if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
-
-           /* var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
+            console.log("Hay un tamalero cerca ");
+           /*
+            var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
             console.log("Empezar Canción");
             myAudio.play();
@@ -953,13 +1167,147 @@ function setTamalertaPerfil(radio){
     }
 }
 
+//Función para subar y actualizar los valores.
+function suma(){
+
+    $('#tablaDulce').find('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaDulce').find('.cantidad').text();
+        tmp++;
+        console.log("Sumar Dulce "+tmp);
+        actualizarInventario('6', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaVerde').find('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaVerde').find('.cantidad').text();
+        tmp++;
+        console.log("Sumar Verde "+tmp);
+        actualizarInventario('1', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaMole').find('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaMole').find('.cantidad').text();
+        tmp++;
+        console.log("Sumar Mole "+tmp);
+        actualizarInventario('2', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaRajas').find('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaRajas').find('.cantidad').text();
+        tmp++;
+        console.log("Sumar Rajas "+tmp);
+        actualizarInventario('3', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaAtole').find('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaAtole').find('.cantidad').text();
+        tmp++;
+        console.log("Sumar Atole "+tmp);
+        actualizarInventario('4', tmp);
+        cargaInventario();
+
+    });
+
+}//suma
+
+function resta(){
+
+    $('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        //window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
+        console.log("Restar");
+        console.log(e);
+    });
+
+    $('#tablaDulce').find('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaDulce').find('.cantidad').text();
+        if(tmp>0){
+            tmp--;
+        }else
+        tmp=0;
+        console.log("Restar Dulce "+tmp);
+        actualizarInventario('6', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaVerde').find('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaVerde').find('.cantidad').text();
+        if(tmp>0){
+            tmp--;
+        }else
+        tmp=0;
+        console.log("Restar Verde "+tmp);
+        actualizarInventario('1', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaMole').find('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaMole').find('.cantidad').text();
+        if(tmp>0){
+            tmp--;
+        }else
+        tmp=0;
+        console.log("Restar Mole "+tmp);
+        actualizarInventario('2', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaRajas').find('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaRajas').find('.cantidad').text();
+        if(tmp>0){
+            tmp--;
+        }else
+        tmp=0;
+        console.log("Restar Rajas "+tmp);
+        actualizarInventario('3', tmp);
+        cargaInventario();
+
+    });
+
+    $('#tablaAtole').find('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        var tmp=$('#tablaAtole').find('.cantidad').text();
+        if(tmp>0){
+            tmp--;
+        }else
+        tmp=0;
+        console.log("Restar Atole "+tmp);
+        actualizarInventario('4', tmp);
+        cargaInventario();
+
+    });
+
+
+}//resta
+
+
+
 //Función para actualizar el inventario con botones de +/-
 function actualizarInventario(id, cantidad){
     console.log("actualizando inventario");
     $.ajax({
         type: 'POST',
         url: 'http://nextlab.org/tamal-app/v1/inventario',
-        headers:{ 'X-Authorization' : key },
+        headers:{ 'X-Authorization' : localStorage.getItem('key') },
         data: {
             id_tamal: id,
             cantidad: cantidad

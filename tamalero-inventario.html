@@ -43,7 +43,7 @@
 
 
 	        <div class="content">
-	        <form role="form" class="sesion" action="index.html">
+	        <form role="form" class="sesion" action="#">
 				<div class="orden col-xs-12 col-sm-8 col-md-6 center clearfix">
 
 					<table id="tabla">
@@ -51,37 +51,37 @@
 
 						<tr id="tablaDulce" data-id="6">
 							<td class="sabor">Dulce</td>
-							<td class="cantidad">NA</td>
-							<td class="eliminar"><button onclick="sumarRestar(1, this)"><i class="restar fa fa-minus-circle"></i></button></td>
-							<td class="eliminar"><button onclick="sumarRestar(2, this)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							<td class="cantidad">0</td>
+							<td class="eliminar"><button class="jsRestar" ><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button class="jsSumar" ><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaVerde" data-id="1">
 							<td class="sabor">Verde</td>
-							<td class="cantidad">NA</td>
-							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
-							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							<td class="cantidad">0</td>
+							<td class="eliminar"><button class="jsRestar" ><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button class="jsSumar" ><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaMole" data-id="2">
 							<td class="sabor">Mole</td>
-							<td class="cantidad">NA</td>
-							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
-							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							<td class="cantidad">0</td>
+							<td class="eliminar"><button class="jsRestar" ><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button class="jsSumar" ><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaRajas" data-id="3">
 							<td class="sabor">Rajas</td>
-							<td class="cantidad">NA</td>
-							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
-							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							<td class="cantidad">0</td>
+							<td class="eliminar"><button class="jsRestar" ><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button class="jsSumar" ><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 
 						<tr id="tablaAtole">
 							<td class="sabor">Atole</td>
-							<td class="cantidad">NA</td>
-							<td class="eliminar"><button onclick="sumarRestar(1)"><i class="restar fa fa-minus-circle"></i></button></td>
-							<td class="eliminar"><button onclick="sumarRestar(2)"><i class=" sumar fa fa-plus-circle"></i></button></td>
+							<td class="cantidad">0</td>
+							<td class="eliminar"><button class="jsRestar" ><i class="restar fa fa-minus-circle"></i></button></td>
+							<td class="eliminar"><button class="jsSumar" ><i class=" sumar fa fa-plus-circle"></i></button></td>
 						</tr>
 					</table>
 				</div><!--INVENTARIO-->
@@ -115,17 +115,17 @@
                         <td class="sabor">Rajas</td>
                         <td class="cantidad">1</td>
                       </tr>
-                      <tr id="tablaOaxaqueño">
-                        <td class="sabor">Oaxaqueño</td>
+                      <tr id="tablaAtole">
+                        <td class="sabor">Atole</td>
                         <td class="cantidad">2</td>
                       </tr>
                     </table>
                     <div class="btn-group btn-group-justified">
 					  <div class="btn-group">
-					    <button type="button" class="btn btn-default btn-success">Aceptar</button>
+					    <button type="button" class="btn btn-default btn-success jsAceptar">Aceptar</button>
 					  </div>
 					  <div class="btn-group">
-					    <button type="button" class="btn btn-default btn-danger">Rechazar</button>
+					    <button type="button" class="btn btn-default btn-danger jsRechazar">Rechazar</button>
 					  </div>
 					</div>
                 </div><!--INVENTARIO-->
@@ -139,12 +139,14 @@
 	<script src="dist/js/functions.js"></script>
 
 	<script>
-		visualizar();
+		//visualizar();
 		actualizaPosicionTamalero();
 		cargaInventario();
 		$(document).ready(function(){
 			registrarEndpoint();
 		});
 		solicitudDePedido();
+		suma();
+		resta();
 	</script>
 </html>
