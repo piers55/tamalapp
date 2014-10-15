@@ -3,23 +3,23 @@
 
 //BOTON DE ON Y OFF ************************************
 
-    $('.btn-toggle').click(function() {
-        $(this).find('.btn').toggleClass('active');
+$('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');
 
-        if ($(this).find('.btn-primary').size()>0) {
-            $(this).find('.btn').toggleClass('btn-primary');
-        }
-        if ($(this).find('.btn-danger').size()>0) {
-            $(this).find('.btn').toggleClass('btn-danger');
-        }
-        if ($(this).find('.btn-success').size()>0) {
-            $(this).find('.btn').toggleClass('btn-success');
-        }
-        if ($(this).find('.btn-info').size()>0) {
-            $(this).find('.btn').toggleClass('btn-info');
-        }
-        $(this).find('.btn').toggleClass('btn-default');
-    });
+    if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+    }
+    if ($(this).find('.btn-danger').size()>0) {
+        $(this).find('.btn').toggleClass('btn-danger');
+    }
+    if ($(this).find('.btn-success').size()>0) {
+        $(this).find('.btn').toggleClass('btn-success');
+    }
+    if ($(this).find('.btn-info').size()>0) {
+        $(this).find('.btn').toggleClass('btn-info');
+    }
+    $(this).find('.btn').toggleClass('btn-default');
+});
 
 //SLIDES PARA COMO FUNCIONA********************************
 $("#myCarousel").carousel();
@@ -38,37 +38,40 @@ $('#myCarousel').on('slide', '', function() {
 
 //MENU COLLAPSE*********************************************
 
-    $(document).on('click',function(e){
-        if( ! $(e.target).is('.fa.fa-bars') ) {
-            $('.navbar-collapse').removeClass('in');
-        }
-    });
+$(document).on('click',function(e){
+    if( ! $(e.target).is('.fa.fa-bars') ) {
+        $('.navbar-collapse').removeClass('in');
+    }
+});
 
 
 //*********************************************************
-    $(document).ready(function(){
-        cerrarSesion();
+$(document).ready(function(){
+    cerrarSesion();
         //tamalertaEmergencia();
     });
-    function cerrarSesion(){
-        $('.navbar-mobile ul li:last-child a').on('click', function(e){
-            e.preventDefault();
 
-            if(localStorage.getItem('rol') == 'tamalero'){
-                console.log('loggin out');
-                console.log(localStorage.getItem('key'));
-                console.log(localStorage.getItem('id'));
-                $.ajax({
-                    type: 'POST',
-                    headers:{ 'X-Authorization' : localStorage.getItem('key')},
-                    url: 'http://nextlab.org/tamal-app/v1/tamalero/logout',
-                    success: function(response) {
-                        console.log(response);
-                    },
-                    error: function(response){
-                        console.log(response);
-                    }
-                });
+
+function cerrarSesion(){
+    $('.navbar-mobile ul li:last-child a').on('click', function(e){
+        e.preventDefault();
+
+        if(localStorage.getItem('rol') == 'tamalero'){
+            console.log('loggin out');
+            console.log(localStorage.getItem('key'));
+            console.log(localStorage.getItem('id'));
+            $.ajax({
+                type: 'POST',
+                headers:{ 'X-Authorization' : localStorage.getItem('key')},
+                url: 'http://nextlab.org/tamal-app/v1/tamalero/logout',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(response){
+                    console.log(response);
+                    console.log("Error");
+                }
+            });
             }// endif
 
             localStorage.removeItem('key');
@@ -82,11 +85,12 @@ $('#myCarousel').on('slide', '', function() {
 
 }(window.jQuery);
 
-    var userLatLng;
-    var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
-    var k=0;
+var userLatLng;
+var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
+
 
 /*
+    var k=0;
     function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
         var nomTabla = "tabla"+saborTemp;
@@ -122,107 +126,107 @@ $('#myCarousel').on('slide', '', function() {
             tdCantidad.innerHTML = cantidadTemp;
         } */
 
-        function removeAllChilds(a){
-            var a=document.getElementById(a);
-            if(a!=null)
+    function removeAllChilds(a){
+        var a=document.getElementById(a);
+        if(a!=null)
             while(a.hasChildNodes())
                 a.removeChild(a.firstChild);
         }
 
-        //Realizar orden/pedido.
-        function orden(){
-            $('#tablaDulce').find('.eliminar').find('.jsSumar').on('click', function(e){
-                e.preventDefault();
-                var tmp=$('#tablaDulce').find('.cantidad').text();
-                tmp++;
-                $('#tablaDulce').find('.cantidad').text(tmp);
-            });
+    //Realizar orden - solo gráfico, sin llamar al Ws.
+    function orden(){
+        $('#tablaDulce').find('.eliminar').find('.jsSumar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaDulce').find('.cantidad').text();
+            tmp++;
+            $('#tablaDulce').find('.cantidad').text(tmp);
+        });
 
-            $('#tablaVerde').find('.eliminar').find('.jsSumar').on('click', function(e){
-                e.preventDefault();
-                var tmp=$('#tablaVerde').find('.cantidad').text();
-                tmp++;
-                $('#tablaVerde').find('.cantidad').text(tmp);
-            });
+        $('#tablaVerde').find('.eliminar').find('.jsSumar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaVerde').find('.cantidad').text();
+            tmp++;
+            $('#tablaVerde').find('.cantidad').text(tmp);
+        });
 
-            $('#tablaMole').find('.eliminar').find('.jsSumar').on('click', function(e){
-                e.preventDefault();
-                var tmp=$('#tablaMole').find('.cantidad').text();
-                tmp++;
-                $('#tablaMole').find('.cantidad').text(tmp);
-            });
+        $('#tablaMole').find('.eliminar').find('.jsSumar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaMole').find('.cantidad').text();
+            tmp++;
+            $('#tablaMole').find('.cantidad').text(tmp);
+        });
 
-            $('#tablaRajas').find('.eliminar').find('.jsSumar').on('click', function(e){
-                e.preventDefault();
-                var tmp=$('#tablaRajas').find('.cantidad').text();
-                tmp++;
-                $('#tablaRajas').find('.cantidad').text(tmp);
-            });
-
-
-            $('#tablaAtole').find('.eliminar').find('.jsSumar').on('click', function(e){
-                e.preventDefault();
-                var tmp=$('#tablaAtole').find('.cantidad').text();
-                tmp++;
-                $('#tablaAtole').find('.cantidad').text(tmp);
-            });
-
-//Restar
-$('#tablaDulce').find('.eliminar').find('.jsRestar').on('click', function(e){
-    e.preventDefault();
-    var tmp=$('#tablaDulce').find('.cantidad').text();
-    if(tmp>0){
-        tmp--;
-    }else{
-        tmp=0;
-    }
-    $('#tablaDulce').find('.cantidad').text(tmp);
-});
-
-$('#tablaVerde').find('.eliminar').find('.jsRestar').on('click', function(e){
-    e.preventDefault();
-    var tmp=$('#tablaVerde').find('.cantidad').text();
-    if(tmp>0){
-        tmp--;
-    }else{
-        tmp=0;
-    }
-    $('#tablaVerde').find('.cantidad').text(tmp);
-});
-
-$('#tablaMole').find('.eliminar').find('.jsRestar').on('click', function(e){
-    e.preventDefault();
-    var tmp=$('#tablaMole').find('.cantidad').text();
-    if(tmp>0){
-        tmp--;
-    }else{
-        tmp=0;
-    }
-    $('#tablaMole').find('.cantidad').text(tmp);
-});
-
-$('#tablaRajas').find('.eliminar').find('.jsRestar').on('click', function(e){
-    e.preventDefault();
-    var tmp=$('#tablaRajas').find('.cantidad').text();
-    if(tmp>0){
-        tmp--;
-    }else{
-        tmp=0;
-    }
-    $('#tablaRajas').find('.cantidad').text(tmp);
-});
+        $('#tablaRajas').find('.eliminar').find('.jsSumar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaRajas').find('.cantidad').text();
+            tmp++;
+            $('#tablaRajas').find('.cantidad').text(tmp);
+        });
 
 
-$('#tablaAtole').find('.eliminar').find('.jsRestar').on('click', function(e){
-    e.preventDefault();
-    var tmp=$('#tablaAtole').find('.cantidad').text();
-    if(tmp>0){
-        tmp--;
-    }else{
-        tmp=0;
-    }
-    $('#tablaAtole').find('.cantidad').text(tmp);
-});
+        $('#tablaAtole').find('.eliminar').find('.jsSumar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaAtole').find('.cantidad').text();
+            tmp++;
+            $('#tablaAtole').find('.cantidad').text(tmp);
+        });
+
+        //Restar
+        $('#tablaDulce').find('.eliminar').find('.jsRestar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaDulce').find('.cantidad').text();
+            if(tmp>0){
+                tmp--;
+            }else{
+                tmp=0;
+            }
+            $('#tablaDulce').find('.cantidad').text(tmp);
+        });
+
+        $('#tablaVerde').find('.eliminar').find('.jsRestar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaVerde').find('.cantidad').text();
+            if(tmp>0){
+                tmp--;
+            }else{
+                tmp=0;
+            }
+            $('#tablaVerde').find('.cantidad').text(tmp);
+        });
+
+        $('#tablaMole').find('.eliminar').find('.jsRestar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaMole').find('.cantidad').text();
+            if(tmp>0){
+                tmp--;
+            }else{
+                tmp=0;
+            }
+            $('#tablaMole').find('.cantidad').text(tmp);
+        });
+
+        $('#tablaRajas').find('.eliminar').find('.jsRestar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaRajas').find('.cantidad').text();
+            if(tmp>0){
+                tmp--;
+            }else{
+                tmp=0;
+            }
+            $('#tablaRajas').find('.cantidad').text(tmp);
+        });
+
+
+        $('#tablaAtole').find('.eliminar').find('.jsRestar').on('click', function(e){
+            e.preventDefault();
+            var tmp=$('#tablaAtole').find('.cantidad').text();
+            if(tmp>0){
+                tmp--;
+            }else{
+                tmp=0;
+            }
+            $('#tablaAtole').find('.cantidad').text(tmp);
+        });
 
         }//orden
 /*
@@ -366,33 +370,33 @@ $('#tablaAtole').find('.eliminar').find('.jsRestar').on('click', function(e){
             }
             //visualizar();
         }
-*/
-function setMarkers(map, locations) {
-    var image = {
-        url: 'images/tamaleros-icon.png',
-        size: new google.maps.Size(32, 32),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(0, 32)
-    };
+        */
+        function setMarkers(map, locations) {
+            var image = {
+                url: 'images/tamaleros-icon.png',
+                size: new google.maps.Size(32, 32),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0, 32)
+            };
 
-    var shape = {
-        coords: [1, 1, 1, 34, 34, 34, 34 , 1],
-        type: 'poly'
-    };
+            var shape = {
+                coords: [1, 1, 1, 34, 34, 34, 34 , 1],
+                type: 'poly'
+            };
 
-    window.markers = new Array();
-    for (var i = 0; i < locations.length; i++) {
-        var pos = locations[i];
-        var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: image,
-            shape: shape,
-            id: pos[0],
-            title: pos[1]
-        });
-        window.markers.push(marker);
+            window.markers = new Array();
+            for (var i = 0; i < locations.length; i++) {
+                var pos = locations[i];
+                var myLatLng = new google.maps.LatLng(pos[3], pos[4]);
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    icon: image,
+                    shape: shape,
+                    id: pos[0],
+                    title: pos[1]
+                });
+                window.markers.push(marker);
 
         /*google.maps.event.addListener(marker, 'click', function() {
             $('#myModal').modal('show');
@@ -422,7 +426,7 @@ function setMarkers(map, locations) {
                 }
             }// for
         }, this);*/
-    }
+}
 }// setMarkers
 
 function geolocationSuccess(position) {
@@ -469,9 +473,9 @@ function geolocateUser() {
       var positionOptions = {
         enableHighAccuracy: true,
         timeout: 30 * 1000 // 10 seconds
-      };
-      navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
-    }
+    };
+    navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
+}
 }// geolocateUser
 
 
@@ -483,9 +487,9 @@ function geolocateTamalero() {
       var positionOptions = {
         enableHighAccuracy: true,
         timeout: 30 * 1000 // 10 seconds
-      };
-      navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, geolocationError, positionOptions);
-    }
+    };
+    navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, geolocationError, positionOptions);
+}
 }// geolocateUser
 
 
@@ -528,31 +532,31 @@ function geolocationSuccessTamalero(position) {
     });
 
  // Place the marker Tamalero
-    new google.maps.Marker({
-        map: window.mapObject,
-        icon: imageUser,
-        title: "Pedido",
-        position: pedidoLatLng
-    });
+ new google.maps.Marker({
+    map: window.mapObject,
+    icon: imageUser,
+    title: "Pedido",
+    position: pedidoLatLng
+});
 
 
-    setInterval(function(){
-        tamaleroMarker.setMap(null);
-        navigator.geolocation.getCurrentPosition(actualizaPos);
-        
-        function actualizaPos(position){
+ setInterval(function(){
+    tamaleroMarker.setMap(null);
+    navigator.geolocation.getCurrentPosition(actualizaPos);
+    
+    function actualizaPos(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
         localStorage.setItem('tamaleroLat', lat.toFixed(3));
         localStorage.setItem('tamaleroLng', lon.toFixed(3))
     }
-        tamaleroLatLng = new google.maps.LatLng(localStorage.getItem('tamaleroLat'), localStorage.getItem('tamaleroLng'));
-        tamaleroMarker.position= tamaleroLatLng;
+    tamaleroLatLng = new google.maps.LatLng(localStorage.getItem('tamaleroLat'), localStorage.getItem('tamaleroLng'));
+    tamaleroMarker.position= tamaleroLatLng;
 
-        tamaleroMarker.setMap(window.mapObject);
-        console.log("Posición Actualizada");
+    tamaleroMarker.setMap(window.mapObject);
+    console.log("Posición Actualizada");
 
-    }, 10000);
+}, 10000);
 
 
 }// geolocationSuccessTamalero
@@ -569,6 +573,7 @@ function hacerPedido(){
         var tamales = damePedido();
         console.log(tamales);
         console.log(lon, lat);
+
         $.ajax({
             type: 'POST',
             url: 'http://nextlab.org/tamal-app/v1/pedidos',
@@ -583,6 +588,7 @@ function hacerPedido(){
                 window.location.replace('index.html');
             },
             error: function(response){
+                localStorage.setItem('pedido', 1); //Simular que el pedido está hecho.
                 console.log("Error al hacer pedido");
                 console.log(response);
             }
@@ -611,41 +617,41 @@ function dameInventarioTamalero(id_tamalero){
         url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
         headers:{ 'X-Authorization' : localStorage.getItem('key')},
         success: function(response) {
-
+            console.log(response);
             // cuando regrewse algo, actualizar inventario en modal
-                $('#tablaDulce').hide();
-                $('#tablaVerde').hide();
-                $('#tablaMole').hide();
-                $('#tablaOaxaqueno').hide();
-                $('#tablaRajas').hide();
+            $('#tablaDulce').hide();
+            $('#tablaVerde').hide();
+            $('#tablaMole').hide();
+            $('#tablaAtole').hide();
+            $('#tablaRajas').hide();
 
             for(var k=0; k<response.inventario.length; k++){
                 var tamales = response.inventario[k];
 
                 switch(tamales.sabor){
                     case "Dulce":
-                        $('#tablaDulce').show();
-                        $('#dulceCantidad').text(tamales.cantidad);
+                    $('#tablaDulce').show();
+                    $('#dulceCantidad').text(tamales.cantidad);
                     break;
 
                     case "Verde":
-                        $('#tablaVerde').show();
-                        $('#verdeCantidad').text(tamales.cantidad);
+                    $('#tablaVerde').show();
+                    $('#verdeCantidad').text(tamales.cantidad);
                     break;
 
                     case "Mole":
-                        $('#tablaMole').show();
-                        $('#moleCantidad').text(tamales.cantidad);
+                    $('#tablaMole').show();
+                    $('#moleCantidad').text(tamales.cantidad);
                     break;
 
-                    case "Oaxaqueño":
-                        $('#tablaOaxaqueno').show();
-                        $('#oaxaquenoCantidad').text(tamales.cantidad);
+                    case "Atole":
+                    $('#tablaAtole').show();
+                    $('#AtoleCantidad').text(tamales.cantidad);
                     break;
 
                     case "Rajas":
-                        $('#tablaRajas').show();
-                        $('#rajasCantidad').text(tamales.cantidad);
+                    $('#tablaRajas').show();
+                    $('#rajasCantidad').text(tamales.cantidad);
                     break;
                 }
 
@@ -658,6 +664,7 @@ function dameInventarioTamalero(id_tamalero){
 
     //return response.inventario;
 } //dameInventarioTamalero
+
 
 function cargaInventario(){
     var id_tamalero = localStorage.getItem('id');
@@ -672,7 +679,8 @@ function cargaInventario(){
                 filaSabor.find('.cantidad').text(val.cantidad);
             });
             console.log("Inventario Cargado");
-                        console.log(response);
+            //cargaInventario();
+            //console.log(response);
         },
         error: function(response){
             return -1;
@@ -680,31 +688,85 @@ function cargaInventario(){
     });
 }// cargaInventario
 
-
+//El usuario ha hecho un pedido y despliega el modal de loading.
 function hayPedido(){
     var hayPedido = localStorage.getItem('pedido');
     if ( hayPedido == 1 ){
         $('#buscandoTamalero').modal('show');
+
+        //Simular la alerta / push notification de que el pedido va en camino
+        setTimeout(function(){  
+            pedidoEnCamino();
+        }, 5000);
     }
+}//hayPedido
+
+//Resultado de recibir la notificación de que el pedido está en camino
+function pedidoEnCamino(){
+    $('#buscandoTamalero').modal('hide');
+    $('#pedidoEnCamino').modal('show');
 }
 
+
 function solicitudDePedido(){
-     $('#solicitudDePedido').modal('show');
-     aceptarPedido();
-     rechazarPedido();
+ 
+    //Simulando un pedido
+    var pedidoLat=19.413;
+    var pedidoLng=-99.11;
+    var lat = pedidoLat;
+    var lon = pedidoLng;
+    var tamales = [{ id:1, c:1},{ id:2, c:3},{ id:3, c:4},{ id:4, c:1},{ id:5, c:2}];
+  
+    var pedido={
+        lat: lat,
+        lon: lon, 
+        data: tamales
+    }; //Fin del objeto
+
+
+
+    for (var i = 0; i < tamales.length; i++) {
+        switch(tamales[i].id){
+            case 1:
+                $('#solicitudDePedido').find('#tablaVerde').find('.cantidad').text(tamales[i].c);
+            break;
+
+            case 2:
+                $('#solicitudDePedido').find('#tablaMole').find('.cantidad').text(tamales[i].c);
+            break;
+
+            case 3:
+                $('#solicitudDePedido').find('#tablaRajas').find('.cantidad').text(tamales[i].c);
+            break;
+
+            case 4:
+                $('#solicitudDePedido').find('#tablaAtole').find('.cantidad').text(tamales[i].c);
+            break;
+
+            case 5:
+                $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(tamales[i].c);
+            break;
+
+            case 6:  //Por el error momentaneo en la base de datos
+                $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(tamales[i].c);
+            break;
+
+        }
+    };
+ $('#solicitudDePedido').modal('show');
+
+ aceptarPedido(pedido);
+ rechazarPedido();
 }
 
 //Aceptar Pedido - Botón en el modal.
-function aceptarPedido(){
-    var pedidoLat=19.418;
-    var pedidoLng=-99.17;
-
-
+function aceptarPedido(pedido){
+   
     $('.jsAceptar').on('click', function(e){
         e.preventDefault();
         console.log("Aceptado");
-        localStorage.setItem("pedido-lat", pedidoLat.toFixed(3));
-        localStorage.setItem("pedido-lon", pedidoLng.toFixed(3));
+        localStorage.setItem("pedido-lat", pedido.lat.toFixed(3));
+        localStorage.setItem("pedido-lon", pedido.lon.toFixed(3));
         window.location.replace('tamalero-index.html');
     });
 }//aceptarPedido
@@ -746,12 +808,11 @@ function login(){
                     document.getElementById('password').value="";
                 }
             }
-        );
+            );
     });
 }// login
 
 //Login Tamalero
-
 function tamaleroLogin(){
     $('form.tamaleroLogin').on('submit', function(e){
         e.preventDefault();
@@ -773,9 +834,36 @@ function tamaleroLogin(){
                     msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
                 }
             }
-        );
+            ); //Fin post
     });
 } //tamaleroLogin
+
+
+//Recuperar password
+function recuperarPassword(){
+    $('form.jsPassword').on('submit', function(e){
+        e.preventDefault();
+        var data = $(this).serialize();
+        console.log(data);
+        
+        $.ajax({
+            type: 'POST',
+            url: 'http://nextlab.org/tamal-app/v1/login',
+            data: {
+                email: data
+            },
+            success: function(response) {
+            //console.log(response);
+            console.log("success");
+        },
+        error: function(response){
+            console.log(response);
+            console.log("error por no ser un ws adecuado");
+        }
+    }
+            ); //Fin ajax
+    });
+} //recuperarPassword
 
 
 // obtiene información de tamaleros de WS
@@ -796,7 +884,7 @@ function obtenerInfoTamaleros(){
                 lon = parseFloat(val.lon);
                 lat = lat.toFixed(3);
                 lon = lon.toFixed(3);
-                console.log(lat + ',' + lon);
+                console.log(lat + ',,' + lon);
                 tamalero.push(lat);
                 tamalero.push(lon);
 
@@ -833,9 +921,7 @@ function actualizaPosicionTamalero(){
 }// actualizaPosicionTamalero
 
 function getPosicionTamalero(){
-     if (navigator.geolocation) {
-
-        console.log('si hay geolocation');
+    if (navigator.geolocation) {
         console.log('getting pos tamalero');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -860,9 +946,11 @@ function setPosicionTamalero(key, lat, lon){
         },
         success: function(response) {
             console.log(response);
+            console.log('posición Actualizada');
         },
         error: function(response){
             console.log(response);
+            console.log('error en set positionTamalero');
         }
     });
 }
@@ -918,10 +1006,11 @@ function actualizaMarkers(map, locations) {
                 if((des0==pos0)&&(des1==pos1)){
                     infoTamalero.innerHTML=""+tamalerosInfo[j][1]+" "+tamalerosInfo[j][2];
                     dameInventarioTamalero(tamalerosInfo[j][0]);
+                    console.log("ciclo para identificar al tamalero clickeado");
                 }
             }// for
         }, this);
-    }
+}
 }// setMarkers
 
 function borraMarkers(){
@@ -931,6 +1020,7 @@ function borraMarkers(){
     window.markers.length = 0;
 }// borraMarkers
 
+
 function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
@@ -938,28 +1028,29 @@ function backToMyLocation(){
     });
 }
 
+
 /**
     Descripcion: Buscar tamaleros cerca si está activada la tamalerta
-*/
-function buscarTamalerosCerca(){
-    var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
+    */
+    function buscarTamalerosCerca(){
+        var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
 
-    var bodee = document.getElementById('audio');
-    removeAllChilds('audio');
-    var myAudio = bodee.appendChild(document.createElement('audio'));
-    myAudio.setAttribute('src','audio/tamales.mp3');
-    myAudio.setAttribute('id', 'mus');
+        var bodee = document.getElementById('audio');
+        removeAllChilds('audio');
+        var myAudio = bodee.appendChild(document.createElement('audio'));
+        myAudio.setAttribute('src','audio/tamales.mp3');
+        myAudio.setAttribute('id', 'mus');
 
-    for(var j=0; j<window.tamalerosInfo.length; j++){
-        des0= tamalerosInfo[j][3];
-        des1= tamalerosInfo[j][4];
+        for(var j=0; j<window.tamalerosInfo.length; j++){
+            des0= tamalerosInfo[j][3];
+            des1= tamalerosInfo[j][4];
 
-        var tamalero = new google.maps.LatLng(des0, des1);
-        var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
-        var radioTamalerta = localStorage.getItem('radio');
+            var tamalero = new google.maps.LatLng(des0, des1);
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
+            var radioTamalerta = localStorage.getItem('radio');
 
-        if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
-            console.log("Hay un tamalero cerca ");
+            if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
+                console.log("Hay un tamalero cerca ");
            /*
             var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
             notification.show();
@@ -972,6 +1063,7 @@ function buscarTamalerosCerca(){
     }// for
 }// buscarTamalerosCerca
 
+//Registro de usuarios
 function register(){
     $('form.register').on('submit', function(e){
         e.preventDefault();
@@ -992,9 +1084,10 @@ function register(){
                     document.getElementById('password').value="";
                 }
             }
-        );
+            );
     });
-}
+}//Fin de Register
+
 
 function buscarPedidos(){
     $.ajax({
@@ -1026,7 +1119,7 @@ function registrarEndpoint(){
             req.onsuccess = function() {
                 var endpoint = req.result;
                 console.log(endpoint);
-                 $.ajax({
+                $.ajax({
                     type: 'POST',
                     url: 'http://nextlab.org/tamal-app/v1/endpoint',
                     headers:{ 'X-Authorization' : key },
@@ -1053,7 +1146,7 @@ function registrarEndpoint(){
             req.onsuccess = function() {
                 var endpoint = req.result;
                 console.log(endpoint);
-                 $.ajax({
+                $.ajax({
                     type: 'POST',
                     url: 'http://nextlab.org/tamal-app/v1/endpoint',
                     headers:{ 'X-Authorization' : key },
@@ -1167,7 +1260,7 @@ function setTamalertaPerfil(radio){
     }
 }
 
-//Función para subar y actualizar los valores.
+//Función para sumar y actualizar los valores.
 function suma(){
 
     $('#tablaDulce').find('.eliminar').find('.jsSumar').on('click', function(e){
@@ -1220,16 +1313,15 @@ function suma(){
 
     });
 
+    $('.eliminar').find('.jsSumar').on('click', function(e){
+        e.preventDefault();
+        cargaInventario();
+    });
+
 }//suma
 
+//Función para restar y actuaizar los valores.
 function resta(){
-
-    $('.eliminar').find('.jsRestar').on('click', function(e){
-        e.preventDefault();
-        //window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
-        console.log("Restar");
-        console.log(e);
-    });
 
     $('#tablaDulce').find('.eliminar').find('.jsRestar').on('click', function(e){
         e.preventDefault();
@@ -1296,6 +1388,10 @@ function resta(){
 
     });
 
+    $('.eliminar').find('.jsRestar').on('click', function(e){
+        e.preventDefault();
+        cargaInventario();
+    });
 
 }//resta
 
@@ -1304,6 +1400,8 @@ function resta(){
 //Función para actualizar el inventario con botones de +/-
 function actualizarInventario(id, cantidad){
     console.log("actualizando inventario");
+    $('#actualizandoInventario').modal('show');
+    console.log("modal");
     $.ajax({
         type: 'POST',
         url: 'http://nextlab.org/tamal-app/v1/inventario',
@@ -1314,16 +1412,25 @@ function actualizarInventario(id, cantidad){
         },
         success: function(response) {
             console.log(response);
+            $('#actualizandoInventario').modal('hide');
         },
         error: function(response){
-            console.log(response);
+            $('#actualizandoInventario').find('myModalLabel').text("Error, intenta nuevamente");
+
         }
     });
 }
 
+
+
+
+
+
+
 /*********************
 BORRAR DESPUES DEL DEMO
 **********************/
+/*
 function tamalertaEmergencia(){
     console.log("tamalertaEmergencia");
     $.ajax({
@@ -1342,12 +1449,14 @@ function tamalertaEmergencia(){
             }
         },
         error: function(response){
-            console.log(response);
+            //console.log(response);
+            console.log("Response de error  - tamalertaEmergencia");
         }
     });
 }//borrar demo
 
-
 function activarTamalertaEmergencia(){
     setInterval(function(){tamalertaEmergencia();}, 15000);
 }
+
+*/
