@@ -1,112 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="pragma" content="no-cache" />
-    <title>Tamalapp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
-  </head>
-  <body class="tamaleros" id="tamaleros">
-            <header class="clearfix">
-            <nav class="navbar navbar-default navbar-static-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header" style="background-image: url(images/nav-bg.png)">
-              <button type="button" role="navigation" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only"></span>
-                <i class="fa fa-bars"></i>
-              </button>
-              <a class="navbar-brand" href="">Tamalapp</a>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title>Tamalapp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="dist/css/tamalapp.min.css"/>
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+</head>
+<body class="tamaleros" id="tamaleros">
+  <header class="clearfix">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header" style="background-image: url(images/nav-bg.png)">
+        <button type="button" role="navigation" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only"></span>
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="">Tamalapp</a>
+      </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="hidden-sm hidden-md hidden-lg collapse navbar-collapse navbar-mobile" id="bs-example-navbar-collapse-1">
-              <ul class="hidden-sm hidden-md hidden-lg nav navbar-nav ">
-                <li ><a class="menu-dropdown" href="tamalero-inventario.html">Mi inventario</a></li>
-                <li ><a class="menu-dropdown" href="tamalero-como-funciona.html">¿Cómo funciona?</a></li>
-                <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-              </ul>
-            </div>
-            <div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
-                <ul class=" nav navbar-nav">
-                  <li ><a class="menu-dropdown" href="tamalero-inventario.html">Mi inventario</a></li>
-                  <li ><a class="menu-dropdown" href="tamalero-como-funciona.html">¿Cómo funciona?</a></li>
-                  <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
-                </ul>
-              </div><!-- /.navbar-mobile -->
-        </nav>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="hidden-sm hidden-md hidden-lg collapse navbar-collapse navbar-mobile" id="bs-example-navbar-collapse-1">
+        <ul class="hidden-sm hidden-md hidden-lg nav navbar-nav ">
+          <li ><a class="menu-dropdown" href="tamalero-inventario.html">Mi inventario</a></li>
+          <li ><a class="menu-dropdown" href="tamalero-como-funciona.html">¿Cómo funciona?</a></li>
+          <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+        </ul>
+      </div>
+      <div class="hidden-xs collapse navbar-collapse" style="background-image: url(images/nav-bg.png)" id="bs-example-navbar-collapse-1">
+        <ul class=" nav navbar-nav">
+          <li ><a class="menu-dropdown" href="tamalero-inventario.html">Mi inventario</a></li>
+          <li ><a class="menu-dropdown" href="tamalero-como-funciona.html">¿Cómo funciona?</a></li>
+          <li><a class="menu-dropdown" href="cerrar-sesion.html">Cerrar sesión</a></li>
+        </ul>
+      </div><!-- /.navbar-mobile -->
+    </nav>
 
-        </header>
-        <div id="map" style='width:100%; height:100%;'></div>
-        <p id="error"></p>
+  </header>
+  <div id="map" style='width:100%; height:100%;'></div>
+  <p id="error"></p>
 
-        <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                 <h4 class="modal-title" id="myModalLabel">Jesús Ramírez</h4>
-                 <p class="modal-title" id="distancia">00</p>
-               </div>
-               <div class="modal-body">
-                 <div class="[ orden ][ col-xs-12 col-sm-8 col-md-6 center clearfix ]">
-                              <table id="tabla">
-                                <p>Inventario</p>
-                                <tr id="tablaDulce">
-                                  <td class="sabor">Dulce</td>
-                                  <td class="cantidad">0</td>
-                                </tr>
-                                <tr id="tablaVerde">
-                                  <td class="sabor">Verde</td>
-                                  <td class="cantidad">0</td>
-                                </tr>
-                                <tr id="tablaMole">
-                                  <td class="sabor">Mole</td>
-                                  <td class="cantidad">0</td>
-                                </tr>
-                                <tr id="tablaRajas">
-                                  <td class="sabor">Rajas</td>
-                                  <td class="cantidad">0</td>
-                                </tr>
-                                <tr id="tablaAtole">
-                                  <td class="sabor">Atole</td>
-                                  <td class="cantidad">0</td>
-                                </tr>
+  <!-- Modal -->
+  <div class="modal fade" id="solicitudDePedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+         <h4 class="modal-title" id="myModalLabel">Pedido en Proceso</h4>
+         <p class="modal-title" id="distancia">00</p>
+       </div>
+       <div class="modal-body">
+         <div class="[ orden ][ col-xs-12 col-sm-8 col-md-6 center clearfix ]">
+          <table id="tabla">
+            <tr id="tablaDulce">
+              <td class="sabor">Dulce</td>
+              <td class="cantidad">1</td>
+            </tr>
+            <tr id="tablaVerde">
+              <td class="sabor">Verde</td>
+              <td class="cantidad">2</td>
+            </tr>
+            <tr id="tablaMole">
+              <td class="sabor">Mole</td>
+              <td class="cantidad">1</td>
+            </tr>
+            <tr id="tablaRajas">
+              <td class="sabor">Rajas</td>
+              <td class="cantidad">1</td>
+            </tr>
+            <tr id="tablaAtole">
+              <td class="sabor">Atole</td>
+              <td class="cantidad">2</td>
+            </tr>
+          </table>
+        </div><!--INVENTARIO-->
+      </div>
+    </div>
+  </div>
+</div>    <!-- Modal -->
 
-                              </table>
-                          </div><!--INVENTARIO-->
-               </div>
 
-             </div>
-           </div>
-          </div>    <!-- Modal -->
+<!-- Botón de centrar -->
+<a href="#" class="btn btn-good btn-lg boton-back-to-my-location">
+  <p><i class="fa fa-location-arrow"></i></p>
+</a>
+<!-- Botón-->
 
-          <!-- Modal TU PEDIDO VA EN CAMINO -->
-          <div class="modal fade" id="pedidoEnCamino" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                 <h1 class="modal-title" id="myModalLabel"><i class="fa fa-bicycle fa-4x"></i> <br> ¡Tu pedido va en camino!</h1>
-               </div>
-             </div>
-           </div>
-          </div>    <!-- Modal -->
-	    </div><!--CONTAINER-->
-      <div id= "audioContainer"></div>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry"></script>
-      <script src="dist/js/jquery.min.js"></script>
-      <script src="dist/js/tamalapp.min.js"></script>
-      <script src="dist/js/pedido.js"></script>
-      <script src="js/ws.js"></script>
-      <script src="dist/js/functions.js"></script>
-      <script>
+</div><!--CONTAINER-->
+<div id= "audioContainer"></div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYOh5fy4r29JkxlpGudJsR0EJASlpVV0&v=3&libraries=geometry"></script>
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/tamalapp.min.js"></script>
+<script src="dist/js/pedido.js"></script>
+<script src="dist/js/functions.js"></script>
+<script>
         //obtenerInfoTamaleros();
         geolocateTamalero();
+        backToMyLocation();
+        //solicitudDePedido();
+        //pedidoAceptado();
         //actualizaPosicionTamaleros();
         //buscarTamalerosCerca();
       </script>
-  </body>
-</html>
+    </body>
+    </html>

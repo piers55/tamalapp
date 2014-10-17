@@ -55,21 +55,22 @@ $(document).ready(function(){
 function cerrarSesion(){
     $('.navbar-mobile ul li:last-child a').on('click', function(e){
         e.preventDefault();
-
+        var key = localStorage.getItem('key');
         if(localStorage.getItem('rol') == 'tamalero'){
             console.log('loggin out');
-            console.log(localStorage.getItem('key'));
+            console.log(key);
             console.log(localStorage.getItem('id'));
             $.ajax({
                 type: 'POST',
-                headers:{ 'X-Authorization' : localStorage.getItem('key')},
+                headers:{ 'X-Authorization' : key },
                 url: 'http://nextlab.org/tamal-app/v1/tamalero/logout',
                 success: function(response) {
+                    console.log("Success - Cerrar Sesion");
                     console.log(response);
                 },
                 error: function(response){
-                    console.log(response);
                     console.log("Error");
+                    console.log(response);
                 }
             });
             }// endif
@@ -434,7 +435,8 @@ function geolocationSuccess(position) {
 
     var myOptions = {
         zoom : 16,
-        center : userLatLng, //disableDefaultUI: true
+        center : userLatLng, 
+        disableDefaultUI: true,
         mapTypeId : google.maps.MapTypeId.ROADMAP
     };
 
@@ -496,12 +498,20 @@ function geolocateTamalero() {
 
 //Dibujar el mapa del tamalero, más sencillo pues solo carga su posición y el destino
 function geolocationSuccessTamalero(position) {
-    tamaleroLatLng = new google.maps.LatLng(position.coords.latitude.toFixed(3), position.coords.longitude.toFixed(3));
+    var lat= position.coords.latitude.toFixed(3);
+    var lon= position.coords.longitude.toFixed(3);
+
+    tamaleroLatLng = new google.maps.LatLng(lat, lon);
     pedidoLatLng = new google.maps.LatLng(localStorage.getItem('pedido-lat'), localStorage.getItem('pedido-lon'));
     
+    //localStorage.setItem("lat", lat);
+    //localStorage.setItem("lon", lon);
+
+
     var myOptions = {
         zoom : 16,
         center : tamaleroLatLng, //disableDefaultUI: true
+        disableDefaultUI: true,
         mapTypeId : google.maps.MapTypeId.ROADMAP
     };
 
@@ -531,13 +541,28 @@ function geolocationSuccessTamalero(position) {
         position: tamaleroLatLng
     });
 
- // Place the marker Tamalero
- new google.maps.Marker({
+ // Place the marker Usuario Destino
+    var usuarioMarker = new google.maps.Marker({
     map: window.mapObject,
     icon: imageUser,
     title: "Pedido",
     position: pedidoLatLng
 });
+
+
+//__________
+
+google.maps.event.addListener(usuarioMarker, 'click', function() {
+            //$('#myModal').modal('show');
+
+            console.log("Usuario clickeado"); 
+            solicitudDePedido();
+            
+        }, this);
+
+//__________
+
+
 
 
  setInterval(function(){
@@ -585,7 +610,9 @@ function hacerPedido(){
                 console.log(response);
                 //Redirije al index.html y le manda la instrucción de que se realizó un pedido
                 localStorage.setItem('pedido', 1);
+                
                 window.location.replace('index.html');
+                registrarEndpointUsuario();
             },
             error: function(response){
                 localStorage.setItem('pedido', 1); //Simular que el pedido está hecho.
@@ -593,6 +620,7 @@ function hacerPedido(){
                 console.log(response);
             }
         });
+        registrarEndpointUsuario();
     });
 }
 
@@ -693,11 +721,13 @@ function hayPedido(){
     var hayPedido = localStorage.getItem('pedido');
     if ( hayPedido == 1 ){
         $('#buscandoTamalero').modal('show');
+        registrarEndpointUsuario();
+        
 
         //Simular la alerta / push notification de que el pedido va en camino
-        setTimeout(function(){  
-            pedidoEnCamino();
-        }, 5000);
+        //setTimeout(function(){  
+          //  pedidoEnCamino();
+        //}, 5000);
     }
 }//hayPedido
 
@@ -705,6 +735,7 @@ function hayPedido(){
 function pedidoEnCamino(){
     $('#buscandoTamalero').modal('hide');
     $('#pedidoEnCamino').modal('show');
+    console.log("Cambiar Modal");
 }
 
 
@@ -723,7 +754,32 @@ function solicitudDePedido(){
         data: tamales
     }; //Fin del objeto
 
+/*            var pos0= ""+this.position.k.toFixed(3);
+            var pos1= ""+this.position.B.toFixed(3);
 
+            var origen=userLatLng;
+            var destino= this.position;//new google.maps.LatLng(pos0);
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
+*/
+
+var distancia = 0;
+$('#solicitudDePedido').find('#distancia').text("Distancia aproximada: "+ distancia +" m");
+
+//Distancia del pedido
+/*
+    var origen = new google.maps.LatLng(localStorage.getItem("lat"), localStorage.getItem("lon"));
+    var destino= new google.maps.LatLng(pedidoLat, pedidoLng);
+    var distancia = google.maps.geometry.spherical.computeDistanceBetween (origen, destino);
+    disancia=distancia.toFixed(1);
+    if(distancia>2500){
+            distancia=distancia/1000;
+            distancia=distancia.toFixed(1);
+            $('#solicitudDePedido').find('#distancia').text(distancia+" Km");
+        }
+        else
+            $('#solicitudDePedido').find('#distancia').text(distancia+" m");
+
+*/
 
     for (var i = 0; i < tamales.length; i++) {
         switch(tamales[i].id){
@@ -758,6 +814,8 @@ function solicitudDePedido(){
  aceptarPedido(pedido);
  rechazarPedido();
 }
+
+
 
 //Aceptar Pedido - Botón en el modal.
 function aceptarPedido(pedido){
@@ -828,10 +886,8 @@ function tamaleroLogin(){
                     localStorage.setItem("rol", "tamalero");
                     window.location.replace('tamalero-inventario.html');
                 }else{
-                    var msj = document.getElementById('notificacionError');
-                    document.getElementById('password').value="";
-                    msj.innerHTML = "";
-                    msj.innerHTML ="Error: "+ "Tu contraseña es incorrecta. Intenta de nuevo.";
+                    var msj = $('#notificacionError').modal('show');
+                    document.getElementById('no-registro').value="";
                 }
             }
             ); //Fin post
@@ -922,7 +978,7 @@ function actualizaPosicionTamalero(){
 
 function getPosicionTamalero(){
     if (navigator.geolocation) {
-        console.log('getting pos tamalero');
+        //console.log('getting pos tamalero');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         alert("Geolocation is not supported by this browser.");
@@ -945,8 +1001,10 @@ function setPosicionTamalero(key, lat, lon){
             lon: lon
         },
         success: function(response) {
-            console.log(response);
-            console.log('posición Actualizada');
+            localStorage.setItem("lat", lat);
+            localStorage.setItem("lon", lon);
+            //console.log(response);
+            //console.log('posición Actualizada');
         },
         error: function(response){
             console.log(response);
@@ -1024,6 +1082,7 @@ function borraMarkers(){
 function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
+        console.log("backToMyLocation");
         window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
     });
 }
@@ -1090,16 +1149,21 @@ function register(){
 
 
 function buscarPedidos(){
+    console.log("***Función Buscar Pedidos***");
     $.ajax({
         url: 'http://nextlab.org/tamal-app/v1/pedidos',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
+            console.log("Success: "+response.message+"\n ***");
+            solicitudDePedido();
             //dameInfoPedido(id);
+            //console.log("******");
         },
         error: function(response){
-            console.log(response);
+            console.log("Error: "+response.message);
         }
     });
+
 }
 
 function dameInfoPedido(id){
@@ -1127,15 +1191,17 @@ function registrarEndpoint(){
                         endpoint: endpoint
                     },
                     success: function(response) {
-                        console.log(response);
+                        console.log("Success: "+response.message);
+
                     },
                     error: function(response){
-                        console.log(response);
+                        console.log("Error: "+response.message);
                     }
                 });
             }
             req.onerror = function(e) {
                 console.log("Error registering the endpoint: " + JSON.stringify(e));
+                location.reload();
             }
         } else if (regs.result.length > 0) {
             for (var i = 0, l = regs.result.length; i < l; i++) {
@@ -1146,6 +1212,8 @@ function registrarEndpoint(){
             req.onsuccess = function() {
                 var endpoint = req.result;
                 console.log(endpoint);
+                //console.log("endpoint Registrado  "+key);
+
                 $.ajax({
                     type: 'POST',
                     url: 'http://nextlab.org/tamal-app/v1/endpoint',
@@ -1154,15 +1222,19 @@ function registrarEndpoint(){
                         endpoint: endpoint
                     },
                     success: function(response) {
+                        console.log("Success: "+response.message + " <- post endpoint");
                         console.log(response);
+                        pushHandler();
+
                     },
                     error: function(response){
-                        console.log(response);
+                        console.log("Error: "+response.message);
                     }
                 });
             }
             req.onerror = function(e) {
                 console.log("Error registering the endpoint: " + JSON.stringify(e));
+                registrarEndpoint();
             }
         } else {
             // Register for a new endpoint.
@@ -1172,15 +1244,17 @@ function registrarEndpoint(){
             }
         }
 
-        pushHandler();
+        //pushHandler();
     }
 }// registrarEndpoint
+
 
 function pushHandler(){
     console.log('pushHandler');
     if (window.navigator.mozSetMessageHandler) {
         window.navigator.mozSetMessageHandler('push', function(e) {
             buscarPedidos();
+            
             // pedir pedidos
             // ws /pedidos
 
@@ -1191,8 +1265,8 @@ function pushHandler(){
             // ws /pedido/entregar
 
 
-            //console.log('My endpoint is ' + e.pushEndpoint);
-            //console.log('My new version is ' +  e.version);
+            console.log('My endpoint is ' + e.pushEndpoint);
+            console.log('My new version is ' +  e.version);
 
             //Remember that you can handle here if you have more than
             //one pushEndpoint
@@ -1239,6 +1313,138 @@ function activarTamalerta(){
         });
     }
 }
+
+//*********************
+
+// Push notification después de haber hecho el pedido al tamalero.
+function registrarEndpointUsuario(){
+    console.log('registrar endpoint');
+
+    var regs = navigator.push.registrations();
+    var key = localStorage.getItem('key');
+
+    regs.onsuccess = function(e) {
+        if (regs.result.length == 0) {
+            var req = navigator.push.register();
+            req.onsuccess = function() {
+                var endpoint = req.result;
+                console.log(endpoint);
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://nextlab.org/tamal-app/v1/endpoint',
+                    headers:{ 'X-Authorization' : key },
+                    data: {
+                        endpoint: endpoint
+                    },
+                    success: function(response) {
+                        console.log("Success: "+response.message);
+                        pushHandlerUsuario();
+
+                    },
+                    error: function(response){
+                        console.log("Error: "+response.message);
+                    }
+                });
+            }
+            req.onerror = function(e) {
+                console.log("Error registering the endpoint: " + JSON.stringify(e));
+                location.reload();
+            }
+        } else if (regs.result.length > 0) {
+            for (var i = 0, l = regs.result.length; i < l; i++) {
+                console.log("Existing registration", regs.result[i].pushEndpoint, regs.result[i].version);
+            }
+            // Reuse existing endpoints.
+            var req = navigator.push.register();
+            req.onsuccess = function() {
+                var endpoint = req.result;
+                console.log(endpoint);
+                //console.log("endpoint Registrado  "+key);
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://nextlab.org/tamal-app/v1/endpoint',
+                    headers:{ 'X-Authorization' : key },
+                    data: {
+                        endpoint: endpoint
+                    },
+                    success: function(response) {
+                        console.log("Success: "+response.message + " <- post endpoint");
+                        console.log(response);
+                        pushHandlerUsuario();
+
+                    },
+                    error: function(response){
+                        console.log("Error: "+response.message);
+                    }
+                });
+            }
+            req.onerror = function(e) {
+                console.log("Error registering the endpoint: " + JSON.stringify(e));
+                registrarEndpointUsuario();
+            }
+        } else {
+            // Register for a new endpoint.
+            var register = navigator.push.register();
+            register.onsuccess = function(e) {
+                console.log("Registered new endpoint", register.result);
+            }
+        }
+    }
+}// registrarEndpointUsuario
+
+
+
+
+function pushHandlerUsuario(){
+    console.log('pushHandlerUsuario');
+    //$('#buscandoTamalero').modal('show');
+
+    if (window.navigator.mozSetMessageHandler) {
+        window.navigator.mozSetMessageHandler('push', function(e) {
+            pedidoEnCamino();
+
+            // pedir pedidos
+            // ws /pedidos
+
+            // aceptar pedido
+            // ws /pedido/aceptar
+            // manda id pedido
+            // ws /pedido/cancelar
+            // ws /pedido/entregar
+
+
+            console.log('My User endpoint is ' + e.pushEndpoint);
+            console.log('My User new version is ' +  e.version);
+
+            //Remember that you can handle here if you have more than
+            //one pushEndpoint
+        });
+    } else {
+        console.log('No message handler');
+    }
+} //pushHandlerUsuario
+
+
+
+
+
+
+
+
+
+
+
+
+//***************************
+
+
+
+
+
+
+
+
 
 function setPerfil(nombre, email){
     $('#nombre').text(nombre);
@@ -1411,7 +1617,7 @@ function actualizarInventario(id, cantidad){
             cantidad: cantidad
         },
         success: function(response) {
-            console.log(response);
+            console.log(response.message);
             $('#actualizandoInventario').modal('hide');
         },
         error: function(response){
@@ -1420,6 +1626,27 @@ function actualizarInventario(id, cantidad){
         }
     });
 }
+
+//Loguear
+function recordarUsuario(){
+    console.log(localStorage.getItem("key"));
+    console.log(localStorage.getItem("radio"));
+    console.log(localStorage.getItem("nombre"));
+    console.log(localStorage.getItem("email"));
+    console.log(localStorage.getItem("pedido"));
+    console.log(localStorage.getItem("rol", "usuario"));
+    console.log(localStorage.getItem('tamalero_cerca'));
+    var tmp=localStorage.getItem("key");
+    if(localStorage.getItem("key")!=null){
+        if (localStorage.getItem("rol")=="usuario") {
+            window.location.replace('index.html');
+            localStorage.setItem("pedido", '0');
+        }else if (localStorage.getItem("rol")=="tamalero") {
+            window.location.replace('tamalero-inventario.html');
+        }
+    }
+}
+
 
 
 
