@@ -104,49 +104,13 @@ var userLatLng;
 var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
 
 
-/*
-    var k=0;
-    function crearElemento( padreTemp, saborTemp, cantidadTemp){
 
-        var nomTabla = "tabla"+saborTemp;
-        if(padreTemp.hasChildNodes){
-            removeAllChilds(nomTabla);
-        }
-
-
-        var tr = padreTemp;
-        var tdSabor = tr.appendChild(document.createElement('td'));
-        var tdCantidad = tr.appendChild(document.createElement('td'));
-        var tdEliminar1 = tr.appendChild(document.createElement('td'));
-        var tdEliminar2 = tr.appendChild(document.createElement('td'));
-        var buttonRestar = tdEliminar1.appendChild(document.createElement('button'));
-        var buttonSumar = tdEliminar2.appendChild(document.createElement('button'));
-
-        var iRestar = buttonRestar.appendChild(document.createElement('i'));
-        var iSumar = buttonSumar.appendChild(document.createElement('i'));
-
-
-
-            tdSabor.setAttribute("class", "sabor");
-            tdCantidad.setAttribute("class", "cantidad");
-            tdEliminar1.setAttribute("class", "eliminar");
-            tdEliminar2.setAttribute("class", "eliminar");
-            buttonRestar.setAttribute("onclick", "sumarRestar(1, this)");
-            buttonSumar.setAttribute("onclick", "sumarRestar(2, this)");
-
-            iSumar.setAttribute("class", "sumar fa fa-plus-circle");
-            iRestar.setAttribute("class", "restar fa fa-minus-circle");
-
-            tdSabor.innerHTML = ""+saborTemp;
-            tdCantidad.innerHTML = cantidadTemp;
-        } */
-
-        function removeAllChilds(a){
-            var a=document.getElementById(a);
-            if(a!=null)
-                while(a.hasChildNodes())
-                    a.removeChild(a.firstChild);
-            }
+function removeAllChilds(a){
+    var a=document.getElementById(a);
+    if(a!=null)
+        while(a.hasChildNodes())
+            a.removeChild(a.firstChild);
+    }
 
     //Realizar orden - solo gráfico, sin llamar al Ws.
     function orden(){
@@ -244,148 +208,8 @@ var dulce = 0, verde = 0, mole = 0, rajas = 0, atole = 0;
         });
 
         }//orden
-/*
-        function visualizar(){
-            var tempTabla, padre;
-
-            if (dulce=="condición para remover"){
-                tempTabla= document.getElementById("tablaDulce");
-                padre = tempTabla.parentNode;
-
-                if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaDulce");
-                }
-            }else {
-                tempTabla= document.getElementById("tablaDulce");
-                crearElemento(tempTabla, "Dulce", dulce);
-            }
 
 
-
-            if (verde=="condición para remover"){
-                tempTabla= document.getElementById("tablaVerde");
-                padre = tempTabla.parentNode;
-
-                if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaVerde");
-                }
-            }else {
-                tempTabla= document.getElementById("tablaVerde");
-                crearElemento(tempTabla, "Verde", verde);
-            }
-
-
-
-            if (mole=="condición para remover"){
-                tempTabla= document.getElementById("tablaMole");
-                padre = tempTabla.parentNode;
-
-                if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaMole");
-                }
-            }else {
-                tempTabla= document.getElementById("tablaMole");
-                crearElemento(tempTabla, "Mole", mole);
-            }
-
-
-
-
-            if (rajas=="condición para remover"){
-                tempTabla= document.getElementById("tablaRajas");
-                padre = tempTabla.parentNode;
-
-                if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaRajas");
-                }
-            }else {
-                tempTabla= document.getElementById("tablaRajas");
-                crearElemento(tempTabla, "Rajas", rajas);
-            }
-
-
-
-            if (atole=="condición para remover"){
-                tempTabla= document.getElementById("tablaAtole");
-                padre = tempTabla.parentNode;
-
-                if (tempTabla.hasChildNodes) {
-                    removeAllChilds("tablaAtole");
-                }
-            }else {
-                tempTabla= document.getElementById("tablaAtole");
-                crearElemento(tempTabla, "Atole", atole);
-            }
-        }
-
-        function añadirInventario(){
-            var sabor = document.getElementById("sabor").value;
-            var cantidad = document.getElementById("cantidad").value;
-
-            switch(sabor){
-                case "Dulce":
-                dulce+=parseInt(cantidad, 10);
-                break;
-
-                case "Verde":
-                verde+=parseInt(cantidad, 10);
-                break;
-
-                case "Mole":
-                mole+=parseInt(cantidad, 10);
-                break;
-
-                case "Rajas":
-                rajas+=parseInt(cantidad, 10);
-                break;
-
-                case "Atole":
-                atole+=parseInt(cantidad, 10);
-                break;
-
-            }
-
-            visualizar();
-        }
-
-        function sumarRestar(caso, caller){
-            var nombreTabla = caller.parentNode.parentNode.getAttribute("id");
-
-            switch(nombreTabla){
-                case "tablaDulce":
-                if (caso==1 && dulce>0) dulce--;
-                else if (caso==2) dulce++;
-                //actualizarInventario('01',dulce);
-                break;
-
-                case "tablaVerde":
-                if (caso==1 && verde>0) verde--;
-                else if (caso==2) verde++;
-                //actualizarInventario('02',verde);
-                break;
-
-                case "tablaMole":
-                if (caso==1 && mole>0) mole--;
-                else if (caso==2) mole++;
-                //actualizarInventario('03',mole);
-                break;
-
-                case "tablaRajas":
-                if (caso==1 && rajas>0) rajas--;
-                else if (caso==2) rajas++;
-                //actualizarInventario('04',rajas);
-                break;
-
-                case "tablaAtole":
-                if (caso==1 && atole>0) atole--;
-                else if (caso==2) atole++;
-                //actualizarInventario('05',atole);
-                break;
-
-            }
-            //visualizar();
-        }
-        */
         function setMarkers(map, locations) {
             var image = {
                 url: 'images/tamaleros-icon.png',
@@ -472,6 +296,7 @@ function geolocationSuccess(position) {
         icon: imageUser,
         title: "Yo",
         position: userLatLng
+        //position: userLatLng
     });
 
     localStorage.setItem("lat", position.coords.latitude.toFixed(3));
@@ -479,7 +304,9 @@ function geolocationSuccess(position) {
 }// geolocationSuccess
 
 function geolocationError(positionError) {
-    document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
+    document.getElementById("error").innerHTML = "Error: ->" + positionError.message + "<br />";
+    console.log("Geolocalización no soportada por el dispositivo o negada por el usuario");
+//    cargarMapaDF();
 }// geolocationError
 
 function geolocateUser() {
@@ -488,11 +315,57 @@ function geolocateUser() {
     {
       var positionOptions = {
         enableHighAccuracy: true,
-        timeout: 300 * 1000 // 10 seconds
+        timeout: 5 * 1000 // 10 seconds
     };
     navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
 }
 }// geolocateUser
+
+
+
+// Función que inicia cargando el mapa del DF para después centrarlo sobre la posición del usuario
+function cargarMapaDF(){
+        var mapOptions = {
+            zoom: 4,
+            disableDefaultUI: true,
+            center: new google.maps.LatLng(19.4, -99.1)
+        };
+        
+        window.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        selfLocation();
+}
+
+//Nueva función de localización posterior a haber cargado el mapa.
+function selfLocation(){
+    if(navigator.geolocation){
+        var positionOptions = {
+            enableHighAccuracy: true,
+            timeout: 5*1000 //5 Segs
+        };
+
+        if(localStorage.getItem('rol')=='tamalero')
+            navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, selfLocationTamaleroError, positionOptions);
+        else
+        {
+            //geolocateUser();
+            navigator.geolocation.getCurrentPosition(geolocationSuccess, selfLocationTamaleroError, positionOptions);
+        }
+    }
+    else
+    {   
+        alert("Geolocation no disponible");
+        console.log("Geolocation no soportada por el teléfono o negada por el usuario");
+    }
+}//selfLocationTamalero
+
+
+//Error al intentar de Localizar al tamalero por medio del Geolocate
+function selfLocationTamaleroError(){
+    alert("Geolocalización no soportada por el dispositvo");
+    console.log("Geolocalización no soportada por el dispositvo");
+} //selfLocationTamaleroError
+
 
 
 
@@ -502,11 +375,20 @@ function geolocateTamalero() {
     {
       var positionOptions = {
         enableHighAccuracy: true,
-        timeout: 30 * 1000 // 10 seconds
+        timeout: 5 * 1000 // 10 seconds
     };
     navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, geolocationError, positionOptions);
-}
-}// geolocateUser
+    }
+    else
+    {
+        console.log("Not geolocation Enamble");
+    }
+
+}// geolocateTamalero
+
+
+
+
 
 
 
@@ -514,10 +396,11 @@ function geolocateTamalero() {
 function geolocationSuccessTamalero(position) {
     var lat= position.coords.latitude.toFixed(3);
     var lon= position.coords.longitude.toFixed(3);
-
+    console.log(position);
     tamaleroLatLng = new google.maps.LatLng(lat, lon);
     pedidoLatLng = new google.maps.LatLng(localStorage.getItem('pedido-lat'), localStorage.getItem('pedido-lon'));
     
+    //var posDF = new google.maps.LatLng(19.4, -99.1);
     //localStorage.setItem("lat", lat);
     //localStorage.setItem("lon", lon);
 
@@ -716,6 +599,7 @@ function dameInventarioTamalero(id_tamalero){
 
 
 function cargaInventario(){
+    getPosicionTamalero();
     var id_tamalero = localStorage.getItem('id');
     $.ajax({
         url: 'http://nextlab.org/tamal-app/v1/tamaleros/'+id_tamalero,
@@ -1117,6 +1001,8 @@ function getPosicionTamalero(){
     function showPosition(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
+        localStorage.setItem("tamaleroLat",lat);
+        localStorage.setItem("tamaleroLon",lon);
         setPosicionTamalero(localStorage.getItem('key'), lat, lon);
     }
 }
@@ -1252,6 +1138,7 @@ function backToMyLocation(){
     }// for
 }// buscarTamalerosCerca
 
+
 //Registro de usuarios
 function register(){
     $('form.register').on('submit', function(e){
@@ -1278,6 +1165,7 @@ function register(){
 }//Fin de Register
 
 
+//Función para conseguir el pedido asignado a un tamalero en base al endpoint
 function buscarPedidos(){
     console.log("***Función Buscar Pedidos***");
     console.log(localStorage.getItem('key'));
@@ -1286,7 +1174,6 @@ function buscarPedidos(){
         url: 'http://nextlab.org/tamal-app/v1/pedidos/tamalero',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
-            //console.log("Success: "+response.message+"\n ***");
             console.log(response);
             console.log(response.id);
 
@@ -1294,23 +1181,11 @@ function buscarPedidos(){
             console.log(url);
             console.log(response.detalle);
 
-
-            //localStorage.setItem("pedido_id", response.id);
-            //localStorage.setItem("pedido_detalle", response.detalle);
-            //localStorage.setItem("pedido_lat", response.lat);
-            //localStorage.setItem("pedido_log", response.lon);
             if(response.error)
                 console.log("Error");
             else
             solicitudDePedido(response);
 
-
-           //dameInfoPedido(response.id);
-            //<<<<<<<<<<<<<<<<<
-
-            //solicitudDePedido();
-            //dameInfoPedido(id);
-            //console.log("******");
         },
         error: function(response){
             console.log("Error: "+response.message);
@@ -1570,8 +1445,6 @@ function pushHandlerUsuario(){
             console.log('My User endpoint is ' + e.pushEndpoint);
             console.log('My User new version is ' +  e.version);
 
-            //Remember that you can handle here if you have more than
-            //one pushEndpoint
         });
     } else {
         console.log('No message handler');
@@ -1592,17 +1465,11 @@ function pushHandlerUsuario(){
 //***************************
 
 
-
-
-
-
-
-
-
 function setPerfil(nombre, email){
     $('#nombre').text(nombre);
     $('#email').text(email);
 }
+
 
 function setTamalertaPerfil(radio){
     radio = 3000;
@@ -1780,7 +1647,7 @@ function actualizarInventario(id, cantidad){
     });
 }
 
-//Loguear
+//Loguear Automaticamente al abrir la aplicación.
 function recordarUsuario(){
     console.log(localStorage.getItem("key"));
     console.log(localStorage.getItem("radio"));
