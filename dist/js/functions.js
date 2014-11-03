@@ -278,10 +278,11 @@ function geolocationSuccess(position) {
         mapTypeId : google.maps.MapTypeId.ROADMAP
     };
 
+    removeAllChilds('map');
     // Draw the map
     window.mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
 
-    setMarkers(window.mapObject, window.tamalerosInfo);
+    
 
     var imageUser = {
         url: 'images/user-marker.png',
@@ -296,8 +297,9 @@ function geolocationSuccess(position) {
         icon: imageUser,
         title: "Yo",
         position: userLatLng
-        //position: userLatLng
     });
+
+    setMarkers(window.mapObject, window.tamalerosInfo);
 
     localStorage.setItem("lat", position.coords.latitude.toFixed(3));
     localStorage.setItem("lon", position.coords.longitude.toFixed(3));
@@ -306,8 +308,8 @@ function geolocationSuccess(position) {
 function geolocationError(positionError) {
     document.getElementById("error").innerHTML = "Error: ->" + positionError.message + "<br />";
     console.log("Geolocalización no soportada por el dispositivo o negada por el usuario");
-//    cargarMapaDF();
 }// geolocationError
+
 
 function geolocateUser() {
     // If the browser supports the Geolocation API
@@ -325,18 +327,17 @@ function geolocateUser() {
 
 // Función que inicia cargando el mapa del DF para después centrarlo sobre la posición del usuario
 function cargarMapaDF(){
-        var mapOptions = {
-            zoom: 4,
-            disableDefaultUI: true,
-            center: new google.maps.LatLng(19.4, -99.1)
-        };
-        
-        window.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        selfLocation();
+    var mapOptions = {
+        zoom: 4,
+        disableDefaultUI: true,
+        center: new google.maps.LatLng(19.4, -99.1)
+    };
+    if(!navigator.geolocation)
+    window.mapObject = new google.maps.Map(document.getElementById('map'), mapOptions);
+    selfLocation();
 }
 
-//Nueva función de localización posterior a haber cargado el mapa.
+//Nueva función de localización posterior a haber cargado el mapa default..
 function selfLocation(){
     if(navigator.geolocation){
         var positionOptions = {
@@ -349,7 +350,8 @@ function selfLocation(){
         else
         {
             //geolocateUser();
-            navigator.geolocation.getCurrentPosition(geolocationSuccess, selfLocationTamaleroError, positionOptions);
+            console.log('usuario');
+            navigator.geolocation.getCurrentPosition(geolocationSuccess, selfLocationUsuarioError, positionOptions);
         }
     }
     else
@@ -362,8 +364,18 @@ function selfLocation(){
 
 //Error al intentar de Localizar al tamalero por medio del Geolocate
 function selfLocationTamaleroError(){
-    alert("Geolocalización no soportada por el dispositvo");
-    console.log("Geolocalización no soportada por el dispositvo");
+    alert("No es posible encontrar tu posición. \nGeolocalización negada por el usuario o No soportada por el dispositivo.");
+    console.log("Geolocalización no soportada por el dispositivo");
+} //selfLocationTamaleroError
+
+
+//Error al intentar de Localizar al tamalero por medio del Geolocate
+function selfLocationUsuarioError(){
+    alert("No es posible encontrar tu posición. \nGeolocalización negada por el usuario o No soportada por el dispositivo.");
+    console.log("Geolocalización no soportada por el dispositivo");
+
+    //setMarkers(window.mapObject, window.tamalerosInfo);
+
 } //selfLocationTamaleroError
 
 
@@ -378,11 +390,11 @@ function geolocateTamalero() {
         timeout: 5 * 1000 // 10 seconds
     };
     navigator.geolocation.getCurrentPosition(geolocationSuccessTamalero, geolocationError, positionOptions);
-    }
-    else
-    {
-        console.log("Not geolocation Enamble");
-    }
+}
+else
+{
+    console.log("Not geolocation Enamble");
+}
 
 }// geolocateTamalero
 
@@ -398,13 +410,9 @@ function geolocationSuccessTamalero(position) {
     var lon= position.coords.longitude.toFixed(3);
     console.log(position);
     tamaleroLatLng = new google.maps.LatLng(lat, lon);
-    pedidoLatLng = new google.maps.LatLng(localStorage.getItem('pedido-lat'), localStorage.getItem('pedido-lon'));
+    console.log(localStorage.getItem('pedido_lat'), localStorage.getItem('pedido_lon'));
+    pedidoLatLng = new google.maps.LatLng(localStorage.getItem('pedido_lon'), localStorage.getItem('pedido_lat'));
     
-    //var posDF = new google.maps.LatLng(19.4, -99.1);
-    //localStorage.setItem("lat", lat);
-    //localStorage.setItem("lon", lon);
-
-
     var myOptions = {
         zoom : 16,
         center : tamaleroLatLng, //disableDefaultUI: true
@@ -413,8 +421,9 @@ function geolocationSuccessTamalero(position) {
     };
 
     // Draw the map
+    removeAllChilds('map');
     window.mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
-
+    
     var imageUser = {
         url: 'images/user-marker.png',
         size: new google.maps.Size(32, 40),
@@ -438,6 +447,7 @@ function geolocationSuccessTamalero(position) {
         position: tamaleroLatLng
     });
 
+
  // Place the marker Usuario Destino
  var usuarioMarker = new google.maps.Marker({
     map: window.mapObject,
@@ -446,7 +456,8 @@ function geolocationSuccessTamalero(position) {
     position: pedidoLatLng
 });
 
-
+console.log(tamaleroMarker);
+console.log(usuarioMarker);
 //__________
 
 google.maps.event.addListener(usuarioMarker, 'click', function() {
@@ -467,7 +478,7 @@ google.maps.event.addListener(usuarioMarker, 'click', function() {
 setInterval(function(){
     tamaleroMarker.setMap(null);
     navigator.geolocation.getCurrentPosition(actualizaPos);
-    
+
     function actualizaPos(position){
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
@@ -497,6 +508,7 @@ function hacerPedido(){
         var tamales = damePedido();
         console.log(tamales);
         console.log(lon, lat);
+        localStorage.setItem('pedido', 0);
 
         $.ajax({
             type: 'POST',
@@ -508,18 +520,23 @@ function hacerPedido(){
             success: function(response) {
                 console.log(response);
                 //Redirije al index.html y le manda la instrucción de que se realizó un pedido
+                console.log("pedido = 1");
                 localStorage.setItem('pedido', 1);
-                
-//                window.location.replace('index.html');
                 registrarEndpointUsuario();
+                window.location.replace('index.html');
             },
             error: function(response){
-                localStorage.setItem('pedido', 1); //Simular que el pedido está hecho.
                 console.log("Error al hacer pedido");
+                hacerPedido();
                 console.log(response);
             }
-        });
-        registrarEndpointUsuario();
+            });
+        //registrarEndpointUsuario();
+        if(localStorage.getItem('pedido')=="1")
+        {
+//            window.location.replace('index.html');
+        }
+        
     });
 }
 
@@ -640,12 +657,71 @@ function hayPedido(){
 function pedidoEnCamino(){
     $('#buscandoTamalero').modal('hide');
     $('#pedidoEnCamino').modal('show');
+    localStorage.setItem('pedido', 0);
     console.log("Cambiar Modal");
 }
 
+function solicitudDeVariosPedidos(Response){
+
+var contador=0;
+setInterval(
+    function(e){
+        
+        if(contador<localStorage.getItem("pedido-longitud")-1)
+            {
+                contador++;
+                buscarPedido(Response.pedidos[contador].id);
+                console.log("Esperando por:", contador );
+            }
+
+    },
+    5000
+    );
+}
+
+function mostrarPedidos(Response){
+    buscarPedido(Response.pedidos[0].id);
+    siguientePedido(Response.pedidos.length);
+}
+
+function siguientePedido(){
+        $('.jsRechazar').on('click', function(e){
+            e.preventDefault();
+            $('#solicitudDePedido').modal('hide');
+        });
+}
+
+
+function buscarPedido(id){
+    console.log("***Función Buscar Pedido por id***");
+    console.log(localStorage.getItem('key'));
+    $.ajax({
+        type: 'GET',
+        url: 'http://nextlab.org/tamal-app/v1/pedidos/'+id,
+        headers:{ 'X-Authorization' : localStorage.getItem('key') },
+        success: function(response) {
+            console.log(response);
+            console.log(response.id);
+            console.log(response.detalle);
+
+            if(response.error)
+                console.log("Error");
+            else
+                {
+                    solicitudDePedido(response);
+                }
+
+        },
+        error: function(response){
+            console.log("Error: "+response.message);
+        }
+    });
+    console.log('buscarPedidos End');
+}
 
 function solicitudDePedido(InventarioResponse){
-    console.log("Modal de Pedido y cargar data");
+    console.log("Modal de Pedido y cargar data: "+ localStorage.getItem('pedido-id'));
+
 
     var pedido={
         lat: InventarioResponse.lat,
@@ -658,6 +734,7 @@ function solicitudDePedido(InventarioResponse){
     localStorage.setItem("pedido_id", InventarioResponse.id);
     
     console.log(pedido);
+    console.log(pedido, localStorage.getItem("pedido_lat"), localStorage.getItem("pedido_lon"));
 
     var distancia = 0;
 
@@ -668,42 +745,49 @@ function solicitudDePedido(InventarioResponse){
     $('#solicitudDePedido').find('#tablaRajas').hide();
     $('#solicitudDePedido').find('#tablaAtole').hide();
     $('#solicitudDePedido').find('#tablaDulce').hide();
-    $('#solicitudDePedido').find('#tablaDulce').hide();
 
-        for (var i = 0; i < pedido.data.length; i++) {
+    localStorage.setItem('pVerde', null);
+    localStorage.setItem('pMole', null);
+    localStorage.setItem('pRajas', null);
+    localStorage.setItem('pAtole', null);
+    localStorage.setItem('pDulce', null);
+    localStorage.setItem('Dulce', null);
 
-            switch(pedido.data[i].id_tamal){
-                case 1:
-                $('#solicitudDePedido').find('#tablaVerde').show();
-                $('#solicitudDePedido').find('#tablaVerde').find('.cantidad').text(pedido.data[i].cantidad);
-                localStorage.setItem("pVerde", pedido.data[i].cantidad);
-                break;
 
-                case 2:
-                $('#solicitudDePedido').find('#tablaMole').show();
-                $('#solicitudDePedido').find('#tablaMole').find('.cantidad').text(pedido.data[i].cantidad);
-                localStorage.setItem("pMole", pedido.data[i].cantidad);
-                break;
+    for (var i = 0; i < pedido.data.length; i++) {
 
-                case 3:
-                $('#solicitudDePedido').find('#tablaRajas').show();
-                $('#solicitudDePedido').find('#tablaRajas').find('.cantidad').text(pedido.data[i].cantidad);
-                localStorage.setItem("pRajas", pedido.data[i].cantidad);
-                break;
+        switch(pedido.data[i].id_tamal){
+            case 1:
+            $('#solicitudDePedido').find('#tablaVerde').show();
+            $('#solicitudDePedido').find('#tablaVerde').find('.cantidad').text(pedido.data[i].cantidad);
+            localStorage.setItem("pVerde", pedido.data[i].cantidad);
+            break;
 
-                case 4:
-                $('#solicitudDePedido').find('#tablaAtole').show();
-                $('#solicitudDePedido').find('#tablaAtole').find('.cantidad').text(pedido.data[i].cantidad);
-                localStorage.setItem("pAtole", pedido.data[i].cantidad);
-                break;
+            case 2:
+            $('#solicitudDePedido').find('#tablaMole').show();
+            $('#solicitudDePedido').find('#tablaMole').find('.cantidad').text(pedido.data[i].cantidad);
+            localStorage.setItem("pMole", pedido.data[i].cantidad);
+            break;
 
-                case 5:
-                $('#solicitudDePedido').find('#tablaDulce').show();
-                $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(pedido.data[i].cantidad);
-                localStorage.setItem("pDulce", pedido.data[i].cantidad);
-                break;
+            case 3:
+            $('#solicitudDePedido').find('#tablaRajas').show();
+            $('#solicitudDePedido').find('#tablaRajas').find('.cantidad').text(pedido.data[i].cantidad);
+            localStorage.setItem("pRajas", pedido.data[i].cantidad);
+            break;
 
-                case 6:
+            case 4:
+            $('#solicitudDePedido').find('#tablaAtole').show();
+            $('#solicitudDePedido').find('#tablaAtole').find('.cantidad').text(pedido.data[i].cantidad);
+            localStorage.setItem("pAtole", pedido.data[i].cantidad);
+            break;
+
+            case 5:
+            $('#solicitudDePedido').find('#tablaDulce').show();
+            $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(pedido.data[i].cantidad);
+            localStorage.setItem("pDulce", pedido.data[i].cantidad);
+            break;
+
+            case 6:
                 $('#solicitudDePedido').find('#tablaDulce').show();  //Por el error momentaneo en la base de datos
                 $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(pedido.data[i].cantidad);
                 localStorage.setItem("Dulce", pedido.data[i].cantidad);
@@ -713,16 +797,17 @@ function solicitudDePedido(InventarioResponse){
         $('#solicitudDePedido').modal('show');
         localStorage.setItem("pedido-id", InventarioResponse.id);
         console.log(localStorage.getItem("pedido-id"));
-        rechazarPedido2(InventarioResponse);
-        rechazarPedido();
+        aceptarPedido(InventarioResponse);
+        siguientePedido();
+        //rechazarPedido();
         console.log("Fin de solicitud de pedido");
-}
+    }
 
 
 // cargarPedidoMapa
 function cargarPedidoMapa(){
-    console.log("Cargar data dentro del modal");
-    var distancia = 0;
+    console.log("Cargar data dentro del modal del mapa");
+    var distancia = 00;
 
     $('#solicitudDePedido').find('#distancia').text("Distancia aproximada: "+ distancia +" m");
 
@@ -731,51 +816,64 @@ function cargarPedidoMapa(){
     $('#solicitudDePedido').find('#tablaRajas').hide();
     $('#solicitudDePedido').find('#tablaAtole').hide();
     $('#solicitudDePedido').find('#tablaDulce').hide();
-    $('#solicitudDePedido').find('#tablaDulce').hide();
 
 
-        for (var i = 1; i < 7; i++) {
+    for (var i = 1; i < 7; i++) {
 
-            switch(i){
-                case 1:
-                if(localStorage.getItem("pVerde")!=null)
-                $('#solicitudDePedido').find('#tablaVerde').show();
-                $('#solicitudDePedido').find('#tablaVerde').find('.cantidad').text(localStorage.getItem("pVerde"));
-                break;
+        switch(i){
+            case 1:
+            if(localStorage.getItem('pVerde')!="null")
+                {
+                    console.log(localStorage.getItem("pVerde"));
+                    $('#solicitudDePedido').find('#tablaVerde').show();
+                    $('#solicitudDePedido').find('#tablaVerde').find('.cantidad').text(localStorage.getItem("pVerde"));
+                }
+            break;
 
-                case 2:
-                if(localStorage.getItem("pMole")!=null)
-                $('#solicitudDePedido').find('#tablaMole').show();
-                $('#solicitudDePedido').find('#tablaMole').find('.cantidad').text(localStorage.getItem("pMole"));
-                break;
+            case 2:
+            if(localStorage.getItem('pMole')!="null")
+                {
+                    console.log(localStorage.getItem("pMole"));
+                    $('#solicitudDePedido').find('#tablaMole').show();
+                    $('#solicitudDePedido').find('#tablaMole').find('.cantidad').text(localStorage.getItem("pMole"));
+                }
+            break;
 
-                case 3:
-                if(localStorage.getItem("pRajas")!=null)
+            case 3:
+            if(localStorage.getItem('pRajas')!="null")
+                {
                 $('#solicitudDePedido').find('#tablaRajas').show();
                 $('#solicitudDePedido').find('#tablaRajas').find('.cantidad').text(localStorage.getItem("pRajas"));
-                break;
+                }
+            break;
 
-                case 4:
-                if(localStorage.getItem("pAtole")!=null)
+            case 4:
+            if(localStorage.getItem('pAtole')!="null")
+                {
                 $('#solicitudDePedido').find('#tablaAtole').show();
                 $('#solicitudDePedido').find('#tablaAtole').find('.cantidad').text(localStorage.getItem("pAtole"));
-                break;
+                }
+            break;
 
-                case 5:
-                if(localStorage.getItem("pDulce")!=null)
+            case 5:
+            if(localStorage.getItem('pDulce')!="null")
+                {
                 $('#solicitudDePedido').find('#tablaDulce').show();
                 $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(localStorage.getItem("pDulce"));
-                break;
+                }
+            break;
 
-                case 6:
-                if(localStorage.getItem("Dulce")!=null)
+            case 6:
+            if(localStorage.getItem('Dulce')!="null")
+                {
                 $('#solicitudDePedido').find('#tablaDulce').show();  //Por el error momentaneo en la base de datos
                 $('#solicitudDePedido').find('#tablaDulce').find('.cantidad').text(localStorage.getItem("Dulce"));
-                break;
-            }
-        };
-        $('#solicitudDePedido').modal('show');
-        console.log("Fin de actualizar pedido");
+                }
+            break;
+        }
+    };
+    $('#solicitudDePedido').modal('show');
+    console.log("Fin de actualizar pedido");
 }
 
 
@@ -785,7 +883,7 @@ function cargarPedidoMapa(){
 
 
 //Aceptar Pedido - Botón en el modal.
-function rechazarPedido2(InventarioResponse){
+function aceptarPedido(InventarioResponse){
     $('.jsAceptar').on('click', function(e){
         e.preventDefault();
         console.log("Aceptado");
@@ -803,18 +901,19 @@ function rechazarPedido2(InventarioResponse){
             },
             success: function(response) {
 
-                    console.log(response);  
-                    console.log("Aceptado");
+                console.log(response);  
+                console.log("Aceptado");
                     //pedidoEnCamino();
                     window.location.replace('tamalero-index.html');
                 },
                 error: function(response){
                     console.log(response);
                     console.log('Error al aceptar el pedido');
+                    aceptarPedido(InventarioResponse);
                 }
             }); //fin ajax
         console.log("Fin del ajax");
-});
+    });
  //window.location.replace('tamalero-index.html');  //-------------------------
 }//rechazarPedido
 
@@ -968,7 +1067,7 @@ function obtenerInfoTamaleros(){
     });
 }
 
-// revisa cada 30 segundo si se actualizó la posición del tamalero
+// revisa cada 10 segundo si se actualizó la posición del tamalero
 function actualizaPosicionTamaleros(){
     setInterval(function(){
         obtenerInfoTamaleros();
@@ -976,12 +1075,13 @@ function actualizaPosicionTamaleros(){
         borraMarkers();
         actualizaMarkers(window.mapObject, window.tamalerosInfo);
         console.log("se ha actualizado la posición de los tamaleros");
-        if(localStorage.getItem('tamalero_cerca') == 0){
-            console.log('busando tamaleros cerca...');
-            buscarTamalerosCerca();
+        //if(localStorage.getItem('tamalero_cerca') == 0){
+            if(localStorage.getItem('pedido') != '1'){
+                console.log('busando tamaleros cerca...');
+                buscarTamalerosCerca();
 
-        }
-    }, 10000);
+            }
+        }, 10000);
 }// actualizaPosicionTamaleros
 
 function actualizaPosicionTamalero(){
@@ -1099,15 +1199,23 @@ function backToMyLocation(){
     $('.boton-back-to-my-location').on('click', function(e){
         e.preventDefault();
         console.log("backToMyLocation");
-        window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
+        if (navigator.geolocation)
+        {
+            window.mapObject.panTo(new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon')) );
+        }
+        else
+        {
+            alert("No es posible encontrar tu ubicación");
+        }
     });
 }
 
 
 /**
-    Descripcion: Buscar tamaleros cerca si está activada la tamalerta
+    Descripcion: Buscar tamaleros cerca y si está activada la tamalerta reproducir la canción.
     */
     function buscarTamalerosCerca(){
+        console.log('buscandoTamalerosCerca');
         var usuario = new google.maps.LatLng(localStorage.getItem('lat'), localStorage.getItem('lon'));
 
         var bodee = document.getElementById('audio');
@@ -1124,15 +1232,24 @@ function backToMyLocation(){
             var distancia = google.maps.geometry.spherical.computeDistanceBetween (usuario, tamalero);
             var radioTamalerta = localStorage.getItem('radio');
 
-            if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
-                console.log("Hay un tamalero cerca ");
-           /*
-            var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
-            notification.show();
-            console.log("Empezar Canción");
-            myAudio.play();
-            console.log("Canción comenzada");
-            localStorage.setItem('tamalero_cerca', 1);*/
+            console.log(distancia, radioTamalerta, tamalero);
+
+
+            //if(parseInt(distancia) < parseInt('2000') && radioTamalerta == '-1'){   //Temporal por la base de datos
+                if(parseInt(distancia) < parseInt(radioTamalerta) && radioTamalerta != '-1'){
+                    console.log("Hay un tamalero cerca ");
+
+                    var volumen = (radioTamalerta-distancia)/radioTamalerta;
+                    volumen = volumen.toFixed(1);
+                    console.log("volumen", volumen);
+                    var notification = navigator.mozNotification.createNotification("Tamalerta", 'Hay un tamalero cerca de ti.');
+                    notification.show();
+                    myAudio.volume=volumen;
+                    console.log("Empezar Canción");
+
+                    myAudio.play();
+                    console.log("Canción comenzada");
+            localStorage.setItem('tamalero_cerca', 1); // Reproducir una única vez
 
         }
     }// for
@@ -1165,34 +1282,34 @@ function register(){
 }//Fin de Register
 
 
-//Función para conseguir el pedido asignado a un tamalero en base al endpoint
+//Función para conseguir los pedidos disponibles para un tamalero en base al endpoint
 function buscarPedidos(){
     console.log("***Función Buscar Pedidos***");
     console.log(localStorage.getItem('key'));
     $.ajax({
-        type: 'POST',
-        url: 'http://nextlab.org/tamal-app/v1/pedidos/tamalero',
+        type: 'GET',
+        url: 'http://nextlab.org/tamal-app/v1/pedidos/disponible/',
         headers:{ 'X-Authorization' : localStorage.getItem('key') },
         success: function(response) {
             console.log(response);
-            console.log(response.id);
-
-            var url= 'http://nextlab.org/tamal-app/v1/pedidos/tamalero';
-            console.log(url);
-            console.log(response.detalle);
 
             if(response.error)
                 console.log("Error");
             else
-            solicitudDePedido(response);
+                {
+
+                    //mostrarPedidos(response);
+                    solicitudDeVariosPedidos(response);
+                    localStorage.setItem("pedido-longitud", response.pedidos.length);
+                }
 
         },
         error: function(response){
             console.log("Error: "+response.message);
         }
     });
-console.log('buscarPedidos End');
-}
+    console.log('buscarPedidos End');
+}//buscarPedidos()
 
 function dameInfoPedido(id){
 
@@ -1334,6 +1451,7 @@ function activarTamalerta(){
             },
             success: function(response) {
                 console.log(response);
+                localStorage.setItem('radio', r);
             },
             error: function(response){
                 console.log(response);
@@ -1645,7 +1763,10 @@ function actualizarInventario(id, cantidad){
 
         }
     });
-}
+} // Fin de actualizarInventario.
+
+
+
 
 //Loguear Automaticamente al abrir la aplicación.
 function recordarUsuario(){
@@ -1665,7 +1786,7 @@ function recordarUsuario(){
             window.location.replace('tamalero-inventario.html');
         }
     }
-}
+}// Fin de recordarUsuario
 
 
 
